@@ -1,0 +1,33 @@
+[
+	{
+		"id": "prod-1",
+		"title": "Monster Sticker Pack",
+		"slug": "monster-stickers",
+		"price": 8.00,
+		"stripePriceId": "",
+		"description": "Set of 5 vinyl stickers featuring playful monster designs.",
+		"images": ["/shop/stickers-placeholder.jpg"],
+		"category": "sticker"
+	},
+	{
+		"id": "prod-2",
+		"title": "Enamel Pin Set",
+		"slug": "enamel-pins",
+		"price": 12.00,
+		"stripePriceId": "",
+		"description": "Two high-quality enamel pins with rubber backs.",
+		"images": ["/shop/pins-placeholder.jpg"],
+		"category": "button"
+	},
+	{
+		"id": "prod-3",
+		"title": "Art Print — Cosmic Dreams",
+		"slug": "cosmic-dreams-print",
+		"price": 25.00,
+		"stripePriceId": "",
+		"description": "11×14\" giclée print on archival paper. Limited edition.",
+		"images": ["/shop/print-placeholder.jpg"],
+		"category": "print"
+	}
+]
+

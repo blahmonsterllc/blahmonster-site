@@ -1,0 +1,19 @@
+[
+	{
+		"id": "post-1",
+		"title": "Designing with Constraints",
+		"slug": "designing-with-constraints",
+		"date": "2024-03-15",
+		"excerpt": "How limitations can spark creativity and lead to better design outcomes.",
+		"content": "Constraints aren't obstacles—they're opportunities. When we design within boundaries, we're forced to think creatively and find elegant solutions.\n\nSome of the best work comes from tight budgets, short timelines, or technical limitations. These constraints push us to focus on what truly matters.\n\nNext time you face a constraint, embrace it. It might just lead to your best work yet."
+	},
+	{
+		"id": "post-2",
+		"title": "Building a Design System",
+		"slug": "building-design-system",
+		"date": "2024-02-20",
+		"excerpt": "Lessons learned creating reusable components and patterns for product teams.",
+		"content": "A design system is more than a component library—it's a shared language between design and development.\n\nStart small. Document patterns as you go. Iterate based on real usage. Most importantly, make it easy to adopt.\n\nThe best design systems grow organically from actual product needs, not theoretical perfection."
+	}
+]
+

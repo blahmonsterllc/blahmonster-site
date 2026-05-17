@@ -1,0 +1,32 @@
+[
+	{
+		"id": "heyhank",
+		"title": "Hey Hank",
+		"slug": "heyhank",
+		"description": "Interactive 3D graphics playground with Three.js. Experimental visual experiences at heyhank.co",
+		"images": ["/portfolio/placeholder-1.jpg"],
+		"category": "interactive",
+		"year": 2026,
+		"url": "https://heyhank.co"
+	},
+	{
+		"id": "keepset",
+		"title": "Keepset",
+		"slug": "keepset",
+		"description": "Modern workout tracking app with clean design and intuitive set logging at keepset.io",
+		"images": ["/portfolio/placeholder-2.jpg"],
+		"category": "product",
+		"year": 2025,
+		"url": "https://keepset.io"
+	},
+	{
+		"id": "tapclick",
+		"title": "TapClick",
+		"slug": "tapclick",
+		"description": "Minimalist metronome app for iOS designed for musicians who value simplicity and precision.",
+		"images": ["/portfolio/placeholder-3.jpg"],
+		"category": "product",
+		"year": 2025
+	}
+]
+
