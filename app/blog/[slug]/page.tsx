@@ -22,9 +22,10 @@ export async function generateStaticParams() {
 	return posts.map((p) => ({ slug: p.slug }));
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
 	const posts = await getPosts();
-	const post = posts.find((p) => p.slug === params.slug);
+	const post = posts.find((p) => p.slug === slug);
 
 	if (!post) {
 		notFound();
