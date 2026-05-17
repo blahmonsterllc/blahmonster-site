@@ -3,117 +3,128 @@ export default function HomePage() {
 		<>
 			{/* Hero Section */}
 			<section style={{
-				marginBottom: 'var(--spacing-2xl)',
+				marginBottom: 'var(--spacing-3xl)',
 				textAlign: 'center',
-				maxWidth: 800,
-				margin: '0 auto var(--spacing-2xl)',
-				position: 'relative'
+				position: 'relative',
+				paddingTop: 'var(--spacing-2xl)'
 			}}>
 				<div style={{
 					position: 'absolute',
-					top: '-40px',
+					top: '50%',
 					left: '50%',
-					transform: 'translateX(-50%)',
-					fontSize: 120,
-					opacity: 0.05,
-					fontWeight: 900,
+					transform: 'translate(-50%, -50%)',
+					width: '600px',
+					height: '600px',
+					background: 'radial-gradient(circle, rgba(0, 255, 136, 0.15) 0%, transparent 70%)',
+					filter: 'blur(80px)',
 					pointerEvents: 'none',
-					userSelect: 'none'
-				}}>★</div>
-				<h1 style={{
-					marginBottom: 'var(--spacing-md)',
-					position: 'relative'
-				}}>
-					Creative Lab
-				</h1>
-				<p style={{
-					fontSize: 20,
-					lineHeight: 1.6,
-					color: 'var(--color-muted)',
-					maxWidth: 640,
-					margin: '0 auto var(--spacing-lg)'
-				}}>
-					We craft compelling brand identities, intuitive digital products, and playful experiences 
-					that connect with people.
-				</p>
-				<div style={{
-					display: 'flex', 
-					gap: 16, 
-					flexWrap: 'wrap', 
-					justifyContent: 'center',
-					marginTop: 'var(--spacing-lg)'
-				}}>
-					<a href="/portfolio" className="button">View Portfolio</a>
-					<a href="/shop" className="button-outline">Shop Art</a>
+					zIndex: 0
+				}} />
+				<div style={{position: 'relative', zIndex: 1}}>
+					<div style={{
+						display: 'inline-block',
+						padding: '8px 20px',
+						background: 'rgba(0, 255, 136, 0.1)',
+						border: '1px solid rgba(0, 255, 136, 0.3)',
+						borderRadius: '100px',
+						fontSize: 13,
+						fontWeight: 700,
+						color: 'var(--color-accent)',
+						marginBottom: 'var(--spacing-lg)',
+						textTransform: 'uppercase',
+						letterSpacing: '0.1em'
+					}}>
+						● Blahmonster
+					</div>
+					<h1 style={{
+						marginBottom: 'var(--spacing-lg)',
+						maxWidth: 900,
+						margin: '0 auto var(--spacing-lg)'
+					}}>
+						Creative Lab
+					</h1>
+					<p style={{
+						fontSize: 22,
+						lineHeight: 1.6,
+						color: 'var(--color-muted)',
+						maxWidth: 640,
+						margin: '0 auto var(--spacing-xl)'
+					}}>
+						We craft compelling brand identities, intuitive digital products, and playful experiences 
+						that connect with people.
+					</p>
+					<div style={{
+						display: 'flex', 
+						gap: 20, 
+						flexWrap: 'wrap', 
+						justifyContent: 'center'
+					}}>
+						<a href="/portfolio" className="button">View Portfolio →</a>
+						<a href="/shop" className="button-outline">Shop Art</a>
+					</div>
 				</div>
 			</section>
 
 			{/* Services Grid */}
 			<section style={{
-				marginBottom: 'var(--spacing-2xl)',
+				marginBottom: 'var(--spacing-3xl)',
 				display: 'grid',
-				gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-				gap: 'var(--spacing-md)'
+				gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+				gap: 'var(--spacing-lg)'
 			}}>
-				<div className="card" style={{
-					background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%)',
-					borderColor: 'rgba(124, 58, 237, 0.2)'
-				}}>
+				<div className="card">
 					<div style={{
-						width: 48,
-						height: 48,
-						borderRadius: 'var(--radius-sm)',
-						background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
+						width: 56,
+						height: 56,
+						borderRadius: 'var(--radius)',
+						background: 'linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 255, 136, 0.05) 100%)',
+						border: '1px solid rgba(0, 255, 136, 0.3)',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						marginBottom: 'var(--spacing-md)',
-						fontSize: 24
+						marginBottom: 'var(--spacing-lg)',
+						fontSize: 28
 					}}>✨</div>
-					<h3 style={{fontSize: 20, marginBottom: 'var(--spacing-sm)'}}>Branding</h3>
-					<p style={{margin: 0, fontSize: 15}}>
+					<h3 style={{fontSize: 24, marginBottom: 'var(--spacing-sm)', color: 'var(--color-text)'}}>Branding</h3>
+					<p style={{margin: 0, fontSize: 16, lineHeight: 1.6}}>
 						Naming, identity systems, guidelines, and visual languages that resonate.
 					</p>
 				</div>
 
-				<div className="card" style={{
-					background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%)',
-					borderColor: 'rgba(6, 182, 212, 0.2)'
-				}}>
+				<div className="card">
 					<div style={{
-						width: 48,
-						height: 48,
-						borderRadius: 'var(--radius-sm)',
-						background: 'linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)',
+						width: 56,
+						height: 56,
+						borderRadius: 'var(--radius)',
+						background: 'linear-gradient(135deg, rgba(255, 51, 102, 0.2) 0%, rgba(255, 51, 102, 0.05) 100%)',
+						border: '1px solid rgba(255, 51, 102, 0.3)',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						marginBottom: 'var(--spacing-md)',
-						fontSize: 24
+						marginBottom: 'var(--spacing-lg)',
+						fontSize: 28
 					}}>🎨</div>
-					<h3 style={{fontSize: 20, marginBottom: 'var(--spacing-sm)'}}>Product Design</h3>
-					<p style={{margin: 0, fontSize: 15}}>
+					<h3 style={{fontSize: 24, marginBottom: 'var(--spacing-sm)', color: 'var(--color-text)'}}>Product Design</h3>
+					<p style={{margin: 0, fontSize: 16, lineHeight: 1.6}}>
 						UX/UI, prototypes, design systems, and thoughtful interactions.
 					</p>
 				</div>
 
-				<div className="card" style={{
-					background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%)',
-					borderColor: 'rgba(245, 158, 11, 0.2)'
-				}}>
+				<div className="card">
 					<div style={{
-						width: 48,
-						height: 48,
-						borderRadius: 'var(--radius-sm)',
-						background: 'linear-gradient(135deg, #f59e0b 0%, #f97316 100%)',
+						width: 56,
+						height: 56,
+						borderRadius: 'var(--radius)',
+						background: 'linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(255, 51, 102, 0.1) 100%)',
+						border: '1px solid rgba(0, 255, 136, 0.3)',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						marginBottom: 'var(--spacing-md)',
-						fontSize: 24
+						marginBottom: 'var(--spacing-lg)',
+						fontSize: 28
 					}}>⚡</div>
-					<h3 style={{fontSize: 20, marginBottom: 'var(--spacing-sm)'}}>Motion & Code</h3>
-					<p style={{margin: 0, fontSize: 15}}>
+					<h3 style={{fontSize: 24, marginBottom: 'var(--spacing-sm)', color: 'var(--color-text)'}}>Motion & Code</h3>
+					<p style={{margin: 0, fontSize: 16, lineHeight: 1.6}}>
 						Microinteractions, animations, and custom development.
 					</p>
 				</div>
@@ -121,38 +132,66 @@ export default function HomePage() {
 
 			{/* Featured App */}
 			<section style={{
-				padding: 'var(--spacing-2xl)',
-				background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-				borderRadius: 'var(--radius)',
+				padding: 'var(--spacing-3xl) var(--spacing-2xl)',
+				background: 'linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%)',
+				borderRadius: 'var(--radius-lg)',
+				border: '1px solid var(--color-border)',
 				color: 'white',
 				textAlign: 'center',
 				position: 'relative',
-				overflow: 'hidden'
+				overflow: 'hidden',
+				boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)'
 			}}>
+				{/* Gradient orbs */}
+				<div style={{
+					position: 'absolute',
+					top: '-20%',
+					left: '-10%',
+					width: '40%',
+					height: '100%',
+					background: 'radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%)',
+					filter: 'blur(60px)',
+					pointerEvents: 'none'
+				}} />
+				<div style={{
+					position: 'absolute',
+					bottom: '-20%',
+					right: '-10%',
+					width: '40%',
+					height: '100%',
+					background: 'radial-gradient(circle, rgba(255, 51, 102, 0.1) 0%, transparent 70%)',
+					filter: 'blur(60px)',
+					pointerEvents: 'none'
+				}} />
+				
 				<div style={{position: 'relative', zIndex: 1}}>
 					<div style={{
 						display: 'inline-block',
-						padding: '6px 16px',
-						background: 'rgba(59, 130, 246, 0.2)',
+						padding: '8px 20px',
+						background: 'rgba(0, 255, 136, 0.15)',
+						border: '1px solid rgba(0, 255, 136, 0.3)',
 						borderRadius: '100px',
-						fontSize: 13,
-						fontWeight: 600,
-						marginBottom: 'var(--spacing-md)',
+						fontSize: 12,
+						fontWeight: 700,
+						marginBottom: 'var(--spacing-lg)',
 						textTransform: 'uppercase',
-						letterSpacing: '0.05em',
-						border: '1px solid rgba(59, 130, 246, 0.3)'
+						letterSpacing: '0.1em',
+						color: 'var(--color-accent)'
 					}}>Featured App</div>
 					<h2 style={{
-						fontSize: 'clamp(32px, 5vw, 48px)',
+						fontSize: 'clamp(40px, 6vw, 64px)',
 						color: 'white',
-						marginBottom: 'var(--spacing-md)'
+						marginBottom: 'var(--spacing-md)',
+						fontWeight: 900,
+						letterSpacing: '-0.03em'
 					}}>TapClick</h2>
 					<p style={{
-						fontSize: 18,
-						maxWidth: 560,
-						margin: '0 auto var(--spacing-lg)',
-						opacity: 0.95,
-						color: 'white'
+						fontSize: 20,
+						maxWidth: 600,
+						margin: '0 auto var(--spacing-xl)',
+						opacity: 0.9,
+						color: 'var(--color-muted)',
+						lineHeight: 1.6
 					}}>
 						A minimalist metronome for iOS. Keep perfect time with an intuitive interface designed for musicians.
 					</p>
@@ -160,23 +199,14 @@ export default function HomePage() {
 						href="/tapclick" 
 						className="button"
 						style={{
-							background: 'white',
-							color: '#0f172a',
-							boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)'
+							background: 'var(--color-accent)',
+							color: 'var(--color-bg)',
+							boxShadow: '0 8px 32px rgba(0, 255, 136, 0.3)'
 						}}
 					>
 						Learn More →
 					</a>
 				</div>
-				<div style={{
-					position: 'absolute',
-					top: '-50%',
-					right: '-10%',
-					width: '60%',
-					height: '200%',
-					background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
-					pointerEvents: 'none'
-				}} />
 			</section>
 		</>
 	);

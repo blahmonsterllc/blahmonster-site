@@ -2,7 +2,7 @@
   "type": "Prerender",
   "expiration": false,
   "sourcePath": "/portfolio/[slug]",
-  "group": 7,
+  "group": 4,
   "bypassToken": "c8f250e9051266d8e8cee0255da57f44",
   "experimentalBypassFor": [
     {
