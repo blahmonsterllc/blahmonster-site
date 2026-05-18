@@ -7,7 +7,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
 
 export async function POST(request: Request) {
 	try {
-		const { priceId, title, price } = await request.json();
+		const body = (await request.json()) as {
+			priceId?: string;
+			title?: string;
+			price?: string | number;
+		};
+		const { priceId, title, price } = body;
 		const lineItems = priceId ? [ { price: priceId, quantity: 1 } ] : [ { price_data: { currency: 'usd', product_data: { name: title }, unit_amount: Math.round(Number(price) * 100) }, quantity: 1 } ];
 		const session = await stripe.checkout.sessions.create({
 			line_items: lineItems as any,

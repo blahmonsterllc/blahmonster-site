@@ -1,19 +1,47 @@
 [
 	{
 		"id": "post-1",
-		"title": "Designing with Constraints",
-		"slug": "designing-with-constraints",
-		"date": "2024-03-15",
-		"excerpt": "How limitations can spark creativity and lead to better design outcomes.",
-		"content": "Constraints aren't obstacles—they're opportunities. When we design within boundaries, we're forced to think creatively and find elegant solutions.\n\nSome of the best work comes from tight budgets, short timelines, or technical limitations. These constraints push us to focus on what truly matters.\n\nNext time you face a constraint, embrace it. It might just lead to your best work yet."
+		"title": "Starting Blah Monster",
+		"slug": "starting-blah-monster",
+		"date": "2026-05-07",
+		"tag": "Essay",
+		"excerpt": "Why I quit the day job, named a studio after a grumpy mascot, and decided to stay solo.",
+		"content": "I spent a decade working inside other people's studios. Good ones. The kind of places where you get to ship real work for real people. But the longer I stayed, the more I felt the pull to make smaller things, faster, on my own terms.\n\nBlah Monster is the result. One person. Long Island. Illustration and software, which is a strange combination on paper but feels natural in practice.\n\nThe name came before everything else. I drew a grumpy little monster on a napkin and called him Blah. He stuck around. Eventually I figured I might as well name the studio after him."
 	},
 	{
 		"id": "post-2",
-		"title": "Building a Design System",
-		"slug": "building-design-system",
-		"date": "2024-02-20",
-		"excerpt": "Lessons learned creating reusable components and patterns for product teams.",
-		"content": "A design system is more than a component library—it's a shared language between design and development.\n\nStart small. Document patterns as you go. Iterate based on real usage. Most importantly, make it easy to adopt.\n\nThe best design systems grow organically from actual product needs, not theoretical perfection."
+		"title": "Notes on Local LLMs for Mac",
+		"slug": "local-llms-for-mac",
+		"date": "2026-04-22",
+		"tag": "Dev",
+		"excerpt": "What I learned building an agent app that runs entirely on Apple Silicon — quantization, prompt latency, and tradeoffs.",
+		"content": "Apple Silicon is fast enough now that local-first AI is no longer a science project. With the right quantization and a careful prompt, a 7B model on an M-series machine can hit useful latency for chat, summarization, and lightweight agent work.\n\nThe tradeoffs are real. You give up the ceiling of frontier models. You spend more time on context management. But you get privacy, offline capability, and no API bill at the end of the month.\n\nFor Hank, that calculus made sense. The app lives on the user's machine. Their files, their context, their compute. No round trip to a cloud."
+	},
+	{
+		"id": "post-3",
+		"title": "Why I Still Draw by Hand",
+		"slug": "draw-by-hand",
+		"date": "2026-03-18",
+		"tag": "Illustration",
+		"excerpt": "Pen, ink, and the slow loop. Some thoughts on why analog still earns its place in a digital pipeline.",
+		"content": "There is a different kind of thinking that happens with a pen. You can't undo. You can't drag to perfection. You commit, and the line is what it is.\n\nMost of my finished work ends up on screens, but the first version is almost always on paper. Pen and ink. A Pentel brush pen when I want weight. A nib when I want nerves.\n\nThe slow loop matters. It forces a kind of decisiveness that I lose when the undo button is one tap away."
+	},
+	{
+		"id": "post-4",
+		"title": "Shipping Less, Shipping Better",
+		"slug": "shipping-less",
+		"date": "2026-02-09",
+		"tag": "Essay",
+		"excerpt": "A short defense of doing fewer things on purpose.",
+		"content": "There is a quiet pressure in software to ship constantly. Weekly releases. Daily features. A changelog that never breathes.\n\nI used to play that game. The work was fine. The work was never great.\n\nThese days I aim for fewer releases and more care per release. Each thing that ships gets a long look. Most things that almost ship don't. That's the part nobody talks about — the work you decide not to do."
+	},
+	{
+		"id": "post-5",
+		"title": "A Small Studio Manifesto",
+		"slug": "small-studio-manifesto",
+		"date": "2026-01-15",
+		"tag": "Essay",
+		"excerpt": "Five principles for staying small on purpose.",
+		"content": "1. Stay close to the work. If you can't see the pixels and the punctuation, you've drifted.\n\n2. Pick clients you'd grab a coffee with. The rest takes care of itself.\n\n3. Say no often. Saying yes to everything is how studios get blurry.\n\n4. Make weird things alongside the paid work. The weird things are the portfolio of the future.\n\n5. Don't grow because growing is the default. Grow only if the work demands it."
 	}
 ]
-

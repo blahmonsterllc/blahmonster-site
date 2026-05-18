@@ -1,32 +1,59 @@
 [
 	{
-		"id": "heyhank",
-		"title": "Hey Hank",
-		"slug": "heyhank",
+		"id": "hank",
+		"num": "001",
+		"title": "Hank",
+		"slug": "hank",
 		"description": "AI agent Mac app that helps you get things done. Your intelligent assistant for productivity and automation.",
-		"images": ["/portfolio/placeholder-1.jpg"],
-		"category": "product",
+		"category": "Mac App",
 		"year": 2026,
 		"url": "https://heyhank.co"
 	},
 	{
 		"id": "keepset",
+		"num": "002",
 		"title": "Keepset",
 		"slug": "keepset",
-		"description": "Therapist app connecting you with mental health professionals. Simple, secure, and accessible therapy.",
-		"images": ["/portfolio/placeholder-2.jpg"],
-		"category": "product",
-		"year": 2025,
+		"description": "Therapist app connecting you with mental health professionals. Simple, secure, and accessible.",
+		"category": "Web",
+		"year": 2026,
 		"url": "https://keepset.io"
 	},
 	{
+		"id": "editorial-spots",
+		"num": "003",
+		"title": "Editorial Spots",
+		"slug": "editorial-spots",
+		"description": "A collection of editorial illustration commissions. Pen, ink, iPad. Mostly black and white.",
+		"category": "Illustration",
+		"year": 2025
+	},
+	{
+		"id": "brand-private",
+		"num": "004",
+		"title": "Brand Identity (Private)",
+		"slug": "brand-private",
+		"description": "A private brand identity engagement. Logo, mascot, type system.",
+		"category": "Branding",
+		"year": 2025
+	},
+	{
 		"id": "tapclick",
+		"num": "005",
 		"title": "TapClick",
 		"slug": "tapclick",
-		"description": "Minimalist metronome app for iOS designed for musicians who value simplicity and precision.",
-		"images": ["/portfolio/placeholder-3.jpg"],
-		"category": "product",
+		"description": "Minimalist metronome app for iPhone designed for musicians who value simplicity and precision.",
+		"category": "iOS App",
 		"year": 2025
+	},
+	{
+		"id": "coloring-book",
+		"num": "006",
+		"title": "Amazing Monster Coloring Book Vol 1",
+		"slug": "coloring-book-vol-1",
+		"description": "A book of monsters to color. Published March 2023. Available on Amazon.",
+		"category": "Print",
+		"year": 2023,
+		"url": "https://www.amazon.com/Amazing-Monster-Coloring-Book-1/dp/B0BZFD19CK"
 	}
 ]
-

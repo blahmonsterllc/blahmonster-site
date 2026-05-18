@@ -9,7 +9,8 @@
 		"lint": "next lint",
 		"pages:build": "npx @cloudflare/next-on-pages",
 		"pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
-		"pages:dev": "npx @cloudflare/next-on-pages --watch"
+		"pages:dev": "npx @cloudflare/next-on-pages --watch",
+		"hash-admin-password": "node scripts/hash-admin-password.mjs"
 	},
 	"dependencies": {
 		"next": "^15.5.2",
@@ -19,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@cloudflare/next-on-pages": "^1.13.16",
+		"@cloudflare/workers-types": "^4.20260518.1",
 		"@types/node": "^20.14.10",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
