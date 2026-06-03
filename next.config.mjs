@@ -31,6 +31,15 @@ const adminSecurityHeaders = [
 
 const nextConfig = {
 	outputFileTracingRoot: path.join(__dirname),
+	async redirects() {
+		return [
+			{
+				source: '/portfolio/brand-private',
+				destination: '/portfolio/lepizzapie',
+				permanent: true
+			}
+		];
+	},
 	async headers() {
 		return [
 			{ source: '/admin', headers: adminSecurityHeaders },

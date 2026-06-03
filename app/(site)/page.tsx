@@ -20,7 +20,7 @@ const work: Work[] = [
 		external: true
 	},
 	{ num: '004', name: 'Editorial Spots', tag: 'Illustration · 2024' },
-	{ num: '005', name: 'Brand Identity', tag: 'Branding · 2024', href: '/portfolio/brand-private' },
+	{ num: '005', name: 'Brand Identity', tag: 'Branding · 2024', href: '/portfolio/lepizzapie' },
 	{
 		num: '006',
 		name: 'Amazing Monster Coloring Book Vol 1 ↗',
