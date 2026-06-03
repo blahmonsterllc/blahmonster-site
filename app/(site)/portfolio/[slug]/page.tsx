@@ -56,7 +56,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 						src={project.image}
 						alt={project.imageAlt ?? project.title}
 						width={560}
-						height={691}
+						height={690}
 					/>
 				</figure>
 			) : null}

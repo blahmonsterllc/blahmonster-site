@@ -553,7 +553,6 @@ img {
 	max-width: 420px;
 	height: auto;
 	display: block;
-	border: 1px solid var(--rule);
 }
 
 /* ---------- Blog post media ---------- */
