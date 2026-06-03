@@ -12,13 +12,7 @@ type Work = {
 const work: Work[] = [
 	{ num: '001', name: 'Hank', tag: 'Mac App · 2026', href: '/portfolio/hank' },
 	{ num: '002', name: 'Keepset', tag: 'Web · 2026', href: 'https://keepset.io', external: true },
-	{
-		num: '003',
-		name: 'TapClick ↗',
-		tag: 'iOS App · 2026',
-		href: 'https://apps.apple.com/us/app/tapclick-metronome-watch/id6767588626',
-		external: true
-	},
+	{ num: '003', name: 'TapClick', tag: 'iOS & Watch · 2026', href: '/portfolio/tapclick' },
 	{ num: '004', name: 'Editorial Spots', tag: 'Illustration · 2024' },
 	{ num: '005', name: 'Brand Identity', tag: 'Branding · 2024', href: '/portfolio/lepizzapie' },
 	{

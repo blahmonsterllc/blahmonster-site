@@ -24,9 +24,11 @@
 		"num": "003",
 		"title": "TapClick",
 		"slug": "tapclick",
-		"description": "Precise metronome for iPhone with tap tempo, setlists, silent bar training, and custom accents. No ads, no subscriptions — one-time purchase.",
-		"category": "iOS App",
+		"description": "I built TapClick because I've been drumming for a long time and most metronome apps felt bloated, fiddly, or not quite right on the gig. I wanted something simpler and more accurate — easy to read, easy to set, and reliable when it matters.\n\nTapClick is a metronome for iPhone and Apple Watch: tap tempo, setlists, silent-bar training, and custom accents. One-time purchase. No ads, no subscriptions, no account. Works offline.",
+		"category": "iOS & Watch",
 		"year": 2026,
+		"image": "/portfolio/tapclick-icon.png",
+		"imageAlt": "TapClick metronome app icon",
 		"url": "https://apps.apple.com/us/app/tapclick-metronome-watch/id6767588626"
 	},
 	{

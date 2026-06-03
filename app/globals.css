@@ -553,8 +553,22 @@ img {
 }
 
 .portfolio-showcase-copy {
-	margin-bottom: 0;
+	margin-bottom: 16px;
 	max-width: 52ch;
+}
+
+.portfolio-showcase-copy:last-of-type {
+	margin-bottom: 0;
+}
+
+.portfolio-showcase-cta {
+	justify-content: center;
+	margin-top: 28px;
+	margin-bottom: 0;
+}
+
+.portfolio-figure--icon img {
+	max-width: 280px;
 }
 
 .portfolio-figure {

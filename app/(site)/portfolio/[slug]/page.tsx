@@ -51,17 +51,35 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 			</h2>
 			{project.image ? (
 				<div className="portfolio-showcase">
-					<figure className="portfolio-figure">
+					<figure
+						className={`portfolio-figure${project.slug === 'tapclick' ? ' portfolio-figure--icon' : ''}`}
+					>
 						{/* eslint-disable-next-line @next/next/no-img-element -- static portfolio asset */}
 						<img
 							src={project.image}
 							alt={project.imageAlt ?? project.title}
-							width={560}
-							height={690}
+							width={project.slug === 'tapclick' ? 280 : 560}
+							height={project.slug === 'tapclick' ? 186 : 690}
 						/>
 					</figure>
-					{project.description ? (
-						<p className="hero-body portfolio-showcase-copy">{project.description}</p>
+					{project.description
+						? project.description.split(/\n\n+/).map((para, i) => (
+								<p key={i} className="hero-body portfolio-showcase-copy">
+									{para}
+								</p>
+							))
+						: null}
+					{project.url ? (
+						<div className="cta-row portfolio-showcase-cta">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="cta solid"
+							>
+								{project.url.includes('apps.apple.com') ? 'App Store →' : 'Visit site →'}
+							</a>
+						</div>
 					) : null}
 				</div>
 			) : (
@@ -72,7 +90,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 				)
 			)}
 
-			{project.url && (
+			{project.url && !project.image ? (
 				<div className="cta-row" style={{ marginTop: 8, marginBottom: 32 }}>
 					<a
 						href={project.url}
@@ -83,7 +101,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 						{project.url.includes('apps.apple.com') ? 'App Store →' : 'Visit site →'}
 					</a>
 				</div>
-			)}
+			) : null}
 
 			<hr />
 
