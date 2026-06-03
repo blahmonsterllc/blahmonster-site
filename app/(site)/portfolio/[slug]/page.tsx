@@ -50,21 +50,26 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 				</span>
 			</h2>
 			{project.image ? (
-				<figure className="portfolio-figure">
-					{/* eslint-disable-next-line @next/next/no-img-element -- static portfolio asset */}
-					<img
-						src={project.image}
-						alt={project.imageAlt ?? project.title}
-						width={560}
-						height={690}
-					/>
-				</figure>
-			) : null}
-
-			{project.description && (
-				<p className="hero-body" style={{ marginBottom: 24 }}>
-					{project.description}
-				</p>
+				<div className="portfolio-showcase">
+					<figure className="portfolio-figure">
+						{/* eslint-disable-next-line @next/next/no-img-element -- static portfolio asset */}
+						<img
+							src={project.image}
+							alt={project.imageAlt ?? project.title}
+							width={560}
+							height={690}
+						/>
+					</figure>
+					{project.description ? (
+						<p className="hero-body portfolio-showcase-copy">{project.description}</p>
+					) : null}
+				</div>
+			) : (
+				project.description && (
+					<p className="hero-body" style={{ marginBottom: 24 }}>
+						{project.description}
+					</p>
+				)
 			)}
 
 			{project.url && (

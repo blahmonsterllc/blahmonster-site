@@ -544,8 +544,21 @@ img {
 	font-weight: 700;
 }
 
+.portfolio-showcase {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin: 24px 0 32px;
+}
+
+.portfolio-showcase-copy {
+	margin-bottom: 0;
+	max-width: 52ch;
+}
+
 .portfolio-figure {
-	margin: 24px 0 28px;
+	margin: 0 0 28px;
 }
 
 .portfolio-figure img {
@@ -553,6 +566,7 @@ img {
 	max-width: 420px;
 	height: auto;
 	display: block;
+	margin: 0 auto;
 }
 
 /* ---------- Blog post media ---------- */
