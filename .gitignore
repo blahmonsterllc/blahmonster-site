@@ -2,6 +2,7 @@ node_modules
 .next
 out
 .vercel
+.wrangler
 .env
 .env.local
 .DS_Store

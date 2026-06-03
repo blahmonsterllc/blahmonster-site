@@ -14,12 +14,17 @@ export const metadata: Metadata = {
 	description:
 		'Blah Monster is a one-person studio on Long Island making illustration, web apps, and Mac/iOS software.',
 	icons: {
-		icon: [{ url: '/favicon.png', type: 'image/png', sizes: '512x512' }],
-		apple: [{ url: '/brand/blahmonster-icon.png', type: 'image/png' }]
+		icon: [
+			{ url: '/favicon.ico', sizes: 'any' },
+			{ url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+			{ url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+			{ url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' }
+		],
+		apple: [{ url: '/favicon-180x180.png', type: 'image/png', sizes: '180x180' }]
 	},
 	openGraph: {
 		title: 'Blah Monster',
-		description: 'Art & Software Studio. Long Island, NY. Est. 2024.',
+		description: 'Art & Software Studio. Long Island, NY. Est. 2023.',
 		type: 'website'
 	}
 };

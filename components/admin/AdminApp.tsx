@@ -3,6 +3,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { slugify } from '@/lib/blog/slug';
 
+type Post = {
+	id: string;
+	title: string;
+	slug: string;
+	date: string;
+	tag?: string;
+	excerpt: string;
+	content: string;
+};
+
 async function apiJson(r: Response): Promise<Record<string, unknown>> {
 	return (await r.json().catch(() => ({}))) as Record<string, unknown>;
 }
@@ -11,9 +21,12 @@ export function AdminApp() {
 	const [authed, setAuthed] = useState<boolean | null>(null);
 	const [password, setPassword] = useState('');
 	const [err, setErr] = useState('');
+	const [posts, setPosts] = useState<Post[]>([]);
+	const [editingId, setEditingId] = useState<string | null>(null);
 	const [title, setTitle] = useState('');
 	const [slug, setSlug] = useState('');
 	const [tag, setTag] = useState('');
+	const [date, setDate] = useState('');
 	const [excerpt, setExcerpt] = useState('');
 	const [content, setContent] = useState('');
 	const [slugTouched, setSlugTouched] = useState(false);
@@ -26,9 +39,62 @@ export function AdminApp() {
 			.catch(() => setAuthed(false));
 	}, []);
 
+	const loadPosts = useCallback(async () => {
+		const r = await fetch('/api/admin/posts');
+		const d = await apiJson(r);
+		if (Array.isArray(d.posts)) setPosts(d.posts as Post[]);
+	}, []);
+
 	useEffect(() => {
-		if (!slugTouched && title) setSlug(slugify(title));
-	}, [title, slugTouched]);
+		if (authed) void loadPosts();
+	}, [authed, loadPosts]);
+
+	useEffect(() => {
+		if (!slugTouched && title && !editingId) setSlug(slugify(title));
+	}, [title, slugTouched, editingId]);
+
+	const clearForm = () => {
+		setEditingId(null);
+		setTitle('');
+		setSlug('');
+		setTag('');
+		setDate('');
+		setExcerpt('');
+		setContent('');
+		setSlugTouched(false);
+		setErr('');
+	};
+
+	const editPost = (post: Post) => {
+		setEditingId(post.id);
+		setTitle(post.title);
+		setSlug(post.slug);
+		setTag(post.tag ?? '');
+		setDate(post.date);
+		setExcerpt(post.excerpt);
+		setContent(post.content);
+		setSlugTouched(true);
+		setErr('');
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
+	const deletePostById = async (post: Post) => {
+		if (!window.confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
+		setBusy(true);
+		const r = await fetch('/api/admin/posts', {
+			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ id: post.id })
+		});
+		const d = await apiJson(r);
+		setBusy(false);
+		if (!r.ok) {
+			window.alert(typeof d.error === 'string' ? d.error : 'Delete failed');
+			return;
+		}
+		if (editingId === post.id) clearForm();
+		await loadPosts();
+	};
 
 	const login = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -93,32 +159,50 @@ export function AdminApp() {
 		}
 		const imported = typeof d.imported === 'number' ? d.imported : 0;
 		window.alert(`Imported ${imported} posts.`);
-		window.location.href = '/blog';
+		await loadPosts();
 	};
 
-	const publish = async (e: React.FormEvent) => {
+	const save = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setBusy(true);
 		setErr('');
-		const r = await fetch('/api/admin/posts', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				title,
-				slug,
-				tag,
-				excerpt,
-				content,
-				date: new Date().toISOString().slice(0, 10)
-			})
-		});
-		const d = await apiJson(r);
-		setBusy(false);
-		if (!r.ok) {
-			setErr(typeof d.error === 'string' ? d.error : 'Could not save');
-			return;
+
+		if (editingId) {
+			const r = await fetch('/api/admin/posts', {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ id: editingId, title, slug, tag, excerpt, content, date })
+			});
+			const d = await apiJson(r);
+			setBusy(false);
+			if (!r.ok) {
+				setErr(typeof d.error === 'string' ? d.error : 'Could not save');
+				return;
+			}
+			clearForm();
+			await loadPosts();
+		} else {
+			const r = await fetch('/api/admin/posts', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					title,
+					slug,
+					tag,
+					excerpt,
+					content,
+					date: date || new Date().toISOString().slice(0, 10)
+				})
+			});
+			const d = await apiJson(r);
+			setBusy(false);
+			if (!r.ok) {
+				setErr(typeof d.error === 'string' ? d.error : 'Could not save');
+				return;
+			}
+			clearForm();
+			await loadPosts();
 		}
-		window.location.href = `/blog/${encodeURIComponent(slug)}`;
 	};
 
 	if (authed === null) {
@@ -131,10 +215,9 @@ export function AdminApp() {
 				<div className="sec-num">/ admin</div>
 				<h1 className="sec-title">Blog</h1>
 				<p className="hero-body" style={{ marginBottom: 24 }}>
-				Sign in to publish posts. Use a strong password and prefer{' '}
-				<code>BLOG_ADMIN_PASSWORD_PBKDF2</code> in production (see{' '}
-				<code>npm run hash-admin-password</code>). This area is not indexed by search engines.
-			</p>
+					Sign in to write and publish blog posts. This page is private and not listed on the
+					public site.
+				</p>
 				<form className="admin-form" onSubmit={login}>
 					<label htmlFor="pw">Password</label>
 					<input
@@ -165,17 +248,20 @@ export function AdminApp() {
 		<section>
 			<div className="sec-num">/ admin</div>
 			<h1 className="sec-title">
-				New post <span className="meta">publish</span>
+				{editingId ? 'Edit post' : 'New post'}{' '}
+				<span className="meta">{editingId ? 'update' : 'publish'}</span>
 			</h1>
 			<p className="hero-body" style={{ marginBottom: 24 }}>
-				Uses your live D1 database on Cloudflare. Media uploads need an R2 bucket bound as{' '}
-				<code>MEDIA</code>; otherwise paste <code>IMAGE:https://…</code> or{' '}
-				<code>VIDEO:https://…</code> on their own lines in the body (blank line between blocks).
+				{editingId
+					? 'Update the fields below and click Save.'
+					: 'Fill in the fields below and click Publish. Separate paragraphs with a blank line.'}{' '}
+				Use <strong>Add image</strong> or <strong>Add video</strong> to insert media, or paste an
+				image URL on its own line as <code>IMAGE:https://…</code>.
 			</p>
 			{err ? (
 				<p style={{ color: 'var(--ink)', marginBottom: 16, maxWidth: '60ch' }}>{err}</p>
 			) : null}
-			<form className="admin-form" onSubmit={publish}>
+			<form className="admin-form" onSubmit={save}>
 				<label htmlFor="title">Title</label>
 				<input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
 
@@ -194,6 +280,15 @@ export function AdminApp() {
 
 				<label htmlFor="tag">Tag (optional)</label>
 				<input id="tag" value={tag} onChange={(e) => setTag(e.target.value)} placeholder="Essay" />
+
+				<label htmlFor="date">Date</label>
+				<input
+					id="date"
+					type="date"
+					value={date}
+					onChange={(e) => setDate(e.target.value)}
+					placeholder={new Date().toISOString().slice(0, 10)}
+				/>
 
 				<label htmlFor="excerpt">Excerpt</label>
 				<textarea
@@ -238,16 +333,22 @@ export function AdminApp() {
 
 				<div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
 					<button type="submit" className="cta solid" disabled={busy}>
-						Publish
+						{editingId ? 'Save' : 'Publish'}
 					</button>
-					<button
-						type="button"
-						className="cta"
-						disabled={busy}
-						onClick={() => void seedDb()}
-					>
-						Seed default posts
-					</button>
+					{editingId ? (
+						<button type="button" className="cta" onClick={clearForm}>
+							Cancel edit
+						</button>
+					) : (
+						<button
+							type="button"
+							className="cta"
+							disabled={busy}
+							onClick={() => void seedDb()}
+						>
+							Seed default posts
+						</button>
+					)}
 					<button type="button" className="cta" onClick={() => void logout()}>
 						Sign out
 					</button>
@@ -256,6 +357,60 @@ export function AdminApp() {
 					</a>
 				</div>
 			</form>
+
+			{posts.length > 0 && (
+				<>
+					<h2 className="sec-title" style={{ marginTop: 48 }}>
+						Posts <span className="meta">{posts.length}</span>
+					</h2>
+					<ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+						{posts.map((p) => (
+							<li
+								key={p.id}
+								style={{
+									padding: '12px 0',
+									borderBottom: '1px solid var(--ink-mute, #333)',
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'baseline',
+									gap: 12,
+									flexWrap: 'wrap'
+								}}
+							>
+								<div style={{ flex: 1, minWidth: 200 }}>
+									<strong>{p.title}</strong>
+									<span
+										className="meta"
+										style={{ marginLeft: 8 }}
+									>
+										{p.date}
+										{p.tag ? ` / ${p.tag}` : ''}
+									</span>
+								</div>
+								<div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+									<button
+										type="button"
+										className="cta"
+										style={{ padding: '4px 12px', fontSize: 13 }}
+										onClick={() => editPost(p)}
+									>
+										Edit
+									</button>
+									<button
+										type="button"
+										className="cta"
+										style={{ padding: '4px 12px', fontSize: 13 }}
+										disabled={busy}
+										onClick={() => void deletePostById(p)}
+									>
+										Delete
+									</button>
+								</div>
+							</li>
+						))}
+					</ul>
+				</>
+			)}
 		</section>
 	);
 }

@@ -31,9 +31,6 @@ const adminSecurityHeaders = [
 
 const nextConfig = {
 	outputFileTracingRoot: path.join(__dirname),
-	images: {
-		remotePatterns: [{ protocol: 'https', hostname: '**.cdn.sanity.io' }]
-	},
 	async headers() {
 		return [
 			{ source: '/admin', headers: adminSecurityHeaders },

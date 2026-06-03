@@ -1,14 +1,29 @@
 import portfolioData from '../../../../data/portfolio.json';
 
+type PortfolioProject = {
+	id: string;
+	num?: string;
+	title: string;
+	slug: string;
+	description?: string;
+	category: string;
+	year: number;
+	url?: string;
+	image?: string;
+	imageAlt?: string;
+};
+
+const projects = portfolioData as PortfolioProject[];
+
 export async function generateStaticParams() {
-	return portfolioData.map((project) => ({
+	return projects.map((project) => ({
 		slug: project.slug
 	}));
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params;
-	const project = portfolioData.find((p) => p.slug === slug);
+	const project = projects.find((p) => p.slug === slug);
 
 	if (!project) {
 		return (
@@ -34,6 +49,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 					{project.category} · {project.year}
 				</span>
 			</h2>
+			{project.image ? (
+				<figure className="portfolio-figure">
+					{/* eslint-disable-next-line @next/next/no-img-element -- static portfolio asset */}
+					<img
+						src={project.image}
+						alt={project.imageAlt ?? project.title}
+						width={560}
+						height={691}
+					/>
+				</figure>
+			) : null}
+
 			{project.description && (
 				<p className="hero-body" style={{ marginBottom: 24 }}>
 					{project.description}
@@ -48,7 +75,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 						rel="noopener noreferrer"
 						className="cta solid"
 					>
-						Visit site →
+						{project.url.includes('apps.apple.com') ? 'App Store →' : 'Visit site →'}
 					</a>
 				</div>
 			)}

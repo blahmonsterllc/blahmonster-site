@@ -118,6 +118,13 @@ img {
 	color: var(--ink);
 }
 
+.domain-brand {
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+}
+
 .head-right {
 	text-align: right;
 	color: var(--ink-mute);
@@ -537,6 +544,19 @@ img {
 	font-weight: 700;
 }
 
+.portfolio-figure {
+	margin: 24px 0 28px;
+}
+
+.portfolio-figure img {
+	width: 100%;
+	max-width: 420px;
+	height: auto;
+	display: block;
+	border: 1px solid var(--rule);
+}
+
+/* ---------- Blog post media ---------- */
 .prose .post-media {
 	margin: 24px 0;
 	max-width: min(72ch, 100%);

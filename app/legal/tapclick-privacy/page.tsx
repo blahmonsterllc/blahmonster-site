@@ -11,11 +11,11 @@ const EFFECTIVE_DATE = 'May 17, 2026';
 
 export default function TapClickPrivacyPage() {
 	return (
-		<div className="frame">
+		<div className="frame legal-page">
 			<header className="head">
 				<div className="head-left">
 					<a href="/legal/tapclick-privacy">
-						<span className="domain">TapClick</span>
+						<span className="domain domain-brand">TapClick</span>
 					</a>
 				</div>
 				<div className="head-right">
@@ -178,12 +178,6 @@ export default function TapClickPrivacyPage() {
 					<dd>Long Island, NY, USA</dd>
 				</dl>
 			</section>
-
-			<div className="ascii">
-				{`─────────────────────────────────
-●  ●         End of Policy         ●  ●
-─────────────────────────────────`}
-			</div>
 
 			<footer className="foot">
 				<div>© 2026 Blah Monster LLC — TapClick is a product of Blah Monster LLC.</div>

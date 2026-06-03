@@ -15,21 +15,21 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
 								priority
 							/>
 						</span>
-						<span className="domain">blahmonster.com</span>
+						<span className="domain domain-brand">Blahmonster.com</span>
 					</a>
 				</div>
 				<div className="head-right">
 					<div className="status">
 						<span className="status-dot" /> Booking late 2026
 					</div>
-					<div>Long Island, NY / Est. 2024</div>
+					<div>Long Island, NY / Est. 2023</div>
 				</div>
 			</header>
 
 			{children}
 
 			<footer className="foot">
-				<div>© 2026 Blah Monster LLC / Made on Long Island</div>
+				<div>© 2026 Blah Monster LLC</div>
 				<div>
 					<a href="#">↑ Back to top</a>
 				</div>

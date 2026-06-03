@@ -1,12 +1,14 @@
+import { getEnvVar } from './cf';
+
 const MIN_PLAINTEXT_LEN = 14;
 
 /** Preferred: set BLOG_ADMIN_PASSWORD_PBKDF2 (see scripts/hash-admin-password.mjs). */
 export async function verifyAdminPassword(plain: string): Promise<boolean> {
-	const hashed = process.env.BLOG_ADMIN_PASSWORD_PBKDF2?.trim();
+	const hashed = getEnvVar('BLOG_ADMIN_PASSWORD_PBKDF2')?.trim();
 	if (hashed) {
 		return verifyPbkdf2Record(plain, hashed);
 	}
-	const plainEnv = process.env.BLOG_ADMIN_PASSWORD;
+	const plainEnv = getEnvVar('BLOG_ADMIN_PASSWORD');
 	if (!plainEnv) return false;
 	if (plainEnv.length < MIN_PLAINTEXT_LEN) {
 		return false;
@@ -15,8 +17,8 @@ export async function verifyAdminPassword(plain: string): Promise<boolean> {
 }
 
 export function adminPasswordConfigured(): boolean {
-	if (process.env.BLOG_ADMIN_PASSWORD_PBKDF2?.trim()) return true;
-	const p = process.env.BLOG_ADMIN_PASSWORD;
+	if (getEnvVar('BLOG_ADMIN_PASSWORD_PBKDF2')?.trim()) return true;
+	const p = getEnvVar('BLOG_ADMIN_PASSWORD');
 	return !!p && p.length >= MIN_PLAINTEXT_LEN;
 }
 

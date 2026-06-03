@@ -9,7 +9,7 @@ if (!password || password.length < 14) {
 	process.exit(1);
 }
 
-const iterations = 310_000;
+const iterations = 100_000; // Cloudflare Workers caps PBKDF2 at 100k iterations
 const salt = crypto.getRandomValues(new Uint8Array(16));
 const enc = new TextEncoder();
 const keyMaterial = await crypto.subtle.importKey(

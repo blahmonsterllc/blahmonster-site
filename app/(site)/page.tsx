@@ -12,10 +12,17 @@ type Work = {
 const work: Work[] = [
 	{ num: '001', name: 'Hank', tag: 'Mac App · 2026', href: '/portfolio/hank' },
 	{ num: '002', name: 'Keepset', tag: 'Web · 2026', href: 'https://keepset.io', external: true },
-	{ num: '003', name: 'Editorial Spots', tag: 'Illustration · 2025' },
-	{ num: '004', name: 'Brand Identity (Private)', tag: 'Branding · 2025' },
 	{
-		num: '005',
+		num: '003',
+		name: 'TapClick ↗',
+		tag: 'iOS App · 2026',
+		href: 'https://apps.apple.com/us/app/tapclick-metronome-watch/id6767588626',
+		external: true
+	},
+	{ num: '004', name: 'Editorial Spots', tag: 'Illustration · 2024' },
+	{ num: '005', name: 'Brand Identity', tag: 'Branding · 2024', href: '/portfolio/brand-private' },
+	{
+		num: '006',
 		name: 'Amazing Monster Coloring Book Vol 1 ↗',
 		tag: 'Print · Amazon · 2023',
 		href: 'https://www.amazon.com/Amazing-Monster-Coloring-Book-1/dp/B0BZFD19CK',
@@ -50,7 +57,7 @@ const faqs = [
 	{ q: 'Who are you?', a: 'Gordon. Solo studio. Long Island, NY.' },
 	{
 		q: 'What is Blah Monster?',
-		a: "The studio name. Also the mascot's name. He's grumpy on purpose."
+		a: "The studio name. Also the mascot's name. I've been drawing monsters since the early 2000s. When I traveled, I'd draw monsters on walls and garbage cans and put stickers up wherever I went."
 	},
 	{ q: 'What do you charge?', a: "Depends on the project. Tell me what you're building." },
 	{
@@ -114,7 +121,7 @@ export default async function HomePage() {
 			<section id="work">
 				<div className="sec-num">/ 01</div>
 				<h2 className="sec-title">
-					Recent Work <span className="meta">2025—2026</span>
+					Recent Work <span className="meta">2023—2026</span>
 				</h2>
 				<ol className="work-list">
 					{work.map((w) => (

@@ -3,11 +3,10 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
-# Create resources in the Cloudflare dashboard, then paste IDs here (or bind in Pages → Settings).
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "blahmonster-blog"
-# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+[[d1_databases]]
+binding = "DB"
+database_name = "blahmonster-blog"
+database_id = "6153fb54-2e6b-4a28-a50c-268fe934326a"
 
 # [[r2_buckets]]
 # binding = "MEDIA"
@@ -15,3 +14,8 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production]
 name = "blahmonster-site"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "blahmonster-blog"
+database_id = "6153fb54-2e6b-4a28-a50c-268fe934326a"

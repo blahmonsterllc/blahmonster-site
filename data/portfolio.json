@@ -20,31 +20,34 @@
 		"url": "https://keepset.io"
 	},
 	{
-		"id": "editorial-spots",
+		"id": "tapclick",
 		"num": "003",
+		"title": "TapClick",
+		"slug": "tapclick",
+		"description": "Precise metronome for iPhone with tap tempo, setlists, silent bar training, and custom accents. No ads, no subscriptions — one-time purchase.",
+		"category": "iOS App",
+		"year": 2026,
+		"url": "https://apps.apple.com/us/app/tapclick-metronome-watch/id6767588626"
+	},
+	{
+		"id": "editorial-spots",
+		"num": "004",
 		"title": "Editorial Spots",
 		"slug": "editorial-spots",
 		"description": "A collection of editorial illustration commissions. Pen, ink, iPad. Mostly black and white.",
 		"category": "Illustration",
-		"year": 2025
+		"year": 2024
 	},
 	{
 		"id": "brand-private",
-		"num": "004",
-		"title": "Brand Identity (Private)",
-		"slug": "brand-private",
-		"description": "A private brand identity engagement. Logo, mascot, type system.",
-		"category": "Branding",
-		"year": 2025
-	},
-	{
-		"id": "tapclick",
 		"num": "005",
-		"title": "TapClick",
-		"slug": "tapclick",
-		"description": "Minimalist metronome app for iPhone designed for musicians who value simplicity and precision.",
-		"category": "iOS App",
-		"year": 2025
+		"title": "Brand Identity",
+		"slug": "brand-private",
+		"description": "I developed this graphic for a friend's pizza catering business — a hand-drawn mascot mark for menus, stickers, and pop-ups.",
+		"category": "Branding",
+		"year": 2024,
+		"image": "/portfolio/le-pizza-pie-brand.jpg",
+		"imageAlt": "Brand identity graphic for a pizza catering business"
 	},
 	{
 		"id": "coloring-book",
