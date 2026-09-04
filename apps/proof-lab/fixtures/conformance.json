@@ -1,0 +1,868 @@
+{
+    "version": 1,
+    "rateMultipliers": [
+        {
+            "temperatureC": -2.0,
+            "value": 0.08111524558576072
+        },
+        {
+            "temperatureC": 0.0,
+            "value": 0.10104777110069317
+        },
+        {
+            "temperatureC": 2.0,
+            "value": 0.12587833483932023
+        },
+        {
+            "temperatureC": 4.0,
+            "value": 0.1568105363366231
+        },
+        {
+            "temperatureC": 6.0,
+            "value": 0.19534373677223468
+        },
+        {
+            "temperatureC": 10.0,
+            "value": 0.30314331330207955
+        },
+        {
+            "temperatureC": 15.0,
+            "value": 0.479311663742295
+        },
+        {
+            "temperatureC": 18.0,
+            "value": 0.630957344480193
+        },
+        {
+            "temperatureC": 20.0,
+            "value": 0.757858283255199
+        },
+        {
+            "temperatureC": 22.0,
+            "value": 0.8705505632961241
+        },
+        {
+            "temperatureC": 24.0,
+            "value": 1.0
+        },
+        {
+            "temperatureC": 26.0,
+            "value": 1.148698354997035
+        },
+        {
+            "temperatureC": 30.0,
+            "value": 1.5157165665103982
+        },
+        {
+            "temperatureC": 35.0,
+            "value": 2.1435469250725867
+        }
+    ],
+    "equivalentHours": [
+        {
+            "hours": 48.0,
+            "temperatureC": 4.0,
+            "value": 7.526905744157908
+        },
+        {
+            "hours": 24.0,
+            "temperatureC": 4.0,
+            "value": 3.763452872078954
+        },
+        {
+            "hours": 3.0,
+            "temperatureC": 24.0,
+            "value": 3.0
+        },
+        {
+            "hours": 14.0,
+            "temperatureC": 20.0,
+            "value": 10.610015965572785
+        },
+        {
+            "hours": 6.0,
+            "temperatureC": 20.0,
+            "value": 4.547149699531194
+        },
+        {
+            "hours": 4.5,
+            "temperatureC": 25.0,
+            "value": 4.822980581413319
+        }
+    ],
+    "instantYeast": [
+        {
+            "equivalentHours": 4.0,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.4
+        },
+        {
+            "equivalentHours": 7.53,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.21248339973439576
+        },
+        {
+            "equivalentHours": 11.3,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.1415929203539823
+        },
+        {
+            "equivalentHours": 15.0,
+            "saltPercent": 2.8,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.11861333333333335
+        },
+        {
+            "equivalentHours": 6.0,
+            "saltPercent": 2.0,
+            "sugarPercent": 10.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.30666666666666664
+        },
+        {
+            "equivalentHours": 9.0,
+            "saltPercent": 2.5,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.3,
+            "value": 0.1445688888888889
+        },
+        {
+            "equivalentHours": 0.0,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 1.5
+        },
+        {
+            "equivalentHours": 400.0,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "value": 0.02
+        }
+    ],
+    "levain": [
+        {
+            "equivalentHours": 4.5,
+            "saltPercent": 2.0,
+            "value": 20.0
+        },
+        {
+            "equivalentHours": 12.0,
+            "saltPercent": 2.0,
+            "value": 7.5
+        },
+        {
+            "equivalentHours": 20.0,
+            "saltPercent": 2.5,
+            "value": 4.815
+        },
+        {
+            "equivalentHours": 0.0,
+            "saltPercent": 2.0,
+            "value": 40.0
+        },
+        {
+            "equivalentHours": 500.0,
+            "saltPercent": 2.0,
+            "value": 3.0
+        }
+    ],
+    "plans": [
+        {
+            "id": "same-day-straight",
+            "fermentationLoadHours": 5.0,
+            "totalHours": 5.75,
+            "hoursToReady": 5.5,
+            "stageCount": 5
+        },
+        {
+            "id": "cold-ball-retard",
+            "fermentationLoadHours": 11.10630643886769,
+            "totalHours": 53.3,
+            "hoursToReady": 53.05,
+            "stageCount": 6
+        },
+        {
+            "id": "cold-bulk-retard",
+            "fermentationLoadHours": 7.665436568395874,
+            "totalHours": 29.8,
+            "hoursToReady": 29.55,
+            "stageCount": 6
+        },
+        {
+            "id": "neapolitan-direct",
+            "fermentationLoadHours": 6.062866266041592,
+            "totalHours": 8.85,
+            "hoursToReady": 8.65,
+            "stageCount": 5
+        },
+        {
+            "id": "poolish-pizza",
+            "fermentationLoadHours": 6.907578285140675,
+            "totalHours": 42.85,
+            "hoursToReady": 42.6,
+            "stageCount": 7
+        },
+        {
+            "id": "biga-pizza",
+            "fermentationLoadHours": 6.724573350376136,
+            "totalHours": 41.95,
+            "hoursToReady": 41.7,
+            "stageCount": 7
+        },
+        {
+            "id": "detroit-pan",
+            "fermentationLoadHours": 7.259346843127922,
+            "totalHours": 23.85,
+            "hoursToReady": 23.55,
+            "stageCount": 6
+        },
+        {
+            "id": "focaccia-cold-bulk",
+            "fermentationLoadHours": 7.0536882615650205,
+            "totalHours": 25.349999999999998,
+            "hoursToReady": 24.95,
+            "stageCount": 6
+        },
+        {
+            "id": "sourdough-pizza-cold",
+            "fermentationLoadHours": 9.788234840721577,
+            "totalHours": 40.35,
+            "hoursToReady": 40.1,
+            "stageCount": 8
+        },
+        {
+            "id": "sourdough-country-loaf",
+            "fermentationLoadHours": 7.366548315444492,
+            "totalHours": 31.45,
+            "hoursToReady": 30.7,
+            "stageCount": 9
+        },
+        {
+            "id": "poolish-baguette",
+            "fermentationLoadHours": 3.5982202253184496,
+            "totalHours": 18.749999999999996,
+            "hoursToReady": 18.349999999999998,
+            "stageCount": 8
+        }
+    ],
+    "formulas": [
+        {
+            "styleId": "neapolitan",
+            "totalDoughGrams": 5100.0,
+            "totalFlourGrams": 3092.783505154639,
+            "totalWaterGrams": 1917.5257731958761,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 3092.783505154639,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1917.5257731958761,
+                    "bakersPercent": 62.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 86.59793814432989,
+                    "bakersPercent": 2.8
+                },
+                {
+                    "id": "yeast",
+                    "grams": 3.092783505154639,
+                    "bakersPercent": 0.1
+                }
+            ]
+        },
+        {
+            "styleId": "new-york",
+            "totalDoughGrams": 6936.0,
+            "totalFlourGrams": 4135.710452566931,
+            "totalWaterGrams": 2564.140480591497,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 4135.710452566931,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 2564.140480591497,
+                    "bakersPercent": 62.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 82.71420905133863,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "yeast",
+                    "grams": 8.684991950390556,
+                    "bakersPercent": 0.21
+                },
+                {
+                    "id": "oil",
+                    "grams": 82.71420905133863,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "sugar",
+                    "grams": 62.035656788503964,
+                    "bakersPercent": 1.5
+                }
+            ]
+        },
+        {
+            "styleId": "detroit",
+            "totalDoughGrams": 2448.0,
+            "totalFlourGrams": 1396.4632059326868,
+            "totalWaterGrams": 977.5242441528809,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1396.4632059326868,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 977.5242441528809,
+                    "bakersPercent": 70.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 27.929264118653737,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "yeast",
+                    "grams": 4.18938961779806,
+                    "bakersPercent": 0.3
+                },
+                {
+                    "id": "oil",
+                    "grams": 41.89389617798061,
+                    "bakersPercent": 3.0
+                }
+            ]
+        },
+        {
+            "styleId": "sicilian",
+            "totalDoughGrams": 2856.0,
+            "totalFlourGrams": 1599.551946233548,
+            "totalWaterGrams": 1151.6774012881547,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1599.551946233548,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1151.6774012881547,
+                    "bakersPercent": 72.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 35.19014281713806,
+                    "bakersPercent": 2.2
+                },
+                {
+                    "id": "yeast",
+                    "grams": 5.5984318118174174,
+                    "bakersPercent": 0.35
+                },
+                {
+                    "id": "oil",
+                    "grams": 63.98207784934192,
+                    "bakersPercent": 4.0
+                }
+            ]
+        },
+        {
+            "styleId": "roman-teglia",
+            "totalDoughGrams": 3060.0,
+            "totalFlourGrams": 1649.5956873315365,
+            "totalWaterGrams": 1319.6765498652292,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1649.5956873315365,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1319.6765498652292,
+                    "bakersPercent": 80.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 36.29110512129381,
+                    "bakersPercent": 2.2
+                },
+                {
+                    "id": "yeast",
+                    "grams": 4.948787061994609,
+                    "bakersPercent": 0.3
+                },
+                {
+                    "id": "oil",
+                    "grams": 49.4878706199461,
+                    "bakersPercent": 3.0
+                }
+            ]
+        },
+        {
+            "styleId": "contemporary-biga",
+            "totalDoughGrams": 4569.6,
+            "totalFlourGrams": 2614.9056949276687,
+            "totalWaterGrams": 1882.7321003479215,
+            "prefermentFlourGrams": 1568.9434169566011,
+            "prefermentTotalGrams": 2355.2978575352495,
+            "prefermentBuild": [
+                {
+                    "id": "pfFlour",
+                    "grams": 1568.9434169566011,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 784.4717084783006,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfYeast",
+                    "grams": 1.8827321003479214,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1045.9622779710676,
+                    "bakersPercent": 40.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1098.260391869621,
+                    "bakersPercent": 42.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 2355.2978575352495,
+                    "bakersPercent": 90.07199999999999
+                },
+                {
+                    "id": "salt",
+                    "grams": 67.98754806811938,
+                    "bakersPercent": 2.6
+                },
+                {
+                    "id": "yeast",
+                    "grams": 2.091924555942135,
+                    "bakersPercent": 0.08
+                }
+            ]
+        },
+        {
+            "styleId": "poolish-pizza",
+            "totalDoughGrams": 4406.4,
+            "totalFlourGrams": 2582.20281871722,
+            "totalWaterGrams": 1755.8979167277096,
+            "prefermentFlourGrams": 774.660845615166,
+            "prefermentTotalGrams": 1550.4836824987547,
+            "prefermentBuild": [
+                {
+                    "id": "pfFlour",
+                    "grams": 774.660845615166,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 774.6608456151658,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfYeast",
+                    "grams": 1.161991268422749,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1807.541973102054,
+                    "bakersPercent": 70.0
+                },
+                {
+                    "id": "water",
+                    "grams": 981.2370711125437,
+                    "bakersPercent": 38.00000000000001
+                },
+                {
+                    "id": "preferment",
+                    "grams": 1550.4836824987547,
+                    "bakersPercent": 60.044999999999995
+                },
+                {
+                    "id": "salt",
+                    "grams": 64.5550704679305,
+                    "bakersPercent": 2.5
+                },
+                {
+                    "id": "yeast",
+                    "grams": 2.5822028187172203,
+                    "bakersPercent": 0.1
+                }
+            ]
+        },
+        {
+            "styleId": "sourdough-pizza",
+            "totalDoughGrams": 3304.8,
+            "totalFlourGrams": 1961.305637982196,
+            "totalWaterGrams": 1294.4617210682493,
+            "prefermentFlourGrams": 196.1305637982196,
+            "prefermentTotalGrams": 392.2611275964392,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 78.45222551928784,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour",
+                    "grams": 156.9044510385757,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 156.9044510385757,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1765.1750741839764,
+                    "bakersPercent": 90.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1098.3311572700297,
+                    "bakersPercent": 56.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 392.2611275964392,
+                    "bakersPercent": 20.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 49.032640949554896,
+                    "bakersPercent": 2.5
+                }
+            ]
+        },
+        {
+            "styleId": "country-loaf",
+            "totalDoughGrams": 1836.0,
+            "totalFlourGrams": 1031.4606741573034,
+            "totalWaterGrams": 783.9101123595506,
+            "prefermentFlourGrams": 103.14606741573034,
+            "prefermentTotalGrams": 206.2921348314607,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 41.258426966292134,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour",
+                    "grams": 82.51685393258427,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 82.51685393258427,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 928.314606741573,
+                    "bakersPercent": 90.0
+                },
+                {
+                    "id": "water",
+                    "grams": 680.7640449438202,
+                    "bakersPercent": 66.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 206.2921348314607,
+                    "bakersPercent": 20.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 20.629213483146067,
+                    "bakersPercent": 2.0
+                }
+            ]
+        },
+        {
+            "styleId": "focaccia",
+            "totalDoughGrams": 2040.0,
+            "totalFlourGrams": 1088.2902107228595,
+            "totalWaterGrams": 870.6321685782875,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1088.2902107228595,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 870.6321685782875,
+                    "bakersPercent": 80.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 23.942384635902908,
+                    "bakersPercent": 2.2
+                },
+                {
+                    "id": "yeast",
+                    "grams": 2.720725526807149,
+                    "bakersPercent": 0.25
+                },
+                {
+                    "id": "oil",
+                    "grams": 54.41451053614297,
+                    "bakersPercent": 5.0
+                }
+            ]
+        },
+        {
+            "styleId": "baguette",
+            "totalDoughGrams": 2142.0,
+            "totalFlourGrams": 1229.847044233154,
+            "totalWaterGrams": 885.489871847871,
+            "prefermentFlourGrams": 491.9388176932616,
+            "prefermentTotalGrams": 984.4679619677552,
+            "prefermentBuild": [
+                {
+                    "id": "pfFlour",
+                    "grams": 491.9388176932616,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 491.9388176932617,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfYeast",
+                    "grams": 0.590326581231914,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 737.9082265398924,
+                    "bakersPercent": 60.0
+                },
+                {
+                    "id": "water",
+                    "grams": 393.5510541546093,
+                    "bakersPercent": 32.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 984.4679619677552,
+                    "bakersPercent": 80.048
+                },
+                {
+                    "id": "salt",
+                    "grams": 24.59694088466308,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "yeast",
+                    "grams": 1.4758164530797848,
+                    "bakersPercent": 0.12
+                }
+            ]
+        },
+        {
+            "styleId": "enriched",
+            "totalDoughGrams": 2448.0,
+            "totalFlourGrams": 1326.1105092091009,
+            "totalWaterGrams": 848.7107258938246,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 1326.1105092091009,
+                    "bakersPercent": 100.0
+                },
+                {
+                    "id": "water",
+                    "grams": 848.7107258938246,
+                    "bakersPercent": 64.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 26.52221018418202,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "yeast",
+                    "grams": 7.956663055254605,
+                    "bakersPercent": 0.6
+                },
+                {
+                    "id": "oil",
+                    "grams": 106.08884073672807,
+                    "bakersPercent": 8.0
+                },
+                {
+                    "id": "sugar",
+                    "grams": 132.6110509209101,
+                    "bakersPercent": 10.0
+                }
+            ]
+        }
+    ],
+    "waterTemperatures": [
+        {
+            "desiredDoughTempC": 24.0,
+            "flourTempC": 21.0,
+            "roomTempC": 22.0,
+            "prefermentTempC": null,
+            "mixer": "SPIRAL",
+            "totalWaterGrams": 12000.0,
+            "tapWaterTempC": 18.0,
+            "waterTemperatureC": 25.0,
+            "iceGrams": 0.0,
+            "waterGrams": 12000.0,
+            "hasWarning": false
+        },
+        {
+            "desiredDoughTempC": 23.0,
+            "flourTempC": 24.0,
+            "roomTempC": 26.0,
+            "prefermentTempC": 20.0,
+            "mixer": "PLANETARY",
+            "totalWaterGrams": 8000.0,
+            "tapWaterTempC": 24.0,
+            "waterTemperatureC": 16.0,
+            "iceGrams": 615.3846153846154,
+            "waterGrams": 7384.615384615385,
+            "hasWarning": false
+        },
+        {
+            "desiredDoughTempC": 25.0,
+            "flourTempC": 18.0,
+            "roomTempC": 18.0,
+            "prefermentTempC": null,
+            "mixer": "HAND",
+            "totalWaterGrams": 1000.0,
+            "tapWaterTempC": 14.0,
+            "waterTemperatureC": 38.0,
+            "iceGrams": 0.0,
+            "waterGrams": 1000.0,
+            "hasWarning": false
+        },
+        {
+            "desiredDoughTempC": 26.0,
+            "flourTempC": 30.0,
+            "roomTempC": 32.0,
+            "prefermentTempC": 28.0,
+            "mixer": "SPIRAL",
+            "totalWaterGrams": 20000.0,
+            "tapWaterTempC": 27.0,
+            "waterTemperatureC": 10.0,
+            "iceGrams": 3177.570093457944,
+            "waterGrams": 16822.429906542056,
+            "hasWarning": false
+        }
+    ],
+    "production": [
+        {
+            "styleId": "new-york",
+            "mixerCapacityKg": 20.0,
+            "mixCount": 1,
+            "ballsPerMix": [
+                20
+            ],
+            "doughPerMixGrams": [
+                6936.0
+            ]
+        },
+        {
+            "styleId": "neapolitan",
+            "mixerCapacityKg": 8.0,
+            "mixCount": 1,
+            "ballsPerMix": [
+                20
+            ],
+            "doughPerMixGrams": [
+                5100.0
+            ]
+        },
+        {
+            "styleId": "country-loaf",
+            "mixerCapacityKg": 30.0,
+            "mixCount": 1,
+            "ballsPerMix": [
+                2
+            ],
+            "doughPerMixGrams": [
+                1836.0
+            ]
+        },
+        {
+            "styleId": "detroit",
+            "mixerCapacityKg": 2.0,
+            "mixCount": 2,
+            "ballsPerMix": [
+                3,
+                3
+            ],
+            "doughPerMixGrams": [
+                1224.0,
+                1224.0
+            ]
+        }
+    ]
+}

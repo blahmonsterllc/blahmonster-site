@@ -1,0 +1,11 @@
+# Gradle / Kotlin
+.gradle/
+build/
+local.properties
+
+# Xcode / SwiftPM
+.build/
+.swiftpm/
+xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/

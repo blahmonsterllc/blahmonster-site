@@ -1,0 +1,426 @@
+import XCTest
+@testable import DoughKit
+
+private let start = Date(timeIntervalSince1970: 1_757_000_000)
+private let hour: TimeInterval = 3600
+
+private func makeBatch(
+	plan: FermentationPlan = .coldBallRetard,
+	progress: [String: StageProgress] = [:],
+	name: String = "Friday service",
+	id: UUID = UUID(uuidString: "00000000-0000-0000-0000-000000000001")!
+) -> Batch {
+	Batch(
+		id: id,
+		name: name,
+		createdAt: start,
+		startAt: start,
+		formula: DoughStyle.style(id: "new-york")!.formula,
+		plan: plan,
+		progress: progress
+	)
+}
+
+final class FermentationTests: XCTestCase {
+	func testReferenceTemperatureHasUnitRate() {
+		XCTAssertEqual(Fermentation.rateMultiplier(atC: 24), 1, accuracy: 1e-12)
+	}
+
+	func testFridgeIsRoughlySixTimesSlower() {
+		let rate = Fermentation.rateMultiplier(atC: 4)
+		XCTAssertTrue((0.14...0.18).contains(rate), "rate(4) was \(rate)")
+	}
+
+	func testRateRisesWithTemperature() {
+		let rates = [-2.0, 0, 4, 10, 15, 20, 24, 30, 35, 45].map { Fermentation.rateMultiplier(atC: $0) }
+		for (a, b) in zip(rates, rates.dropFirst()) {
+			XCTAssertGreaterThan(b, a)
+		}
+	}
+
+	func testSegmentQ10sShowUpAsTenDegreeRatios() {
+		XCTAssertEqual(
+			Fermentation.rateMultiplier(atC: 30) / Fermentation.rateMultiplier(atC: 20),
+			2.0,
+			accuracy: 1e-9
+		)
+		XCTAssertEqual(
+			Fermentation.rateMultiplier(atC: 20) / Fermentation.rateMultiplier(atC: 10),
+			2.5,
+			accuracy: 1e-9
+		)
+		XCTAssertEqual(
+			Fermentation.rateMultiplier(atC: 10) / Fermentation.rateMultiplier(atC: 0),
+			3.0,
+			accuracy: 1e-9
+		)
+	}
+
+	func testEquivalentHoursRoundTrip() {
+		for temp in [2.0, 4, 12, 20, 24, 30] {
+			for hours in [0.5, 3, 18, 72] {
+				let equivalent = Fermentation.equivalentHours(hours: hours, atC: temp)
+				let back = Fermentation.hours(forEquivalentHours: equivalent, atC: temp)
+				XCTAssertEqual(back, hours, accuracy: 1e-9)
+			}
+		}
+	}
+
+	func testNegativeDurationsDoNotFerment() {
+		XCTAssertEqual(Fermentation.equivalentHours(hours: -5, atC: 24), 0, accuracy: 1e-12)
+	}
+
+	func testDoseFallsAsTheScheduleLengthens() {
+		let doses = [2.0, 4, 8, 16, 32].map { Leavening.instantYeastPercent(equivalentHours: $0) }
+		for (a, b) in zip(doses, doses.dropFirst()) {
+			XCTAssertLessThan(b, a)
+		}
+	}
+
+	func testDosesAreClamped() {
+		XCTAssertEqual(
+			Leavening.instantYeastPercent(equivalentHours: 0),
+			Leavening.maxInstantYeastPercent,
+			accuracy: 1e-12
+		)
+		XCTAssertEqual(
+			Leavening.instantYeastPercent(equivalentHours: 10_000),
+			Leavening.minInstantYeastPercent,
+			accuracy: 1e-12
+		)
+		XCTAssertEqual(Leavening.levainPercent(equivalentHours: 0), Leavening.maxLevainPercent, accuracy: 1e-12)
+	}
+
+	func testPrefermentReducesTheFinalYeast() {
+		let straight = Leavening.instantYeastPercent(equivalentHours: 8)
+		let withPoolish = Leavening.instantYeastPercent(equivalentHours: 8, prefermentedFlourFraction: 0.3)
+		XCTAssertEqual(withPoolish, straight * (1 - 0.8 * 0.3), accuracy: 1e-12)
+	}
+}
+
+final class FormulaTests: XCTestCase {
+	private func grams(_ rows: [Ingredient], _ id: String) -> Double {
+		rows.first { $0.id == id }?.grams ?? 0
+	}
+
+	func testIngredientsAddUpToTheDoughYouAskedFor() {
+		let formula = DoughFormula(
+			ballCount: 20,
+			ballWeightGrams: 280,
+			lossPercent: 2,
+			hydrationPercent: 65,
+			saltPercent: 2.5,
+			oilPercent: 2,
+			sugarPercent: 1,
+			instantYeastPercent: 0.2
+		)
+		let result = formula.result()
+		XCTAssertEqual(result.totalDoughGrams, 20 * 280 * 1.02, accuracy: 1e-9)
+		XCTAssertEqual(result.overall.reduce(0) { $0 + $1.grams }, result.totalDoughGrams, accuracy: 1e-6)
+	}
+
+	func testPrefermentMovesFlourRatherThanAddingIt() {
+		let formula = DoughFormula(
+			hydrationPercent: 70,
+			prefermentKind: .poolish,
+			prefermentedFlourPercent: 30,
+			prefermentHydrationPercent: 100,
+			prefermentYeastPercent: 0.15
+		)
+		let result = formula.result()
+		XCTAssertEqual(result.prefermentFlourGrams, result.totalFlourGrams * 0.3, accuracy: 1e-9)
+		XCTAssertEqual(
+			grams(result.finalMix, "flour") + result.prefermentFlourGrams,
+			result.totalFlourGrams,
+			accuracy: 1e-9
+		)
+	}
+
+	func testLevainBuildEqualsTheRipeLevain() {
+		let result = DoughStyle.style(id: "country-loaf")!.formula.result()
+		XCTAssertEqual(
+			result.prefermentBuild.reduce(0) { $0 + $1.grams },
+			result.prefermentTotalGrams,
+			accuracy: 1e-9
+		)
+		XCTAssertNil(result.overall.first { $0.id == "yeast" })
+	}
+
+	func testFreshYeastWeighsThreeTimesInstant() {
+		var formula = DoughFormula(instantYeastPercent: 0.2)
+		XCTAssertEqual(formula.scoopedYeastPercent, 0.2, accuracy: 1e-12)
+		formula.yeastType = .freshCake
+		XCTAssertEqual(formula.scoopedYeastPercent, 0.6, accuracy: 1e-12)
+	}
+
+	func testEveryShippedStyleIsSelfConsistent() {
+		for style in DoughStyle.library {
+			let result = style.formula.result()
+			XCTAssertEqual(
+				result.overall.reduce(0) { $0 + $1.grams },
+				result.totalDoughGrams,
+				accuracy: 1e-6,
+				"overall drifted for \(style.id)"
+			)
+			XCTAssertEqual(
+				result.finalMix.reduce(0) { $0 + $1.grams },
+				result.totalDoughGrams,
+				accuracy: 1e-6,
+				"final mix drifted for \(style.id)"
+			)
+		}
+	}
+
+	func testZeroBallCountDegradesQuietly() {
+		let result = DoughFormula(ballCount: 0).result()
+		XCTAssertEqual(result.totalDoughGrams, 0, accuracy: 1e-12)
+		XCTAssertTrue(result.overall.allSatisfy { $0.grams.isFinite })
+	}
+
+	func testBallsSpreadEvenlyAcrossMixes() {
+		let result = DoughFormula(ballCount: 7, ballWeightGrams: 1000, lossPercent: 0).result()
+		let plan = result.productionPlan(mixerCapacityKg: 2)
+		XCTAssertEqual(plan.mixes.map(\.ballCount), [2, 2, 2, 1])
+		XCTAssertEqual(plan.mixes.reduce(0) { $0 + $1.doughGrams }, result.totalDoughGrams, accuracy: 1e-6)
+	}
+
+	func testNonsenseCapacityDoesNotHang() {
+		let plan = DoughFormula(ballCount: 5, ballWeightGrams: 250).result()
+			.productionPlan(mixerCapacityKg: 0)
+		XCTAssertGreaterThanOrEqual(plan.mixCount, 1)
+		XCTAssertEqual(plan.mixes.reduce(0) { $0 + $1.ballCount }, 5)
+	}
+}
+
+final class WaterTemperatureTests: XCTestCase {
+	func testThreeFactorMethod() {
+		let water = DoughTemperature.waterTemperature(
+			desiredDoughTempC: 24,
+			flourTempC: 21,
+			roomTempC: 22,
+			prefermentTempC: nil,
+			frictionC: MixerKind.spiral.frictionC
+		)
+		XCTAssertEqual(water, 25, accuracy: 1e-9)
+	}
+
+	func testIceSplitSatisfiesTheHeatBalance() {
+		let split = DoughTemperature.iceSplit(waterGrams: 10_000, tapTempC: 20, targetC: 4)
+		XCTAssertEqual(split.ice + split.water, 10_000, accuracy: 1e-9)
+		XCTAssertEqual(split.ice * (80 + 4), split.water * (20 - 4), accuracy: 1e-6)
+	}
+
+	func testImpossibleTemperatureIsFlagged() {
+		let result = DoughTemperature.solve(
+			desiredDoughTempC: 22,
+			flourTempC: 32,
+			roomTempC: 34,
+			prefermentTempC: nil,
+			mixer: .planetary,
+			totalWaterGrams: 5_000,
+			tapWaterTempC: 24
+		)
+		XCTAssertLessThan(result.waterTemperatureC, 0)
+		XCTAssertNotNil(result.warning)
+		XCTAssertEqual(result.iceGrams + result.waterGrams, 5_000, accuracy: 1e-9)
+	}
+}
+
+final class ScheduleTests: XCTestCase {
+	func testReadyByLandsExactlyWhenAsked() {
+		for plan in FermentationPlan.library {
+			let schedule = Scheduler.build(plan: plan, anchor: .readyBy(start))
+			XCTAssertEqual(
+				schedule.readyAt.timeIntervalSince1970,
+				start.timeIntervalSince1970,
+				accuracy: 0.001,
+				"plan \(plan.id) missed its ready time"
+			)
+		}
+	}
+
+	func testStagesAreLaidEndToEnd() {
+		let schedule = Scheduler.build(plan: .sourdoughCountryLoaf, anchor: .startAt(start))
+		for (a, b) in zip(schedule.stages, schedule.stages.dropFirst()) {
+			XCTAssertEqual(a.end, b.start)
+		}
+	}
+
+	func testColdStageCarriesItsWindow() {
+		let schedule = Scheduler.build(plan: .coldBallRetard, anchor: .startAt(start))
+		let cold = schedule.stages.first { $0.stage.kind == .coldRetard }!
+		XCTAssertEqual(cold.windowEnd, cold.end.addingTimeInterval(24 * hour))
+	}
+
+	func testFoldRemindersSitInTheFirstPartOfTheBulk() {
+		let schedule = Scheduler.build(plan: .sourdoughCountryLoaf, anchor: .startAt(start))
+		let bulk = schedule.stages.first { $0.id == "bulk" }!
+		XCTAssertEqual(bulk.foldTimes.count, 5)
+		XCTAssertTrue(bulk.foldTimes.allSatisfy { $0 > bulk.start && $0 < bulk.end })
+		for (a, b) in zip(bulk.foldTimes, bulk.foldTimes.dropFirst()) {
+			XCTAssertEqual(b.timeIntervalSince(a), 30 * 60, accuracy: 0.001)
+		}
+	}
+
+	func testReadyTimeExcludesTheBake() {
+		let schedule = Scheduler.build(plan: .sourdoughCountryLoaf, anchor: .startAt(start))
+		XCTAssertEqual(schedule.stages.last!.stage.kind, .bake)
+		XCTAssertEqual(schedule.readyAt, schedule.stages.last!.start)
+		XCTAssertGreaterThan(schedule.finishAt, schedule.readyAt)
+	}
+
+	func testPlanAndStageIDsAreUnique() {
+		let planIDs = FermentationPlan.library.map(\.id)
+		XCTAssertEqual(planIDs.count, Set(planIDs).count)
+		for plan in FermentationPlan.library {
+			let stageIDs = plan.stages.map(\.id)
+			XCTAssertEqual(stageIDs.count, Set(stageIDs).count, "duplicate stage ids in \(plan.id)")
+		}
+	}
+
+	func testEveryStylePointsAtARealPlan() {
+		for style in DoughStyle.library {
+			XCTAssertNotNil(FermentationPlan.plan(id: style.planID), "\(style.id) points at a missing plan")
+		}
+	}
+}
+
+final class BatchTests: XCTestCase {
+	func testFinishingEarlyDragsEverythingEarlier() {
+		let plain = makeBatch()
+		let bulk = plain.timeline.first { $0.id == "bulk" }!
+		let early = bulk.end.addingTimeInterval(-30 * 60)
+		let shifted = makeBatch(progress: ["bulk": StageProgress(completedAt: early)])
+
+		XCTAssertEqual(shifted.timeline.first { $0.id == "bulk" }!.end, early)
+		XCTAssertEqual(
+			shifted.readyAt.timeIntervalSince1970,
+			plain.readyAt.timeIntervalSince1970 - 30 * 60,
+			accuracy: 0.001
+		)
+	}
+
+	func testExtendingAStagePushesTheBakeBack() {
+		let plain = makeBatch()
+		let extended = makeBatch(progress: ["temper": StageProgress(adjustmentHours: 0.5)])
+		XCTAssertEqual(
+			extended.readyAt.timeIntervalSince1970,
+			plain.readyAt.timeIntervalSince1970 + 30 * 60,
+			accuracy: 0.001
+		)
+	}
+
+	func testStageStatusWalksThroughItsStates() {
+		let batch = makeBatch()
+		let bulk = batch.timeline.first { $0.id == "bulk" }!
+		XCTAssertEqual(batch.status(of: bulk, at: bulk.start.addingTimeInterval(-1)), .upcoming)
+		XCTAssertEqual(batch.status(of: bulk, at: bulk.start.addingTimeInterval(60)), .active)
+		XCTAssertEqual(batch.status(of: bulk, at: bulk.end.addingTimeInterval(60)), .due)
+		XCTAssertEqual(batch.status(of: bulk, at: bulk.end.addingTimeInterval(45 * 60)), .overdue)
+	}
+
+	func testElapsedStageBecomesABadge() {
+		let batch = makeBatch()
+		let bulk = batch.timeline.first { $0.id == "bulk" }!
+		let after = bulk.end.addingTimeInterval(1)
+		XCTAssertEqual(batch.dueStages(at: after).map(\.id), ["bulk"])
+		XCTAssertEqual(AlertScheduler.currentBadge(batches: [batch], at: after), 1)
+	}
+
+	func testAcknowledgingClearsTheBadgeWithoutCompleting() {
+		let batch = makeBatch()
+		let bulk = batch.timeline.first { $0.id == "bulk" }!
+		let acked = makeBatch(progress: ["bulk": StageProgress(acknowledgedAt: bulk.end)])
+		XCTAssertTrue(acked.dueStages(at: bulk.end.addingTimeInterval(1)).isEmpty)
+	}
+
+	func testArchivedBatchesAreLeftOutOfTheBadge() {
+		let live = makeBatch(id: UUID())
+		var shelved = makeBatch(id: UUID())
+		shelved.isArchived = true
+		let after = live.timeline.first { $0.id == "bulk" }!.end.addingTimeInterval(1)
+		XCTAssertEqual(AlertScheduler.currentBadge(batches: [live, shelved], at: after), 1)
+	}
+
+	func testColdStageFiresOnBothEdgesOfItsWindow() {
+		let alerts = makeBatch().upcomingAlerts(from: start).filter { $0.stageID == "cold" }
+		let kinds = Set(alerts.map(\.kind))
+		XCTAssertTrue(kinds.contains(.windowOpen))
+		XCTAssertTrue(kinds.contains(.windowClosing))
+		let open = alerts.first { $0.kind == .windowOpen }!
+		let close = alerts.first { $0.kind == .windowClosing }!
+		XCTAssertEqual(close.fireAt.timeIntervalSince(open.fireAt), 24 * hour, accuracy: 0.001)
+	}
+
+	func testFoldRemindersBecomeAlerts() {
+		let alerts = makeBatch(plan: .sourdoughCountryLoaf).upcomingAlerts(from: start)
+		let folds = alerts.filter { $0.kind == .fold }
+		XCTAssertEqual(folds.count, 5)
+		XCTAssertEqual(folds.first?.title, "Fold 1 — Friday service")
+	}
+
+	func testCompletedStagesStopNagging() {
+		let batch = makeBatch(progress: ["bulk": StageProgress(completedAt: start.addingTimeInterval(hour))])
+		XCTAssertTrue(batch.upcomingAlerts(from: start).allSatisfy { $0.stageID != "bulk" })
+	}
+
+	func testAlertIDsAreStableAndUnique() {
+		let ids = makeBatch().upcomingAlerts(from: start).map(\.id)
+		XCTAssertEqual(ids.count, Set(ids).count)
+		XCTAssertEqual(ids, makeBatch().upcomingAlerts(from: start).map(\.id))
+	}
+
+	func testBadgesClimbForRealAlertsButNotFolds() {
+		let badged = AlertScheduler.badgedAlerts(
+			batches: [makeBatch(plan: .sourdoughCountryLoaf)],
+			from: start
+		)
+		XCTAssertFalse(badged.isEmpty)
+		var previous = 0
+		for (alert, badge) in badged {
+			if alert.kind == .fold {
+				XCTAssertEqual(badge, previous, "a fold reminder should not raise the badge")
+			} else {
+				XCTAssertEqual(badge, previous + 1)
+			}
+			previous = badge
+		}
+	}
+
+	func testPendingAlertsAreCappedToThePlatformLimit() {
+		let many = (1...40).map { _ in makeBatch(id: UUID()) }
+		let badged = AlertScheduler.badgedAlerts(batches: many, from: start)
+		XCTAssertLessThanOrEqual(badged.count, AlertScheduler.pendingLimit)
+	}
+}
+
+final class ComparisonTests: XCTestCase {
+	func testAnUnchangedCloneShowsNoDifferences() {
+		let comparison = BatchComparison(left: makeBatch(), right: makeBatch(id: UUID()))
+		XCTAssertTrue(comparison.changedRows.isEmpty, "unexpected diffs: \(comparison.changedRows)")
+	}
+
+	func testChangingOneThingShowsThatOneThing() {
+		let original = makeBatch()
+		var tweaked = makeBatch(id: UUID())
+		tweaked.formula.hydrationPercent = 68
+		let changed = BatchComparison(left: original, right: tweaked).changedRows.map(\.id)
+		XCTAssertTrue(changed.contains("hydration"))
+		XCTAssertFalse(changed.contains("salt"))
+	}
+
+	func testScoresAppearOnlyWhenBothRunsWereTasted() {
+		var tasted = makeBatch()
+		tasted.review = BatchReview(crumb: 4)
+		XCTAssertTrue(
+			BatchComparison(left: tasted, right: makeBatch(id: UUID())).rows
+				.allSatisfy { !$0.id.hasPrefix("score-") }
+		)
+
+		var other = makeBatch(id: UUID())
+		other.review = BatchReview(crumb: 2)
+		XCTAssertTrue(
+			BatchComparison(left: tasted, right: other).changedRows.contains { $0.id == "score-crumb" }
+		)
+	}
+}
