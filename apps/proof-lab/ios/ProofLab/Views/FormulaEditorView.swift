@@ -13,6 +13,7 @@ struct FormulaEditorView: View {
 		ScrollView {
 			VStack(spacing: 14) {
 				yieldPanel
+				flourPanel
 				percentagePanel
 				leavenPanel
 				prefermentPanel
@@ -35,6 +36,26 @@ struct FormulaEditorView: View {
 			Text("Scrap, what stays in the bowl, the ball you drop. Two per cent covers most days.")
 				.font(.mono(11))
 				.foregroundStyle(Palette.inkMute)
+		}
+	}
+
+	private var flourPanel: some View {
+		let blend = formula.blend
+		return NavigationLink {
+			FlourBlendEditorView(flours: $formula.flours, hydrationPercent: formula.hydrationPercent)
+		} label: {
+			Panel(title: "Flour", trailing: Formatting.percent(blend.proteinPercent, places: 1) + " protein") {
+				HStack {
+					VStack(alignment: .leading, spacing: 4) {
+						Text(blend.summary).font(.monoBody).foregroundStyle(Palette.ink)
+						if !formula.flourNote.isEmpty {
+							Text(formula.flourNote).font(.mono(11)).foregroundStyle(Palette.inkMute)
+						}
+					}
+					Spacer()
+					Image(systemName: "chevron.right").font(.mono(12)).foregroundStyle(Palette.inkMute)
+				}
+			}
 		}
 	}
 
