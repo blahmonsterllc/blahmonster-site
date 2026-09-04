@@ -8,16 +8,45 @@ import SwiftUI
 final class AppModel {
 	private(set) var batches: [Batch] = []
 	var notificationsAuthorized = false
-	var useFahrenheit = false
-	var defaultMixerCapacityKg: Double = 20
-	var defaultMixer: MixerKind = .spiral
+
+	// Preferences are written straight through to UserDefaults; there are only three of them
+	// and they need to survive a relaunch.
+	var useFahrenheit: Bool {
+		didSet { defaults.set(useFahrenheit, forKey: Keys.fahrenheit) }
+	}
+
+	var defaultMixerCapacityKg: Double {
+		didSet { defaults.set(defaultMixerCapacityKg, forKey: Keys.mixerCapacity) }
+	}
+
+	var defaultMixer: MixerKind {
+		didSet { defaults.set(defaultMixer.rawValue, forKey: Keys.mixer) }
+	}
+
+	private enum Keys {
+		static let fahrenheit = "useFahrenheit"
+		static let mixerCapacity = "defaultMixerCapacityKg"
+		static let mixer = "defaultMixer"
+	}
 
 	private let store: BatchStore
 	private let notifications: NotificationService
+	private let defaults: UserDefaults
 
-	init(store: BatchStore? = nil, notifications: NotificationService = .shared) {
+	init(
+		store: BatchStore? = nil,
+		notifications: NotificationService = .shared,
+		defaults: UserDefaults = .standard
+	) {
 		self.store = store ?? Self.makeStore()
 		self.notifications = notifications
+		self.defaults = defaults
+		self.useFahrenheit = defaults.bool(forKey: Keys.fahrenheit)
+		// `double(forKey:)` returns 0 for a missing key, which would be a nonsense mixer.
+		let storedCapacity = defaults.double(forKey: Keys.mixerCapacity)
+		self.defaultMixerCapacityKg = storedCapacity > 0 ? storedCapacity : 20
+		self.defaultMixer = defaults.string(forKey: Keys.mixer)
+			.flatMap(MixerKind.init(rawValue:)) ?? .spiral
 		self.batches = self.store.load()
 	}
 

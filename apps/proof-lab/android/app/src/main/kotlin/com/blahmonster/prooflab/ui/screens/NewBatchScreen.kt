@@ -1,5 +1,6 @@
 package com.blahmonster.prooflab.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -73,6 +74,12 @@ fun NewBatchScreen(model: AppViewModel, onDone: () -> Unit) {
 	var readyBy by remember { mutableStateOf(true) }
 	var anchorMillis by remember { mutableStateOf(System.currentTimeMillis() + 12 * HOUR_MILLIS) }
 	var editor by remember { mutableStateOf(Editor.NONE) }
+
+	// The sub-editors are swapped in place rather than pushed onto the back stack, so system
+	// back has to be taught to step out of them instead of abandoning the whole draft.
+	BackHandler(enabled = editor != Editor.NONE) {
+		editor = if (editor == Editor.FLOUR) Editor.FORMULA else Editor.NONE
+	}
 
 	when (editor) {
 		Editor.FORMULA -> {
