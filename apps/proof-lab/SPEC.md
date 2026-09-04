@@ -62,6 +62,7 @@ idy% = 1.6 / EH
      × (1 + 0.14 · max(0, salt% − 2))      // salt slows yeast
      × (1 + 0.03 · max(0, sugar% − 5))     // osmotic drag in enriched doughs
      × (1 − 0.8 · prefermentedFlourFraction)
+     × (1 − 0.3 · wholeGrainFraction)      // bran ferments faster, see §3
 clamped to 0.02 … 1.5
 ```
 
@@ -85,13 +86,44 @@ Other yeast forms are weight multiples of IDY: active dry × 1.25, fresh/cake ×
 **Sourdough levain**, as a percentage of total flour (levain weight, not its flour):
 
 ```
-levain% = 90 / EH × (1 + 0.14 · max(0, salt% − 2))
+levain% = 90 / EH
+        × (1 + 0.14 · max(0, salt% − 2))
+        × (1 − 0.3 · wholeGrainFraction)     // see §3
 clamped to 3 … 40
 ```
 
 ≈ 20 % levain for a 4.5 h bulk, dropping as the schedule lengthens.
 
-## 3. Formula (baker's percentages)
+## 3. Flour blends
+
+A formula carries a list of flours, each a share of the total flour. One entry is the
+ordinary case; several is where prototyping starts — 70 % 00 with 30 % semola behaves
+nothing like straight 00.
+
+Shares are **normalised before use**, so a blend that adds to 97 % on screen still weighs out
+correctly. Derived properties are weighted by the normalised shares:
+
+```
+protein        = Σ(protein · share)
+wholeGrain     = Σ(share) over flours flagged whole grain
+absorptionGuide = 50 + (protein − 10)·2.2 + Σ(absorptionOffset · share)
+```
+
+The absorption guide is a **floor, not a target** — roughly what the blend carries
+comfortably. Style takes you above it; a Roman teglia goes far above it on purpose.
+
+Whole grain also feeds back into leavening. Bran carries enzymes and wild yeast, so a
+whole-grain dough runs faster than its protein suggests:
+
+```
+× (1 − 0.3 · wholeGrainFraction)
+```
+
+on both the yeast and levain suggestions. Every ingredient list splits flour into one row per
+component — totals, the mix sheet, and each mixer load — and a preferment is assumed to take
+the same blend, scaled down.
+
+## 4. Formula (baker's percentages)
 
 Percentages are relative to **total flour**, which includes flour inside a preferment.
 
@@ -125,7 +157,7 @@ feedWater = feedFlour · hl/100
 **True hydration** is reported separately from the water percentage because eggs, milk and
 oil change how a dough behaves; only water and the water inside a preferment count.
 
-## 4. Production scaling
+## 5. Production scaling
 
 ```
 mixes = ceil(totalDough / (mixerCapacityKg · 1000))
@@ -135,7 +167,7 @@ Dough is split evenly across mixes; balls are distributed `floor(n/mixes)` each 
 remainder spread one-per-mix across the first mixes, so no mix is short by more than one
 ball.
 
-## 5. Dough temperature (DDT)
+## 6. Dough temperature (DDT)
 
 Classic factor method. Three factors without a preferment, four with one:
 
@@ -156,7 +188,7 @@ ice = water · (tapTemp − targetTemp) / (80 + tapTemp)
 Below 0 °C required water temperature the answer is "chill the flour" — the app says so
 instead of returning a nonsense number.
 
-## 6. Scheduling
+## 7. Scheduling
 
 A plan is an ordered list of stages, each with a duration, a temperature and flags for
 alerts, fold reminders and — on cold stages — a *usable window*: how long past "ready"
@@ -171,7 +203,7 @@ At runtime a batch recomputes from its actual start: each stage's end is
 `start + (hours + adjustment)`, unless it was completed manually, in which case the
 completion time becomes the next stage's start and everything downstream shifts.
 
-## 7. Alerts and badges
+## 8. Alerts and badges
 
 Every stage boundary schedules a local notification. Because notifications must fire with
 the app closed, badge counts are **precomputed**: all pending alerts across all batches
@@ -179,4 +211,4 @@ are sorted by fire time and each carries its own cumulative badge number, so the
 badge is right even if the app never wakes. On foreground the app reconciles the badge
 against the stages actually due.
 
-Cold stages emit up to three alerts: window opens, peak, and window closes.
+Cold stages emit two alerts: one when the window opens, one when it closes.

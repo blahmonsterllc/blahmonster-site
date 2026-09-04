@@ -24,13 +24,23 @@ final class ConformanceTests: XCTestCase {
 			let saltPercent: Double
 			let sugarPercent: Double
 			let prefermentedFlourFraction: Double
+			let wholeGrainFraction: Double
 			let value: Double
 		}
 
 		struct LevainPoint: Decodable {
 			let equivalentHours: Double
 			let saltPercent: Double
+			let wholeGrainFraction: Double
 			let value: Double
+		}
+
+		struct BlendPoint: Decodable {
+			let styleId: String
+			let proteinPercent: Double
+			let wholeGrainFraction: Double
+			let absorptionGuidePercent: Double
+			let summary: String
 		}
 
 		struct PlanPoint: Decodable {
@@ -89,6 +99,7 @@ final class ConformanceTests: XCTestCase {
 		let formulas: [FormulaPoint]
 		let waterTemperatures: [WaterPoint]
 		let production: [ProductionPoint]
+		let blends: [BlendPoint]
 	}
 
 	/// Transcendental functions can differ in the last bit or two between platforms.
@@ -144,7 +155,8 @@ final class ConformanceTests: XCTestCase {
 					equivalentHours: point.equivalentHours,
 					saltPercent: point.saltPercent,
 					sugarPercent: point.sugarPercent,
-					prefermentedFlourFraction: point.prefermentedFlourFraction
+					prefermentedFlourFraction: point.prefermentedFlourFraction,
+					wholeGrainFraction: point.wholeGrainFraction
 				),
 				point.value,
 				"yeast at \(point.equivalentHours) EH"
@@ -157,7 +169,8 @@ final class ConformanceTests: XCTestCase {
 			assertClose(
 				Leavening.levainPercent(
 					equivalentHours: point.equivalentHours,
-					saltPercent: point.saltPercent
+					saltPercent: point.saltPercent,
+					wholeGrainFraction: point.wholeGrainFraction
 				),
 				point.value,
 				"levain at \(point.equivalentHours) EH"
@@ -260,6 +273,32 @@ final class ConformanceTests: XCTestCase {
 			for (mix, expected) in zip(plan.mixes, point.doughPerMixGrams) {
 				assertClose(mix.doughGrams, expected, "\(point.styleId) mix \(mix.id) dough")
 			}
+		}
+	}
+
+	func testFlourBlendsMatch() {
+		XCTAssertEqual(
+			DoughStyle.library.map(\.id),
+			fixtures.blends.map(\.styleId),
+			"the two style libraries have diverged"
+		)
+		for point in fixtures.blends {
+			guard let style = DoughStyle.style(id: point.styleId) else {
+				return XCTFail("missing style \(point.styleId)")
+			}
+			let blend = style.formula.blend
+			assertClose(blend.proteinPercent, point.proteinPercent, "protein for \(point.styleId)")
+			assertClose(
+				blend.wholeGrainFraction,
+				point.wholeGrainFraction,
+				"whole grain share for \(point.styleId)"
+			)
+			assertClose(
+				blend.absorptionGuidePercent,
+				point.absorptionGuidePercent,
+				"absorption guide for \(point.styleId)"
+			)
+			XCTAssertEqual(blend.summary, point.summary, "blend summary for \(point.styleId)")
 		}
 	}
 

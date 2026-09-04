@@ -9,6 +9,10 @@ import kotlin.test.assertTrue
 class FormulaTest {
 	private fun grams(list: List<Ingredient>, id: String) = list.firstOrNull { it.id == id }?.grams ?: 0.0
 
+	/** A blend spreads flour across several rows; sum whatever the prefix produced. */
+	private fun flourGrams(list: List<Ingredient>, prefix: String = "flour") =
+		list.filter { it.id == prefix || it.id.startsWith("$prefix-") }.sumOf { it.grams }
+
 	@Test
 	fun `ingredients add up to the dough you asked for`() {
 		val formula = DoughFormula(
@@ -59,7 +63,7 @@ class FormulaTest {
 		// Flour in the mixer plus flour in the poolish is all the flour there is.
 		assertEquals(
 			result.totalFlourGrams,
-			grams(result.finalMix, "flour") + result.prefermentFlourGrams,
+			flourGrams(result.finalMix) + result.prefermentFlourGrams,
 			1e-9,
 		)
 		val prefermentWater = result.prefermentFlourGrams * 1.0
@@ -92,7 +96,7 @@ class FormulaTest {
 		assertEquals(result.prefermentTotalGrams, result.prefermentBuild.sumOf { it.grams }, 1e-9)
 		val seedFlour = result.prefermentFlourGrams * 0.20
 		assertEquals(seedFlour * 2, grams(result.prefermentBuild, "seed"), 1e-9)
-		assertEquals(result.prefermentFlourGrams - seedFlour, grams(result.prefermentBuild, "pfFlour"), 1e-9)
+		assertEquals(result.prefermentFlourGrams - seedFlour, flourGrams(result.prefermentBuild, "pfFlour"), 1e-9)
 	}
 
 	@Test

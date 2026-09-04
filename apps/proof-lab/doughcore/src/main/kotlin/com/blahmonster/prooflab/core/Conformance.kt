@@ -24,6 +24,7 @@ data class ConformanceFixtures(
 	val formulas: List<FormulaPoint>,
 	val waterTemperatures: List<WaterPoint>,
 	val production: List<ProductionPoint>,
+	val blends: List<BlendPoint>,
 )
 
 @Serializable
@@ -38,11 +39,26 @@ data class YeastPoint(
 	val saltPercent: Double,
 	val sugarPercent: Double,
 	val prefermentedFlourFraction: Double,
+	val wholeGrainFraction: Double,
 	val value: Double,
 )
 
 @Serializable
-data class LevainPoint(val equivalentHours: Double, val saltPercent: Double, val value: Double)
+data class LevainPoint(
+	val equivalentHours: Double,
+	val saltPercent: Double,
+	val wholeGrainFraction: Double,
+	val value: Double,
+)
+
+@Serializable
+data class BlendPoint(
+	val styleId: String,
+	val proteinPercent: Double,
+	val wholeGrainFraction: Double,
+	val absorptionGuidePercent: Double,
+	val summary: String,
+)
 
 @Serializable
 data class PlanPoint(
@@ -95,15 +111,18 @@ data class ProductionPoint(
 object Conformance {
 	private val temperatures = listOf(-2.0, 0.0, 2.0, 4.0, 6.0, 10.0, 15.0, 18.0, 20.0, 22.0, 24.0, 26.0, 30.0, 35.0)
 
+	// equivalent hours, salt %, sugar %, prefermented flour fraction, whole grain fraction
 	private val yeastCases = listOf(
-		listOf(4.0, 2.0, 0.0, 0.0),
-		listOf(7.53, 2.0, 0.0, 0.0),
-		listOf(11.3, 2.0, 0.0, 0.0),
-		listOf(15.0, 2.8, 0.0, 0.0),
-		listOf(6.0, 2.0, 10.0, 0.0),
-		listOf(9.0, 2.5, 0.0, 0.3),
-		listOf(0.0, 2.0, 0.0, 0.0),
-		listOf(400.0, 2.0, 0.0, 0.0),
+		listOf(4.0, 2.0, 0.0, 0.0, 0.0),
+		listOf(7.53, 2.0, 0.0, 0.0, 0.0),
+		listOf(11.3, 2.0, 0.0, 0.0, 0.0),
+		listOf(15.0, 2.8, 0.0, 0.0, 0.0),
+		listOf(6.0, 2.0, 10.0, 0.0, 0.0),
+		listOf(9.0, 2.5, 0.0, 0.3, 0.0),
+		listOf(8.0, 2.0, 0.0, 0.0, 0.5),
+		listOf(8.0, 2.3, 0.0, 0.1, 1.0),
+		listOf(0.0, 2.0, 0.0, 0.0, 0.0),
+		listOf(400.0, 2.0, 0.0, 0.0, 0.0),
 	)
 
 	private val waterCases = listOf(
@@ -139,11 +158,24 @@ object Conformance {
 				saltPercent = it[1],
 				sugarPercent = it[2],
 				prefermentedFlourFraction = it[3],
-				value = Leavening.instantYeastPercent(it[0], it[1], it[2], it[3]),
+				wholeGrainFraction = it[4],
+				value = Leavening.instantYeastPercent(it[0], it[1], it[2], it[3], it[4]),
 			)
 		},
-		levain = listOf(4.5 to 2.0, 12.0 to 2.0, 20.0 to 2.5, 0.0 to 2.0, 500.0 to 2.0).map {
-			LevainPoint(it.first, it.second, Leavening.levainPercent(it.first, it.second))
+		levain = listOf(
+			Triple(4.5, 2.0, 0.0),
+			Triple(12.0, 2.0, 0.0),
+			Triple(20.0, 2.5, 0.0),
+			Triple(9.0, 2.0, 0.35),
+			Triple(0.0, 2.0, 0.0),
+			Triple(500.0, 2.0, 0.0),
+		).map {
+			LevainPoint(
+				it.first,
+				it.second,
+				it.third,
+				Leavening.levainPercent(it.first, it.second, it.third),
+			)
 		},
 		plans = PlanLibrary.all.map {
 			PlanPoint(it.id, it.fermentationLoadHours, it.totalHours, it.hoursToReady, it.stages.size)
@@ -199,6 +231,16 @@ object Conformance {
 					doughPerMixGrams = plan.mixes.map { it.doughGrams },
 				)
 			},
+		blends = StyleLibrary.all.map { style ->
+			val blend = style.formula.blend
+			BlendPoint(
+				styleId = style.id,
+				proteinPercent = blend.proteinPercent,
+				wholeGrainFraction = blend.wholeGrainFraction,
+				absorptionGuidePercent = blend.absorptionGuidePercent,
+				summary = blend.summary,
+			)
+		},
 	)
 }
 

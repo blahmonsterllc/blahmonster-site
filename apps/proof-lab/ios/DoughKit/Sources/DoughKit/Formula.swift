@@ -59,6 +59,8 @@ public struct DoughFormula: Codable, Sendable, Equatable {
 	public var prefermentYeastPercent: Double
 	/// Mature starter carried into a levain build, as a percent of the levain's flour.
 	public var starterSeedPercent: Double
+	/// The flour blend. A single entry is the ordinary case; more is where prototyping starts.
+	public var flours: [FlourComponent]
 
 	public var flourNote: String
 
@@ -80,6 +82,7 @@ public struct DoughFormula: Codable, Sendable, Equatable {
 		prefermentHydrationPercent: Double = 100,
 		prefermentYeastPercent: Double = 0.1,
 		starterSeedPercent: Double = 20,
+		flours: [FlourComponent] = FlourLibrary.defaultBlend,
 		flourNote: String = ""
 	) {
 		self.name = name
@@ -99,8 +102,11 @@ public struct DoughFormula: Codable, Sendable, Equatable {
 		self.prefermentHydrationPercent = prefermentHydrationPercent
 		self.prefermentYeastPercent = prefermentYeastPercent
 		self.starterSeedPercent = starterSeedPercent
+		self.flours = flours
 		self.flourNote = flourNote
 	}
+
+	public var blend: FlourBlend { FlourBlend(flours) }
 }
 
 public struct Ingredient: Sendable, Equatable, Identifiable {
@@ -185,11 +191,31 @@ public extension DoughFormula {
 			: prefermentFlour * prefermentYeastPercent * yeastType.multiplier / 100
 		let prefermentTotal = prefermentFlour + prefermentWater + prefermentYeast
 
-		var overall: [Ingredient] = [
-			Ingredient(id: "flour", name: "Flour (total)", grams: totalFlour, bakersPercent: 100),
-			Ingredient(id: "water", name: "Water (total)", grams: totalWater, bakersPercent: hydrationPercent),
-			Ingredient(id: "salt", name: "Salt", grams: salt, bakersPercent: saltPercent)
-		]
+		let components = blend.normalized
+
+		/// One row per flour, or a single row when the blend is just the one. A preferment is
+		/// assumed to take the same blend as the dough, scaled down.
+		func flourRows(scale: Double, label: String, idPrefix: String) -> [Ingredient] {
+			guard components.count > 1 else {
+				return [
+					Ingredient(id: idPrefix, name: label, grams: totalFlour * scale, bakersPercent: 100 * scale)
+				]
+			}
+			return components.map { component in
+				Ingredient(
+					id: "\(idPrefix)-\(component.id)",
+					name: "\(label) — \(component.shortName)",
+					grams: totalFlour * scale * component.percent / 100,
+					bakersPercent: component.percent * scale
+				)
+			}
+		}
+
+		var overall: [Ingredient] = flourRows(scale: 1, label: "Flour (total)", idPrefix: "flour")
+		overall.append(
+			Ingredient(id: "water", name: "Water (total)", grams: totalWater, bakersPercent: hydrationPercent)
+		)
+		overall.append(Ingredient(id: "salt", name: "Salt", grams: salt, bakersPercent: saltPercent))
 		if leaven == .commercialYeast, yeast > 0 {
 			overall.append(
 				Ingredient(
@@ -217,39 +243,41 @@ public extension DoughFormula {
 				let seed = seedFlour * (1 + prefermentHydrationPercent / 100)
 				let feedFlour = prefermentFlour - seedFlour
 				let feedWater = feedFlour * prefermentHydrationPercent / 100
-				build = [
-					Ingredient(id: "seed", name: "Ripe starter", grams: seed, bakersPercent: 0),
-					Ingredient(id: "pfFlour", name: "Flour", grams: feedFlour, bakersPercent: 0),
-					Ingredient(id: "pfWater", name: "Water", grams: feedWater, bakersPercent: 0)
-				]
+				let feedScale = totalFlour > 0 ? feedFlour / totalFlour : 0
+				build = [Ingredient(id: "seed", name: "Ripe starter", grams: seed, bakersPercent: 0)]
+				build += flourRows(scale: feedScale, label: "Flour", idPrefix: "pfFlour").map {
+					Ingredient(id: $0.id, name: $0.name, grams: $0.grams, bakersPercent: 0)
+				}
+				build.append(Ingredient(id: "pfWater", name: "Water", grams: feedWater, bakersPercent: 0))
 			} else {
-				build = [
-					Ingredient(id: "pfFlour", name: "Flour", grams: prefermentFlour, bakersPercent: 0),
-					Ingredient(id: "pfWater", name: "Water", grams: prefermentWater, bakersPercent: 0),
+				build = flourRows(scale: prefFlourFraction, label: "Flour", idPrefix: "pfFlour").map {
+					Ingredient(id: $0.id, name: $0.name, grams: $0.grams, bakersPercent: 0)
+				}
+				build.append(Ingredient(id: "pfWater", name: "Water", grams: prefermentWater, bakersPercent: 0))
+				build.append(
 					Ingredient(
 						id: "pfYeast",
 						name: "Yeast — \(yeastType.shortName)",
 						grams: prefermentYeast,
 						bakersPercent: 0
 					)
-				]
+				)
 			}
 		}
 
-		var final: [Ingredient] = [
-			Ingredient(
-				id: "flour",
-				name: "Flour",
-				grams: totalFlour - prefermentFlour,
-				bakersPercent: 100 - prefermentedFlourPercent
-			),
+		var final: [Ingredient] = flourRows(
+			scale: 1 - prefFlourFraction,
+			label: "Flour",
+			idPrefix: "flour"
+		)
+		final.append(
 			Ingredient(
 				id: "water",
 				name: "Water",
 				grams: totalWater - prefermentWater,
 				bakersPercent: hydrationPercent - (prefermentWater / max(totalFlour, 1)) * 100
 			)
-		]
+		)
 		if prefermentTotal > 0 {
 			final.append(
 				Ingredient(

@@ -14,6 +14,8 @@ public extension FermentationPlan {
 		detroitPan,
 		focacciaColdBulk,
 		sourdoughPizzaCold,
+		sourdoughRoomPizza,
+		sourdoughPanCold,
 		sourdoughCountryLoaf,
 		poolishBaguette
 	]
@@ -200,6 +202,46 @@ public extension FermentationPlan {
 			PlanStage(id: "shape", kind: .shape, title: "Final shape", detail: "Into bannetons, seam up.", hours: 0.2, temperatureC: 22, alerts: false),
 			PlanStage(id: "cold", kind: .coldRetard, title: "Cold proof", detail: "Uncovered for a drier skin, if you like the scoring crisp.", hours: 14, temperatureC: 4, usableWindowHours: 10),
 			PlanStage(id: "bake", kind: .bake, title: "Bake", detail: "Lidded 20 min, then open to colour.", hours: 0.75, temperatureC: 22, alerts: false)
+		]
+	)
+
+	static let sourdoughRoomPizza = FermentationPlan(
+		id: "sourdough-room-pizza",
+		name: "Sourdough pizza — room temp",
+		family: .pizza,
+		leaven: .sourdough,
+		summary: "No fridge at all. Long warm bulk and a slow appretto, Neapolitan rhythm on a levain.",
+		prefermentKind: .levain,
+		prefermentedFlourPercent: 8,
+		prefermentHydrationPercent: 100,
+		stages: [
+			PlanStage(id: "levain", kind: .preferment, title: "Build levain", detail: "Stiff-ish and sweet-smelling, not sharp.", hours: 8, temperatureC: 24),
+			PlanStage(id: "autolyse", kind: .autolyse, title: "Autolyse", hours: 0.75, temperatureC: 22, alerts: false),
+			PlanStage(id: "mix", kind: .mix, title: "Mix", detail: "Levain first, salt last.", hours: 0.3, temperatureC: 22, alerts: false),
+			PlanStage(id: "bulk", kind: .bulk, title: "Puntata", detail: "Folds in the first hour only.", hours: 4, temperatureC: 24, foldIntervalMinutes: 45),
+			PlanStage(id: "staglio", kind: .divide, title: "Staglio", hours: 0.3, temperatureC: 22, alerts: false),
+			PlanStage(id: "appretto", kind: .finalProof, title: "Appretto", detail: "Balls in boxes until slack and domed.", hours: 5, temperatureC: 22),
+			PlanStage(id: "bake", kind: .bake, title: "Bake", hours: 0.2, temperatureC: 22, alerts: false)
+		]
+	)
+
+	static let sourdoughPanCold = FermentationPlan(
+		id: "sourdough-pan-cold",
+		name: "Sourdough pan — cold",
+		family: .pizza,
+		leaven: .sourdough,
+		summary: "Levain pan dough: warm bulk, into the pan, overnight cold, proof to the rim.",
+		prefermentKind: .levain,
+		prefermentedFlourPercent: 12,
+		prefermentHydrationPercent: 100,
+		stages: [
+			PlanStage(id: "levain", kind: .preferment, title: "Build levain", hours: 9, temperatureC: 24),
+			PlanStage(id: "mix", kind: .mix, title: "Mix", hours: 0.3, temperatureC: 24, alerts: false),
+			PlanStage(id: "bulk", kind: .bulk, title: "Bulk ferment", detail: "Coil folds while it's still slack.", hours: 3, temperatureC: 25, foldIntervalMinutes: 40),
+			PlanStage(id: "pan", kind: .shape, title: "Into the pan", detail: "Oil generously, stretch in two goes.", hours: 0.3, temperatureC: 22, alerts: false),
+			PlanStage(id: "cold", kind: .coldRetard, title: "Cold ferment", hours: 16, temperatureC: 4, usableWindowHours: 20),
+			PlanStage(id: "proof", kind: .finalProof, title: "Proof in pan", hours: 3.5, temperatureC: 21),
+			PlanStage(id: "bake", kind: .bake, title: "Bake", hours: 0.3, temperatureC: 22, alerts: false)
 		]
 	)
 

@@ -164,14 +164,16 @@ public extension Batch {
 			equivalentHours: fermentationLoadHours,
 			saltPercent: formula.saltPercent,
 			sugarPercent: formula.sugarPercent,
-			prefermentedFlourFraction: formula.prefermentedFlourFraction
+			prefermentedFlourFraction: formula.prefermentedFlourFraction,
+			wholeGrainFraction: formula.blend.wholeGrainFraction
 		)
 	}
 
 	var suggestedLevainPercent: Double {
 		Leavening.levainPercent(
 			equivalentHours: fermentationLoadHours,
-			saltPercent: formula.saltPercent
+			saltPercent: formula.saltPercent,
+			wholeGrainFraction: formula.blend.wholeGrainFraction
 		)
 	}
 

@@ -185,6 +185,46 @@ object PlanLibrary {
 		),
 	)
 
+	val sourdoughRoomPizza = FermentationPlan(
+		id = "sourdough-room-pizza",
+		name = "Sourdough pizza — room temp",
+		family = PlanFamily.PIZZA,
+		leaven = LeavenKind.SOURDOUGH,
+		summary = "No fridge at all. Long warm bulk and a slow appretto, Neapolitan rhythm on a levain.",
+		prefermentKind = PrefermentKind.LEVAIN,
+		prefermentedFlourPercent = 8.0,
+		prefermentHydrationPercent = 100.0,
+		stages = listOf(
+			PlanStage("levain", StageKind.PREFERMENT, "Build levain", "Stiff-ish and sweet-smelling, not sharp.", 8.0, 24.0),
+			PlanStage("autolyse", StageKind.AUTOLYSE, "Autolyse", hours = 0.75, temperatureC = 22.0, alerts = false),
+			PlanStage("mix", StageKind.MIX, "Mix", "Levain first, salt last.", 0.3, 22.0, alerts = false),
+			PlanStage("bulk", StageKind.BULK, "Puntata", "Folds in the first hour only.", 4.0, 24.0, foldIntervalMinutes = 45),
+			PlanStage("staglio", StageKind.DIVIDE, "Staglio", hours = 0.3, temperatureC = 22.0, alerts = false),
+			PlanStage("appretto", StageKind.FINAL_PROOF, "Appretto", "Balls in boxes until slack and domed.", 5.0, 22.0),
+			PlanStage("bake", StageKind.BAKE, "Bake", hours = 0.2, temperatureC = 22.0, alerts = false),
+		),
+	)
+
+	val sourdoughPanCold = FermentationPlan(
+		id = "sourdough-pan-cold",
+		name = "Sourdough pan — cold",
+		family = PlanFamily.PIZZA,
+		leaven = LeavenKind.SOURDOUGH,
+		summary = "Levain pan dough: warm bulk, into the pan, overnight cold, proof to the rim.",
+		prefermentKind = PrefermentKind.LEVAIN,
+		prefermentedFlourPercent = 12.0,
+		prefermentHydrationPercent = 100.0,
+		stages = listOf(
+			PlanStage("levain", StageKind.PREFERMENT, "Build levain", hours = 9.0, temperatureC = 24.0),
+			PlanStage("mix", StageKind.MIX, "Mix", hours = 0.3, temperatureC = 24.0, alerts = false),
+			PlanStage("bulk", StageKind.BULK, "Bulk ferment", "Coil folds while it's still slack.", 3.0, 25.0, foldIntervalMinutes = 40),
+			PlanStage("pan", StageKind.SHAPE, "Into the pan", "Oil generously, stretch in two goes.", 0.3, 22.0, alerts = false),
+			PlanStage("cold", StageKind.COLD_RETARD, "Cold ferment", hours = 16.0, temperatureC = 4.0, usableWindowHours = 20.0),
+			PlanStage("proof", StageKind.FINAL_PROOF, "Proof in pan", hours = 3.5, temperatureC = 21.0),
+			PlanStage("bake", StageKind.BAKE, "Bake", hours = 0.3, temperatureC = 22.0, alerts = false),
+		),
+	)
+
 	val poolishBaguette = FermentationPlan(
 		id = "poolish-baguette",
 		name = "Baguette — poolish",
@@ -216,6 +256,8 @@ object PlanLibrary {
 		detroitPan,
 		focacciaColdBulk,
 		sourdoughPizzaCold,
+		sourdoughRoomPizza,
+		sourdoughPanCold,
 		sourdoughCountryLoaf,
 		poolishBaguette,
 	)

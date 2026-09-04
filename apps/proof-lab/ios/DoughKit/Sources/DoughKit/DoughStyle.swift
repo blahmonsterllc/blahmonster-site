@@ -28,6 +28,7 @@ public extension DoughStyle {
 				hydrationPercent: 62,
 				saltPercent: 2.8,
 				instantYeastPercent: 0.1,
+				flours: [FlourLibrary.at("00-pizzeria", 100)],
 				flourNote: "Type 00, W 260–300"
 			),
 			planID: FermentationPlan.neapolitanDirect.id
@@ -46,6 +47,7 @@ public extension DoughStyle {
 				oilPercent: 2,
 				sugarPercent: 1.5,
 				instantYeastPercent: 0.21,
+				flours: [FlourLibrary.at("high-gluten", 100)],
 				flourNote: "High-gluten bread flour, 13–14 % protein"
 			),
 			planID: FermentationPlan.coldBallRetard.id
@@ -63,6 +65,7 @@ public extension DoughStyle {
 				saltPercent: 2,
 				oilPercent: 3,
 				instantYeastPercent: 0.3,
+				flours: [FlourLibrary.at("bread", 100)],
 				flourNote: "Bread flour"
 			),
 			planID: FermentationPlan.detroitPan.id
@@ -80,6 +83,7 @@ public extension DoughStyle {
 				saltPercent: 2.2,
 				oilPercent: 4,
 				instantYeastPercent: 0.35,
+				flours: [FlourLibrary.at("bread", 100)],
 				flourNote: "Bread flour"
 			),
 			planID: FermentationPlan.coldBulkRetard.id
@@ -97,6 +101,7 @@ public extension DoughStyle {
 				saltPercent: 2.2,
 				oilPercent: 3,
 				instantYeastPercent: 0.3,
+				flours: [FlourLibrary.at("00-strong", 80), FlourLibrary.at("semola", 20)],
 				flourNote: "Strong 00 or a W 330+ blend"
 			),
 			planID: FermentationPlan.coldBulkRetard.id
@@ -117,6 +122,7 @@ public extension DoughStyle {
 				prefermentedFlourPercent: 60,
 				prefermentHydrationPercent: 50,
 				prefermentYeastPercent: 0.12,
+				flours: [FlourLibrary.at("00-strong", 100)],
 				flourNote: "Strong 00, W 320+"
 			),
 			planID: FermentationPlan.bigaPizza.id
@@ -137,6 +143,7 @@ public extension DoughStyle {
 				prefermentedFlourPercent: 30,
 				prefermentHydrationPercent: 100,
 				prefermentYeastPercent: 0.15,
+				flours: [FlourLibrary.at("00-pizzeria", 100)],
 				flourNote: "00 or bread flour"
 			),
 			planID: FermentationPlan.poolishPizza.id
@@ -157,7 +164,144 @@ public extension DoughStyle {
 				prefermentKind: .levain,
 				prefermentedFlourPercent: 10,
 				prefermentHydrationPercent: 100,
+				flours: [FlourLibrary.at("bread", 90), FlourLibrary.at("whole-wheat", 10)],
 				flourNote: "Bread flour with 10 % whole wheat"
+			),
+			planID: FermentationPlan.sourdoughPizzaCold.id
+		),
+		DoughStyle(
+			id: "sourdough-neapolitan",
+			name: "Sourdough Neapolitan",
+			family: .pizza,
+			blurb: "Naples rhythm on a levain — no fridge, a touch of semola for bite.",
+			formula: DoughFormula(
+				name: "Sourdough Neapolitan",
+				ballCount: 16,
+				ballWeightGrams: 250,
+				hydrationPercent: 63,
+				saltPercent: 2.8,
+				leaven: .sourdough,
+				instantYeastPercent: 0,
+				prefermentKind: .levain,
+				prefermentedFlourPercent: 8,
+				prefermentHydrationPercent: 100,
+				flours: [FlourLibrary.at("00-pizzeria", 90), FlourLibrary.at("semola", 10)],
+				flourNote: "Keep the levain young or it'll read sour in a 60-second bake"
+			),
+			planID: FermentationPlan.sourdoughRoomPizza.id
+		),
+		DoughStyle(
+			id: "sourdough-new-york",
+			name: "Sourdough New York",
+			family: .pizza,
+			blurb: "Foldable slice with a levain tang. Oil for browning, whole wheat for depth.",
+			formula: DoughFormula(
+				name: "Sourdough New York",
+				ballCount: 16,
+				ballWeightGrams: 340,
+				hydrationPercent: 65,
+				saltPercent: 2.2,
+				oilPercent: 2,
+				leaven: .sourdough,
+				instantYeastPercent: 0,
+				prefermentKind: .levain,
+				prefermentedFlourPercent: 10,
+				prefermentHydrationPercent: 100,
+				flours: [
+					FlourLibrary.at("high-gluten", 85),
+					FlourLibrary.at("whole-wheat", 15)
+				],
+				flourNote: "High-gluten carries the long cold retard"
+			),
+			planID: FermentationPlan.sourdoughPizzaCold.id
+		),
+		DoughStyle(
+			id: "sourdough-pan",
+			name: "Sourdough pan",
+			family: .pizza,
+			blurb: "Detroit-style on a levain. Slack, oily, proofed to the rim of the pan.",
+			formula: DoughFormula(
+				name: "Sourdough pan",
+				ballCount: 4,
+				ballWeightGrams: 420,
+				hydrationPercent: 75,
+				saltPercent: 2,
+				oilPercent: 3,
+				leaven: .sourdough,
+				instantYeastPercent: 0,
+				prefermentKind: .levain,
+				prefermentedFlourPercent: 12,
+				prefermentHydrationPercent: 100,
+				flours: [FlourLibrary.at("bread", 100)],
+				flourNote: "Bread flour; a stronger flour fights the pan"
+			),
+			planID: FermentationPlan.sourdoughPanCold.id
+		),
+		DoughStyle(
+			id: "sourdough-teglia",
+			name: "Sourdough teglia",
+			family: .pizza,
+			blurb: "Roman tray pizza on a levain. Very wet, very open, cut with a scissor.",
+			formula: DoughFormula(
+				name: "Sourdough teglia",
+				ballCount: 3,
+				ballWeightGrams: 800,
+				hydrationPercent: 82,
+				saltPercent: 2.2,
+				oilPercent: 3,
+				leaven: .sourdough,
+				instantYeastPercent: 0,
+				prefermentKind: .levain,
+				prefermentedFlourPercent: 10,
+				prefermentHydrationPercent: 100,
+				flours: [
+					FlourLibrary.at("00-strong", 70),
+					FlourLibrary.at("semola", 20),
+					FlourLibrary.at("whole-wheat", 10)
+				],
+				flourNote: "Needs a strong flour to hold 82 %"
+			),
+			planID: FermentationPlan.sourdoughPanCold.id
+		),
+		DoughStyle(
+			id: "semola-blend",
+			name: "Semola blend pizza",
+			family: .pizza,
+			blurb: "00 cut with semola: more bite, more colour, a slightly shorter dough.",
+			formula: DoughFormula(
+				name: "Semola blend",
+				ballCount: 16,
+				ballWeightGrams: 270,
+				hydrationPercent: 65,
+				saltPercent: 2.6,
+				instantYeastPercent: 0.15,
+				flours: [FlourLibrary.at("00-pizzeria", 70), FlourLibrary.at("semola", 30)],
+				flourNote: "Semola drinks less — expect a firmer dough at the same number"
+			),
+			planID: FermentationPlan.coldBallRetard.id
+		),
+		DoughStyle(
+			id: "whole-grain-pizza",
+			name: "Half whole-grain pizza",
+			family: .pizza,
+			blurb: "Fifty per cent whole grain. Nutty, fast-fermenting, needs less leaven than it looks.",
+			formula: DoughFormula(
+				name: "Half whole-grain",
+				ballCount: 12,
+				ballWeightGrams: 280,
+				hydrationPercent: 72,
+				saltPercent: 2.3,
+				leaven: .sourdough,
+				instantYeastPercent: 0,
+				prefermentKind: .levain,
+				prefermentedFlourPercent: 9,
+				prefermentHydrationPercent: 100,
+				flours: [
+					FlourLibrary.at("bread", 50),
+					FlourLibrary.at("whole-wheat", 40),
+					FlourLibrary.at("kamut", 10)
+				],
+				flourNote: "Bran cuts the gluten — handle gently and don't over-bulk"
 			),
 			planID: FermentationPlan.sourdoughPizzaCold.id
 		),
@@ -177,7 +321,12 @@ public extension DoughStyle {
 				prefermentKind: .levain,
 				prefermentedFlourPercent: 10,
 				prefermentHydrationPercent: 100,
-				flourNote: "85 % bread flour, 15 % whole wheat"
+				flours: [
+					FlourLibrary.at("bread", 80),
+					FlourLibrary.at("whole-wheat", 15),
+					FlourLibrary.at("rye", 5)
+				],
+				flourNote: "A little rye keeps the levain lively"
 			),
 			planID: FermentationPlan.sourdoughCountryLoaf.id
 		),
@@ -194,6 +343,7 @@ public extension DoughStyle {
 				saltPercent: 2.2,
 				oilPercent: 5,
 				instantYeastPercent: 0.25,
+				flours: [FlourLibrary.at("bread", 100)],
 				flourNote: "Bread flour"
 			),
 			planID: FermentationPlan.focacciaColdBulk.id
@@ -214,6 +364,7 @@ public extension DoughStyle {
 				prefermentedFlourPercent: 40,
 				prefermentHydrationPercent: 100,
 				prefermentYeastPercent: 0.12,
+				flours: [FlourLibrary.at("t65", 100)],
 				flourNote: "T65 or unbleached AP"
 			),
 			planID: FermentationPlan.poolishBaguette.id
@@ -232,6 +383,7 @@ public extension DoughStyle {
 				oilPercent: 8,
 				sugarPercent: 10,
 				instantYeastPercent: 0.6,
+				flours: [FlourLibrary.at("bread", 100)],
 				flourNote: "Bread flour"
 			),
 			planID: FermentationPlan.sameDayStraight.id
@@ -240,5 +392,14 @@ public extension DoughStyle {
 
 	static func style(id: String) -> DoughStyle? {
 		library.first { $0.id == id }
+	}
+
+	static func styles(family: PlanFamily) -> [DoughStyle] {
+		library.filter { $0.family == family }
+	}
+
+	/// Every style leavened with a levain — the sourdough shelf.
+	static var sourdough: [DoughStyle] {
+		library.filter { $0.formula.leaven == .sourdough }
 	}
 }

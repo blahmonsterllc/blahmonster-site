@@ -45,8 +45,12 @@ data class DoughFormula(
 	val prefermentYeastPercent: Double = 0.1,
 	/** Mature starter carried into a levain build, as a percent of the levain's flour. */
 	val starterSeedPercent: Double = 20.0,
+	/** The flour blend. A single entry is the ordinary case; more is where prototyping starts. */
+	val flours: List<FlourComponent> = FlourLibrary.defaultBlend,
 	val flourNote: String = "",
 ) {
+	val blend: FlourBlend get() = FlourBlend(flours)
+
 	val prefermentedFlourFraction: Double
 		get() = if (prefermentKind == PrefermentKind.NONE) 0.0
 		else min(max(prefermentedFlourPercent / 100.0, 0.0), 1.0)
@@ -91,8 +95,28 @@ data class DoughFormula(
 			else prefermentFlour * prefermentYeastPercent * yeastType.multiplier / 100.0
 		val prefermentTotal = prefermentFlour + prefermentWater + prefermentYeast
 
+		val components = blend.normalized
+
+		/**
+		 * One row per flour, or a single row when the blend is just the one. A preferment is
+		 * assumed to take the same blend as the dough, scaled down.
+		 */
+		fun flourRows(scale: Double, label: String, idPrefix: String): List<Ingredient> =
+			if (components.size == 1) {
+				listOf(Ingredient(idPrefix, label, totalFlour * scale, 100.0 * scale))
+			} else {
+				components.map {
+					Ingredient(
+						"$idPrefix-${it.id}",
+						"$label — ${it.shortName}",
+						totalFlour * scale * it.percent / 100.0,
+						it.percent * scale,
+					)
+				}
+			}
+
 		val overall = buildList {
-			add(Ingredient("flour", "Flour (total)", totalFlour, 100.0))
+			addAll(flourRows(1.0, "Flour (total)", "flour"))
 			add(Ingredient("water", "Water (total)", totalWater, hydrationPercent))
 			add(Ingredient("salt", "Salt", salt, saltPercent))
 			if (leaven == LeavenKind.COMMERCIAL_YEAST && yeast > 0) {
@@ -116,31 +140,25 @@ data class DoughFormula(
 				val seed = seedFlour * (1 + prefermentHydrationPercent / 100.0)
 				val feedFlour = prefermentFlour - seedFlour
 				val feedWater = feedFlour * prefermentHydrationPercent / 100.0
-				listOf(
-					Ingredient("seed", "Ripe starter", seed, 0.0),
-					Ingredient("pfFlour", "Flour", feedFlour, 0.0),
-					Ingredient("pfWater", "Water", feedWater, 0.0),
-				)
+				val feedScale = if (totalFlour > 0) feedFlour / totalFlour else 0.0
+				buildList {
+					add(Ingredient("seed", "Ripe starter", seed, 0.0))
+					addAll(flourRows(feedScale, "Flour", "pfFlour").map { it.copy(bakersPercent = 0.0) })
+					add(Ingredient("pfWater", "Water", feedWater, 0.0))
+				}
 			} else {
-				listOf(
-					Ingredient("pfFlour", "Flour", prefermentFlour, 0.0),
-					Ingredient("pfWater", "Water", prefermentWater, 0.0),
-					Ingredient("pfYeast", "Yeast — ${yeastType.shortName}", prefermentYeast, 0.0),
-				)
+				buildList {
+					addAll(flourRows(prefFlourFraction, "Flour", "pfFlour").map { it.copy(bakersPercent = 0.0) })
+					add(Ingredient("pfWater", "Water", prefermentWater, 0.0))
+					add(Ingredient("pfYeast", "Yeast — ${yeastType.shortName}", prefermentYeast, 0.0))
+				}
 			}
 		} else {
 			emptyList()
 		}
 
 		val final = buildList {
-			add(
-				Ingredient(
-					"flour",
-					"Flour",
-					totalFlour - prefermentFlour,
-					100.0 - prefermentedFlourPercent,
-				),
-			)
+			addAll(flourRows(1.0 - prefFlourFraction, "Flour", "flour"))
 			add(
 				Ingredient(
 					"water",

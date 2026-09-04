@@ -105,10 +105,15 @@ data class Batch(
 			saltPercent = formula.saltPercent,
 			sugarPercent = formula.sugarPercent,
 			prefermentedFlourFraction = formula.prefermentedFlourFraction,
+			wholeGrainFraction = formula.blend.wholeGrainFraction,
 		)
 
 	val suggestedLevainPercent: Double
-		get() = Leavening.levainPercent(fermentationLoadHours, formula.saltPercent)
+		get() = Leavening.levainPercent(
+			equivalentHours = fermentationLoadHours,
+			saltPercent = formula.saltPercent,
+			wholeGrainFraction = formula.blend.wholeGrainFraction,
+		)
 
 	fun status(stage: ScheduledStage, now: Long): StageStatus = when {
 		progress[stage.id]?.completedAt != null -> StageStatus.DONE

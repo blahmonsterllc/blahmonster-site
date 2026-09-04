@@ -76,6 +76,13 @@ object Leavening {
 	const val MAX_LEVAIN_PERCENT = 40.0
 
 	/**
+	 * Bran carries enzymes and wild yeast, so whole-grain doughs run faster than their protein
+	 * suggests. A wholly whole-grain dough wants roughly 30 % less leaven than a white one on
+	 * the same schedule.
+	 */
+	const val WHOLE_GRAIN_SPEEDUP = 0.3
+
+	/**
 	 * Instant dry yeast as a percentage of total flour for a given fermentation load.
 	 *
 	 * Calibrated against the cold-fermentation tables American pizzerias work from —
@@ -89,20 +96,27 @@ object Leavening {
 		saltPercent: Double = 2.0,
 		sugarPercent: Double = 0.0,
 		prefermentedFlourFraction: Double = 0.0,
+		wholeGrainFraction: Double = 0.0,
 	): Double {
 		if (equivalentHours <= 0.0) return MAX_INSTANT_YEAST_PERCENT
 		var percent = 1.6 / equivalentHours
 		percent *= 1 + 0.14 * max(0.0, saltPercent - 2.0)
 		percent *= 1 + 0.03 * max(0.0, sugarPercent - 5.0)
 		percent *= 1 - 0.8 * min(max(prefermentedFlourFraction, 0.0), 1.0)
+		percent *= 1 - WHOLE_GRAIN_SPEEDUP * min(max(wholeGrainFraction, 0.0), 1.0)
 		return min(max(percent, MIN_INSTANT_YEAST_PERCENT), MAX_INSTANT_YEAST_PERCENT)
 	}
 
 	/** Ripe levain as a percentage of total flour (levain weight, not the flour in it). */
-	fun levainPercent(equivalentHours: Double, saltPercent: Double = 2.0): Double {
+	fun levainPercent(
+		equivalentHours: Double,
+		saltPercent: Double = 2.0,
+		wholeGrainFraction: Double = 0.0,
+	): Double {
 		if (equivalentHours <= 0.0) return MAX_LEVAIN_PERCENT
 		var percent = 90.0 / equivalentHours
 		percent *= 1 + 0.14 * max(0.0, saltPercent - 2.0)
+		percent *= 1 - WHOLE_GRAIN_SPEEDUP * min(max(wholeGrainFraction, 0.0), 1.0)
 		return min(max(percent, MIN_LEVAIN_PERCENT), MAX_LEVAIN_PERCENT)
 	}
 

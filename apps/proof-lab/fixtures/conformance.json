@@ -96,6 +96,7 @@
             "saltPercent": 2.0,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.4
         },
         {
@@ -103,6 +104,7 @@
             "saltPercent": 2.0,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.21248339973439576
         },
         {
@@ -110,6 +112,7 @@
             "saltPercent": 2.0,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.1415929203539823
         },
         {
@@ -117,6 +120,7 @@
             "saltPercent": 2.8,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.11861333333333335
         },
         {
@@ -124,6 +128,7 @@
             "saltPercent": 2.0,
             "sugarPercent": 10.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.30666666666666664
         },
         {
@@ -131,13 +136,31 @@
             "saltPercent": 2.5,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.3,
+            "wholeGrainFraction": 0.0,
             "value": 0.1445688888888889
+        },
+        {
+            "equivalentHours": 8.0,
+            "saltPercent": 2.0,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.5,
+            "value": 0.17
+        },
+        {
+            "equivalentHours": 8.0,
+            "saltPercent": 2.3,
+            "sugarPercent": 0.0,
+            "prefermentedFlourFraction": 0.1,
+            "wholeGrainFraction": 1.0,
+            "value": 0.13420959999999998
         },
         {
             "equivalentHours": 0.0,
             "saltPercent": 2.0,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 1.5
         },
         {
@@ -145,6 +168,7 @@
             "saltPercent": 2.0,
             "sugarPercent": 0.0,
             "prefermentedFlourFraction": 0.0,
+            "wholeGrainFraction": 0.0,
             "value": 0.02
         }
     ],
@@ -152,26 +176,37 @@
         {
             "equivalentHours": 4.5,
             "saltPercent": 2.0,
+            "wholeGrainFraction": 0.0,
             "value": 20.0
         },
         {
             "equivalentHours": 12.0,
             "saltPercent": 2.0,
+            "wholeGrainFraction": 0.0,
             "value": 7.5
         },
         {
             "equivalentHours": 20.0,
             "saltPercent": 2.5,
+            "wholeGrainFraction": 0.0,
             "value": 4.815
+        },
+        {
+            "equivalentHours": 9.0,
+            "saltPercent": 2.0,
+            "wholeGrainFraction": 0.35,
+            "value": 8.95
         },
         {
             "equivalentHours": 0.0,
             "saltPercent": 2.0,
+            "wholeGrainFraction": 0.0,
             "value": 40.0
         },
         {
             "equivalentHours": 500.0,
             "saltPercent": 2.0,
+            "wholeGrainFraction": 0.0,
             "value": 3.0
         }
     ],
@@ -238,6 +273,20 @@
             "totalHours": 40.35,
             "hoursToReady": 40.1,
             "stageCount": 8
+        },
+        {
+            "id": "sourdough-room-pizza",
+            "fermentationLoadHours": 8.35275281648062,
+            "totalHours": 18.55,
+            "hoursToReady": 18.35,
+            "stageCount": 7
+        },
+        {
+            "id": "sourdough-pan-cold",
+            "fermentationLoadHours": 8.567172356241672,
+            "totalHours": 32.4,
+            "hoursToReady": 32.1,
+            "stageCount": 7
         },
         {
             "id": "sourdough-country-loaf",
@@ -409,9 +458,14 @@
             "prefermentBuild": [],
             "finalMix": [
                 {
-                    "id": "flour",
-                    "grams": 1649.5956873315365,
-                    "bakersPercent": 100.0
+                    "id": "flour-00-strong",
+                    "grams": 1319.6765498652292,
+                    "bakersPercent": 80.0
+                },
+                {
+                    "id": "flour-semola",
+                    "grams": 329.9191374663073,
+                    "bakersPercent": 20.0
                 },
                 {
                     "id": "water",
@@ -514,7 +568,7 @@
             "finalMix": [
                 {
                     "id": "flour",
-                    "grams": 1807.541973102054,
+                    "grams": 1807.5419731020538,
                     "bakersPercent": 70.0
                 },
                 {
@@ -553,8 +607,13 @@
                     "bakersPercent": 0.0
                 },
                 {
-                    "id": "pfFlour",
-                    "grams": 156.9044510385757,
+                    "id": "pfFlour-bread",
+                    "grams": 141.21400593471813,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-whole-wheat",
+                    "grams": 15.690445103857568,
                     "bakersPercent": 0.0
                 },
                 {
@@ -565,9 +624,14 @@
             ],
             "finalMix": [
                 {
-                    "id": "flour",
-                    "grams": 1765.1750741839764,
-                    "bakersPercent": 90.0
+                    "id": "flour-bread",
+                    "grams": 1588.6575667655788,
+                    "bakersPercent": 81.0
+                },
+                {
+                    "id": "flour-whole-wheat",
+                    "grams": 176.51750741839766,
+                    "bakersPercent": 9.0
                 },
                 {
                     "id": "water",
@@ -587,6 +651,352 @@
             ]
         },
         {
+            "styleId": "sourdough-neapolitan",
+            "totalDoughGrams": 4080.0,
+            "totalFlourGrams": 2460.7961399276232,
+            "totalWaterGrams": 1550.3015681544027,
+            "prefermentFlourGrams": 196.86369119420988,
+            "prefermentTotalGrams": 393.72738238841976,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 78.74547647768395,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-00-pizzeria",
+                    "grams": 141.7418576598311,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-semola",
+                    "grams": 15.74909529553679,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 157.4909529553679,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour-00-pizzeria",
+                    "grams": 2037.5392038600721,
+                    "bakersPercent": 82.8
+                },
+                {
+                    "id": "flour-semola",
+                    "grams": 226.39324487334133,
+                    "bakersPercent": 9.200000000000001
+                },
+                {
+                    "id": "water",
+                    "grams": 1353.4378769601929,
+                    "bakersPercent": 55.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 393.72738238841976,
+                    "bakersPercent": 16.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 68.90229191797344,
+                    "bakersPercent": 2.8
+                }
+            ]
+        },
+        {
+            "styleId": "sourdough-new-york",
+            "totalDoughGrams": 5548.8,
+            "totalFlourGrams": 3279.4326241134754,
+            "totalWaterGrams": 2131.6312056737593,
+            "prefermentFlourGrams": 327.9432624113476,
+            "prefermentTotalGrams": 655.8865248226953,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 131.17730496453905,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-high-gluten",
+                    "grams": 223.00141843971633,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-whole-wheat",
+                    "grams": 39.353191489361706,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 262.35460992907804,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour-high-gluten",
+                    "grams": 2508.765957446809,
+                    "bakersPercent": 76.5
+                },
+                {
+                    "id": "flour-whole-wheat",
+                    "grams": 442.72340425531917,
+                    "bakersPercent": 13.5
+                },
+                {
+                    "id": "water",
+                    "grams": 1803.6879432624116,
+                    "bakersPercent": 55.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 655.8865248226953,
+                    "bakersPercent": 20.000000000000007
+                },
+                {
+                    "id": "salt",
+                    "grams": 72.14751773049646,
+                    "bakersPercent": 2.2
+                },
+                {
+                    "id": "oil",
+                    "grams": 65.58865248226951,
+                    "bakersPercent": 2.0
+                }
+            ]
+        },
+        {
+            "styleId": "sourdough-pan",
+            "totalDoughGrams": 1713.6000000000001,
+            "totalFlourGrams": 952.0,
+            "totalWaterGrams": 714.0,
+            "prefermentFlourGrams": 114.24,
+            "prefermentTotalGrams": 228.48,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 45.696,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour",
+                    "grams": 91.392,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 91.392,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour",
+                    "grams": 837.76,
+                    "bakersPercent": 88.0
+                },
+                {
+                    "id": "water",
+                    "grams": 599.76,
+                    "bakersPercent": 63.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 228.48,
+                    "bakersPercent": 24.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 19.04,
+                    "bakersPercent": 2.0
+                },
+                {
+                    "id": "oil",
+                    "grams": 28.56,
+                    "bakersPercent": 3.0
+                }
+            ]
+        },
+        {
+            "styleId": "sourdough-teglia",
+            "totalDoughGrams": 2448.0,
+            "totalFlourGrams": 1307.6923076923078,
+            "totalWaterGrams": 1072.3076923076924,
+            "prefermentFlourGrams": 130.7692307692308,
+            "prefermentTotalGrams": 261.5384615384616,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 52.30769230769232,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-00-strong",
+                    "grams": 73.23076923076924,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-semola",
+                    "grams": 20.923076923076927,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-whole-wheat",
+                    "grams": 10.461538461538463,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 104.61538461538464,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour-00-strong",
+                    "grams": 823.846153846154,
+                    "bakersPercent": 63.0
+                },
+                {
+                    "id": "flour-semola",
+                    "grams": 235.38461538461542,
+                    "bakersPercent": 18.0
+                },
+                {
+                    "id": "flour-whole-wheat",
+                    "grams": 117.69230769230771,
+                    "bakersPercent": 9.0
+                },
+                {
+                    "id": "water",
+                    "grams": 941.5384615384615,
+                    "bakersPercent": 72.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 261.5384615384616,
+                    "bakersPercent": 20.000000000000004
+                },
+                {
+                    "id": "salt",
+                    "grams": 28.769230769230777,
+                    "bakersPercent": 2.2
+                },
+                {
+                    "id": "oil",
+                    "grams": 39.23076923076924,
+                    "bakersPercent": 3.0
+                }
+            ]
+        },
+        {
+            "styleId": "semola-blend",
+            "totalDoughGrams": 4406.4,
+            "totalFlourGrams": 2626.7660208643815,
+            "totalWaterGrams": 1707.397913561848,
+            "prefermentFlourGrams": 0.0,
+            "prefermentTotalGrams": 0.0,
+            "prefermentBuild": [],
+            "finalMix": [
+                {
+                    "id": "flour-00-pizzeria",
+                    "grams": 1838.7362146050668,
+                    "bakersPercent": 70.0
+                },
+                {
+                    "id": "flour-semola",
+                    "grams": 788.0298062593145,
+                    "bakersPercent": 30.0
+                },
+                {
+                    "id": "water",
+                    "grams": 1707.397913561848,
+                    "bakersPercent": 65.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 68.29591654247392,
+                    "bakersPercent": 2.6
+                },
+                {
+                    "id": "yeast",
+                    "grams": 3.9401490312965723,
+                    "bakersPercent": 0.15
+                }
+            ]
+        },
+        {
+            "styleId": "whole-grain-pizza",
+            "totalDoughGrams": 3427.2000000000003,
+            "totalFlourGrams": 1966.265060240964,
+            "totalWaterGrams": 1415.710843373494,
+            "prefermentFlourGrams": 176.96385542168676,
+            "prefermentTotalGrams": 353.9277108433735,
+            "prefermentBuild": [
+                {
+                    "id": "seed",
+                    "grams": 70.7855421686747,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-bread",
+                    "grams": 70.78554216867471,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-whole-wheat",
+                    "grams": 56.62843373493977,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-kamut",
+                    "grams": 14.157108433734942,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfWater",
+                    "grams": 141.57108433734942,
+                    "bakersPercent": 0.0
+                }
+            ],
+            "finalMix": [
+                {
+                    "id": "flour-bread",
+                    "grams": 894.6506024096386,
+                    "bakersPercent": 45.5
+                },
+                {
+                    "id": "flour-whole-wheat",
+                    "grams": 715.7204819277109,
+                    "bakersPercent": 36.4
+                },
+                {
+                    "id": "flour-kamut",
+                    "grams": 178.93012048192773,
+                    "bakersPercent": 9.1
+                },
+                {
+                    "id": "water",
+                    "grams": 1238.7469879518073,
+                    "bakersPercent": 63.0
+                },
+                {
+                    "id": "preferment",
+                    "grams": 353.9277108433735,
+                    "bakersPercent": 18.0
+                },
+                {
+                    "id": "salt",
+                    "grams": 45.22409638554217,
+                    "bakersPercent": 2.3
+                }
+            ]
+        },
+        {
             "styleId": "country-loaf",
             "totalDoughGrams": 1836.0,
             "totalFlourGrams": 1031.4606741573034,
@@ -600,8 +1010,18 @@
                     "bakersPercent": 0.0
                 },
                 {
-                    "id": "pfFlour",
-                    "grams": 82.51685393258427,
+                    "id": "pfFlour-bread",
+                    "grams": 66.01348314606741,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-whole-wheat",
+                    "grams": 12.37752808988764,
+                    "bakersPercent": 0.0
+                },
+                {
+                    "id": "pfFlour-rye",
+                    "grams": 4.125842696629213,
                     "bakersPercent": 0.0
                 },
                 {
@@ -612,9 +1032,19 @@
             ],
             "finalMix": [
                 {
-                    "id": "flour",
-                    "grams": 928.314606741573,
-                    "bakersPercent": 90.0
+                    "id": "flour-bread",
+                    "grams": 742.6516853932585,
+                    "bakersPercent": 72.0
+                },
+                {
+                    "id": "flour-whole-wheat",
+                    "grams": 139.24719101123597,
+                    "bakersPercent": 13.5
+                },
+                {
+                    "id": "flour-rye",
+                    "grams": 46.41573033707866,
+                    "bakersPercent": 4.5
                 },
                 {
                     "id": "water",
@@ -863,6 +1293,134 @@
                 1224.0,
                 1224.0
             ]
+        }
+    ],
+    "blends": [
+        {
+            "styleId": "neapolitan",
+            "proteinPercent": 12.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 55.5,
+            "summary": "100 % Type 00 pizzeria"
+        },
+        {
+            "styleId": "new-york",
+            "proteinPercent": 14.0,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 61.3,
+            "summary": "100 % High-gluten"
+        },
+        {
+            "styleId": "detroit",
+            "proteinPercent": 12.7,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 56.94,
+            "summary": "100 % Bread flour"
+        },
+        {
+            "styleId": "sicilian",
+            "proteinPercent": 12.7,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 56.94,
+            "summary": "100 % Bread flour"
+        },
+        {
+            "styleId": "roman-teglia",
+            "proteinPercent": 13.3,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 58.46000000000001,
+            "summary": "80 % Type 00 strong · 20 % Semola rimacinata"
+        },
+        {
+            "styleId": "contemporary-biga",
+            "proteinPercent": 13.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 59.7,
+            "summary": "100 % Type 00 strong"
+        },
+        {
+            "styleId": "poolish-pizza",
+            "proteinPercent": 12.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 55.5,
+            "summary": "100 % Type 00 pizzeria"
+        },
+        {
+            "styleId": "sourdough-pizza",
+            "proteinPercent": 12.78,
+            "wholeGrainFraction": 0.1,
+            "absorptionGuidePercent": 57.816,
+            "summary": "90 % Bread flour · 10 % Whole wheat"
+        },
+        {
+            "styleId": "sourdough-neapolitan",
+            "proteinPercent": 12.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 55.3,
+            "summary": "90 % Type 00 pizzeria · 10 % Semola rimacinata"
+        },
+        {
+            "styleId": "sourdough-new-york",
+            "proteinPercent": 13.925,
+            "wholeGrainFraction": 0.15,
+            "absorptionGuidePercent": 61.96000000000001,
+            "summary": "85 % High-gluten · 15 % Whole wheat"
+        },
+        {
+            "styleId": "sourdough-pan",
+            "proteinPercent": 12.7,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 56.94,
+            "summary": "100 % Bread flour"
+        },
+        {
+            "styleId": "sourdough-teglia",
+            "proteinPercent": 13.299999999999999,
+            "wholeGrainFraction": 0.1,
+            "absorptionGuidePercent": 59.059999999999995,
+            "summary": "70 % Type 00 strong · 20 % Semola rimacinata · 10 % Whole wheat"
+        },
+        {
+            "styleId": "semola-blend",
+            "proteinPercent": 12.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 54.9,
+            "summary": "70 % Type 00 pizzeria · 30 % Semola rimacinata"
+        },
+        {
+            "styleId": "whole-grain-pizza",
+            "proteinPercent": 13.05,
+            "wholeGrainFraction": 0.5,
+            "absorptionGuidePercent": 60.71,
+            "summary": "50 % Bread flour · 40 % Whole wheat · 10 % Kamut"
+        },
+        {
+            "styleId": "country-loaf",
+            "proteinPercent": 12.685,
+            "wholeGrainFraction": 0.2,
+            "absorptionGuidePercent": 58.407000000000004,
+            "summary": "80 % Bread flour · 15 % Whole wheat · 5 % Rye"
+        },
+        {
+            "styleId": "focaccia",
+            "proteinPercent": 12.7,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 56.94,
+            "summary": "100 % Bread flour"
+        },
+        {
+            "styleId": "baguette",
+            "proteinPercent": 11.5,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 53.3,
+            "summary": "100 % T65"
+        },
+        {
+            "styleId": "enriched",
+            "proteinPercent": 12.7,
+            "wholeGrainFraction": 0.0,
+            "absorptionGuidePercent": 56.94,
+            "summary": "100 % Bread flour"
         }
     ]
 }

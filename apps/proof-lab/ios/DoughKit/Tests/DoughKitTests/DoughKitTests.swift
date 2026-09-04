@@ -424,3 +424,91 @@ final class ComparisonTests: XCTestCase {
 		)
 	}
 }
+
+final class FlourBlendTests: XCTestCase {
+	private let blend = FlourBlend([
+		FlourLibrary.at("bread", 80),
+		FlourLibrary.at("whole-wheat", 20)
+	])
+
+	func testProteinIsTheWeightedAverage() {
+		XCTAssertEqual(blend.proteinPercent, 12.86, accuracy: 1e-9)
+	}
+
+	func testWholeGrainShareCountsOnlyWholeGrains() {
+		XCTAssertEqual(blend.wholeGrainFraction, 0.2, accuracy: 1e-9)
+		XCTAssertEqual(FlourBlend(FlourLibrary.defaultBlend).wholeGrainFraction, 0, accuracy: 1e-9)
+	}
+
+	func testSharesAreRescaledRatherThanTrusted() {
+		let sloppy = FlourBlend([FlourLibrary.at("bread", 40), FlourLibrary.at("semola", 10)])
+		XCTAssertEqual(sloppy.normalized.reduce(0) { $0 + $1.percent }, 100, accuracy: 1e-9)
+		XCTAssertEqual(sloppy.normalized[0].percent, 80, accuracy: 1e-9)
+	}
+
+	func testEmptyOrZeroedBlendsStillWork() {
+		XCTAssertEqual(FlourBlend([]).normalized.count, 1)
+		let zeroed = FlourBlend([FlourLibrary.at("bread", 0), FlourLibrary.at("rye", 0)])
+		XCTAssertEqual(zeroed.normalized.reduce(0) { $0 + $1.percent }, 100, accuracy: 1e-9)
+		XCTAssertEqual(zeroed.normalized[0].percent, 50, accuracy: 1e-9)
+	}
+
+	func testSummaryReadsLikeABakerWouldSayIt() {
+		XCTAssertEqual(blend.summary, "80 % Bread flour · 20 % Whole wheat")
+	}
+
+	func testFlourLibraryIsSaneAndUnique() {
+		let ids = FlourLibrary.all.map(\.id)
+		XCTAssertEqual(ids.count, Set(ids).count)
+		XCTAssertTrue(FlourLibrary.all.allSatisfy { (8.0...16.0).contains($0.proteinPercent) })
+	}
+
+	func testEachFlourGetsItsOwnRow() {
+		let formula = DoughFormula(
+			ballCount: 10,
+			ballWeightGrams: 300,
+			lossPercent: 0,
+			hydrationPercent: 70,
+			flours: [
+				FlourLibrary.at("bread", 70),
+				FlourLibrary.at("whole-wheat", 20),
+				FlourLibrary.at("rye", 10)
+			]
+		)
+		let result = formula.result()
+		let rows = result.overall.filter { $0.id.hasPrefix("flour") }
+		XCTAssertEqual(rows.count, 3)
+		XCTAssertEqual(rows.reduce(0) { $0 + $1.grams }, result.totalFlourGrams, accuracy: 1e-9)
+		XCTAssertEqual(result.totalDoughGrams, 3000, accuracy: 1e-9)
+		XCTAssertEqual(result.finalMix.reduce(0) { $0 + $1.grams }, 3000, accuracy: 1e-6)
+	}
+
+	func testASingleFlourStaysASingleRow() {
+		let rows = DoughFormula().result().overall.filter { $0.id.hasPrefix("flour") }
+		XCTAssertEqual(rows.count, 1)
+		XCTAssertEqual(rows[0].id, "flour")
+	}
+
+	func testWholeGrainDoughsGetLessLeaven() {
+		let white = Leavening.instantYeastPercent(equivalentHours: 8)
+		let wholemeal = Leavening.instantYeastPercent(equivalentHours: 8, wholeGrainFraction: 1)
+		XCTAssertEqual(wholemeal, white * (1 - Leavening.wholeGrainSpeedup), accuracy: 1e-12)
+	}
+
+	func testEveryShippedStyleHasABlendThatAddsToAHundred() {
+		for style in DoughStyle.library {
+			XCTAssertEqual(
+				style.formula.flours.reduce(0) { $0 + $1.percent },
+				100,
+				accuracy: 1e-9,
+				"\(style.id) blend doesn't add to 100"
+			)
+		}
+	}
+
+	func testTheSourdoughShelfCoversSeveralPizzaStyles() {
+		let pizza = DoughStyle.sourdough.filter { $0.family == .pizza }
+		XCTAssertGreaterThanOrEqual(pizza.count, 4)
+		XCTAssertGreaterThanOrEqual(Set(pizza.map(\.planID)).count, 3)
+	}
+}
