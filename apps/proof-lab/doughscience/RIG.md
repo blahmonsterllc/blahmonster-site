@@ -56,6 +56,40 @@ You do not need all of this on day one. In value order:
 
 ---
 
+## Why not a thermocouple
+
+The obvious probe to reach for, and the wrong one. A Type K thermocouple is accurate to about
+±2.2 °C at standard grade — **larger than the effect being measured.** The whole question is
+whether the walk-in you believe is 4 °C is really 5.8 °C, and a sensor with 2.2 °C of error
+can't answer it. It also needs cold-junction compensation and an amplifier, so it's more
+electronics for a worse number.
+
+Thermocouples earn their enormous range by giving up resolution, and range is the one thing
+this job doesn't need. Dough lives between 0 and 30 °C.
+
+| Sensor | Accuracy | Notes |
+| --- | --- | --- |
+| Type K thermocouple | ±2.2 °C | Wrong tool. Bigger error than the signal |
+| **DS18B20** | ±0.5 °C | Digital, no amplifier, no calibration, ready-made stainless probe |
+| NTC thermistor 10k | ±0.1–0.2 °C | Cheapest and best *if* calibrated; needs an ADC and divider |
+| PT1000 RTD Class A | ±0.16 °C at 5 °C | Lab grade, needs a MAX31865, costs more |
+
+The DS18B20 wins on a property that isn't accuracy: each one carries a unique 64-bit address,
+so a dozen probes share a single GPIO. Six trays on one wire, no multiplexer.
+
+**Stability matters more than absolute accuracy here.** A probe reading a consistent 0.3 °C
+high makes the equivalent-hours figure slightly wrong but leaves every comparison *between* runs
+valid — and comparison is the entire point. Drift is the problem; offset mostly isn't.
+
+**Placement will confuse you more than the sensor will.** A 20 kg mass has real gradients:
+fermentation is exothermic, so the core runs warmer than the edge during bulk and cools more
+slowly in the fridge. One probe in the centre of one tray measures something quite different
+from ambient. Pick a spot and keep it across runs, or the data won't compare.
+
+Where a thermocouple *does* belong is the oven — a Neapolitan deck at 430–480 °C is exactly
+Type K territory and nothing else survives it. Worth adding later: the log currently records how
+the dough got to the oven and then goes quiet.
+
 ## Wiring
 
 Everything except the probe and the load cell is I²C on one chain:
