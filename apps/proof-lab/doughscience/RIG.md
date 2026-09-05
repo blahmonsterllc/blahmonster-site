@@ -37,7 +37,9 @@ Roughly $90 for the full set, less if you stage it.
 | **VL53L1X** ToF rangefinder | Dough height to the millimetre — the aliquot jar, automated | $6 |
 | **SHT4x** temperature + humidity | Ambient conditions; the humidity channel you asked about | $5 |
 | **DS18B20** in a stainless probe | Dough *core* temperature — the highest-value sensor here | $4 |
-| **SCD41** NDIR CO₂ | The most direct read on yeast activity | $30 |
+| **In-dough probe** (stainless spear, 4 ring electrodes) | Gas fraction from bulk resistance — see below | ~$8 |
+| **AD5941** impedance front end | Drives the probe with AC and reads it properly | $12 |
+| **SCD41** NDIR CO₂ | Headspace gas. Buy it to *validate* the probe, not instead of it | $30 |
 | Load cell (1 kg) + **HX711** | Mass loss as gas escapes — an independent check on CO₂ | $10 |
 | microSD breakout | Logging that survives a dropped connection | $6 |
 | DS3231 RTC | Timestamps that survive a power cut | $5 |
@@ -51,10 +53,70 @@ You do not need all of this on day one. In value order:
    maybe $15 and answers a real question in one bake.
 2. **Add the VL53L1X.** Now you have rise, and rise is the signal bakers actually judge by.
 3. **Add SHT4x.** Cheap, rides along on the same I²C bus, tells you about skin formation.
-4. **Add SCD41 and the load cell** once the first two are boring — these are the research
-   channels, and they need a controlled container to mean much.
+4. **Build the in-dough probe.** This is the interesting one, and the cheapest route to a gas
+   signal. Four stainless electrodes at fixed spacing, AC excitation, log raw impedance.
+5. **Add the SCD41 and the load cell** last — headspace CO₂ and mass loss are what you check
+   the probe against, and both need a controlled container to mean much.
 
 ---
+
+## The in-dough probe
+
+The most promising instrument here isn't any of the sensors watching from outside. It's a
+single spear that lives *in* the dough and reports what's happening inside it. Two published
+modalities work, both from inside:
+
+### Electrical resistance / impedance → gas fraction
+
+CO₂ is a dielectric gas, so as dough fills with bubbles its conductivity **falls**. Measure
+resistance between electrodes in the dough and you are tracking gas production directly — and
+because it's a bulk property, you get it without the sealed headspace an NDIR sensor demands.
+
+The literature has done this with platinum plates and a lab impedance analyser, and also with
+cheap electrodes and a plain multimeter. The useful line: *if the length and cross-sectional
+area of the measuring cell are fixed, volume fraction can be estimated from the resistance
+value.* A fixed-geometry probe gives you gas volume fraction for a few dollars of stainless.
+
+**Use four electrodes, not two.** A Kelvin arrangement — outer pair drives current, inner pair
+senses voltage — keeps contact impedance at the dough/metal boundary from swamping the bulk
+reading. Two-electrode setups fail this way and the failure looks like signal.
+
+**Drive it with AC, not DC.** DC polarises the electrodes and the reading walks away from you.
+A fixed-frequency AC excitation is enough; an AD5941/AD5933 gives a proper sweep if you want one.
+
+### Thermal properties → gas fraction, independently
+
+Gas conducts heat poorly, so thermal conductivity drops as dough aerates. A self-heated element
+plus a temperature sensor measures this. Published work on gluten-free dough proofing reports up
+to 87 % correlation with a professional rheofermentometer — a five-figure lab instrument —
+from what is physically a resistor and a thermometer. Their layout used one sensor against the
+container wall at the bottom and one in the middle of the dough near the top.
+
+### One probe, several channels
+
+A 316 stainless spear can carry all of it: temperature at the tip, four ring electrodes at fixed
+spacing along the shaft, and a self-heated element. Push one thing into the dough, get
+temperature, gas fraction by two independent methods, and a handle on acidification.
+
+### What will bite you
+
+- **Salt dominates the baseline.** A 2.5 % salt dough reads nothing like a 2.0 % one. This is
+  relative-within-a-run and per-formula: you calibrate the *shape* of the curve, never an
+  absolute number across recipes.
+- **Temperature moves conductivity a lot.** Compensate for it — free, since the same probe is
+  already measuring temperature.
+- **It's invasive.** The probe opens a channel and may nucleate bubbles. Put it in the aliquot
+  sample, not in a production tray. This is one more reason the aliquot is the right unit of
+  measurement for the whole rig.
+- **Electrode material.** Stainless for food contact. Copper appears in the papers because it's
+  cheap, but it oxidises and doesn't belong in dough you intend to eat.
+
+### What this does to the parts list
+
+If the resistance channel works, it largely replaces the SCD41 — same quantity (gas fraction),
+a tenth the cost, no headspace model, and it works in an open container. Build the probe before
+buying the CO₂ sensor, and keep the SCD41 as the thing you validate the probe *against* if the
+correlation turns out to be poor.
 
 ## Why not a thermocouple
 
@@ -96,10 +158,14 @@ Everything except the probe and the load cell is I²C on one chain:
 
 ```
 ESP32-S3 ── Qwiic ── VL53L1X (0x29) ── SHT4x (0x44) ── SCD41 (0x62) ── DS3231 (0x68)
-        └── GPIO + 4.7 kΩ pull-up ── DS18B20 (1-Wire, stainless probe in the dough)
+        │                          └── AD5941 (SPI) ── 4 ring electrodes on the spear
+        └── GPIO + 4.7 kΩ pull-up ── DS18B20 (1-Wire, at the spear tip, in the dough)
         └── SPI ── microSD
         └── HX711 (2-wire) ── 1 kg load cell under the container
 ```
+
+The spear carries the DS18B20 at the tip and the four electrodes up the shaft, so one insertion
+gets you temperature and impedance from the same place in the dough.
 
 No address collisions across those four I²C parts, so they daisy-chain without a mux.
 
@@ -131,6 +197,10 @@ timestamp_ms,dough_c,ambient_c,rh,height_mm,co2_ppm,mass_g
 1757000000000,23.4,21.8,68.2,101.5,912,1004.2
 1757000060000,23.4,21.9,68.0,102.1,948,1004.1
 ```
+
+The impedance channel isn't in this schema yet, deliberately — it needs a run or two before you
+know whether you're logging one resistance, a magnitude and phase, or a whole sweep. Log it to a
+second file keyed by the same timestamps until the shape settles, then add columns.
 
 Rules the parser already assumes, so keep to them:
 
