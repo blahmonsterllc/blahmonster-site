@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
 	title: 'TapClick — Privacy Policy',
 	description:
-		'Privacy policy for TapClick, a metronome app for iPhone by Blah Monster LLC. TapClick collects no personal data.',
+		'Privacy policy for TapClick, a metronome app for iPhone and Apple Watch by Blah Monster LLC. TapClick collects no personal data, and health data never leaves your device.',
 	robots: { index: true, follow: true }
 };
 
-const EFFECTIVE_DATE = 'May 17, 2026';
+const EFFECTIVE_DATE = 'September 5, 2026';
 
 export default function TapClickPrivacyPage() {
 	return (
@@ -25,7 +25,7 @@ export default function TapClickPrivacyPage() {
 			</header>
 
 			<section className="hero" style={{ marginBottom: 48 }}>
-				<div className="hero-tag">Metronome for iPhone</div>
+				<div className="hero-tag">Metronome for iPhone &amp; Apple Watch</div>
 				<h1
 					className="hero-title"
 					style={{ fontSize: 'clamp(40px, 9vw, 72px)', marginBottom: 28 }}
@@ -35,7 +35,9 @@ export default function TapClickPrivacyPage() {
 				<p className="hero-body">
 					<strong>Short version:</strong> TapClick does not collect personal data. It has no
 					accounts, no analytics, no advertising, no third-party trackers. It works fully
-					offline. Your settings stay on your device.
+					offline. Your settings stay on your device. On Apple Watch it can log your
+					practice to Apple Health — that data stays on your device and is never sent to
+					us, and you can switch it off.
 				</p>
 				<p className="hero-body">
 					The long version is below. It exists because the App Store requires every app to
@@ -57,7 +59,12 @@ export default function TapClickPrivacyPage() {
 						<li>Name, email address, phone number, or mailing address.</li>
 						<li>Account credentials. There are no accounts in TapClick.</li>
 						<li>Location data (precise or approximate).</li>
-						<li>Contacts, photos, calendar entries, or health data.</li>
+						<li>Contacts, photos, or calendar entries.</li>
+						<li>
+							Health data, in the sense of receiving it. The Apple Watch app works with
+							Apple Health on your watch, but that data is never transmitted to us or to
+							anyone else &mdash; see section 03.
+						</li>
 						<li>Microphone audio. TapClick does not request microphone access.</li>
 						<li>
 							Advertising identifiers (IDFA), device fingerprints, or other identifiers used
@@ -98,13 +105,41 @@ export default function TapClickPrivacyPage() {
 			<section>
 				<div className="sec-num">/ 03</div>
 				<h2 className="sec-title">
-					Third parties <span className="meta">none</span>
+					Apple Watch <span className="meta">and Apple Health</span>
 				</h2>
 				<div className="prose">
 					<p>
-						TapClick contains no third-party SDKs for analytics, advertising, attribution,
-						crash reporting, or anything else. No data is sent to any server operated by us
-						or by anyone else. The app does not require a network connection to function.
+						On Apple Watch, TapClick runs your practice as a workout session. This is what
+						keeps the click going while your hands are busy &mdash; without it, watchOS
+						suspends the app the moment you drop your arm, which for a metronome is the
+						whole ballgame. It also means an hour of playing counts as an hour of work.
+					</p>
+					<p>
+						<strong>What TapClick reads:</strong> your heart rate and active energy while a
+						practice session is running, so it can work out how much you burned.
+					</p>
+					<p>
+						<strong>What TapClick writes:</strong> a workout, with its duration and active
+						energy, saved to Apple Health on your device when the session ends.
+					</p>
+					<p>
+						<strong>Where it goes:</strong> nowhere. Health data is read from and written to
+						Apple Health on your own watch and iPhone. It is never transmitted to Blah
+						Monster LLC, never sent to any server, and never shared with any third party.
+						We have no way to see it. It is never used for advertising, marketing, or any
+						purpose other than showing you your practice session and saving it to Health.
+					</p>
+					<p>
+						<strong>Turning it off:</strong> practice logging is a setting &mdash; Settings
+						&rsaquo; Apple Watch &rsaquo; Track Practice Movement in the iPhone app. Switch
+						it off and nothing is written to Health; the workout session still runs, purely
+						to keep the metronome alive. You can also revoke TapClick&apos;s access
+						entirely in the Health app under Sharing &rsaquo; Apps, or on the watch in
+						Settings &rsaquo; Privacy &amp; Security &rsaquo; Health.
+					</p>
+					<p>
+						Workouts already saved to Health belong to you and live in the Health app.
+						Deleting TapClick does not delete them; you can remove them there at any time.
 					</p>
 				</div>
 			</section>
@@ -113,6 +148,23 @@ export default function TapClickPrivacyPage() {
 
 			<section>
 				<div className="sec-num">/ 04</div>
+				<h2 className="sec-title">
+					Third parties <span className="meta">none</span>
+				</h2>
+				<div className="prose">
+					<p>
+						TapClick contains no third-party SDKs for analytics, advertising, attribution,
+						crash reporting, or anything else. No data &mdash; health data included &mdash;
+						is sent to any server operated by us or by anyone else. The app does not require
+						a network connection to function.
+					</p>
+				</div>
+			</section>
+
+			<hr />
+
+			<section>
+				<div className="sec-num">/ 05</div>
 				<h2 className="sec-title">
 					Children&apos;s privacy <span className="meta">COPPA</span>
 				</h2>
@@ -128,15 +180,17 @@ export default function TapClickPrivacyPage() {
 			<hr />
 
 			<section>
-				<div className="sec-num">/ 05</div>
+				<div className="sec-num">/ 06</div>
 				<h2 className="sec-title">
 					Your rights <span className="meta">GDPR / CCPA</span>
 				</h2>
 				<div className="prose">
 					<p>
 						Because TapClick does not collect or process personal data, there is no personal
-						data for us to access, correct, export, or delete on your behalf. If you have
-						any concerns about your privacy in connection with TapClick, please contact us
+						data for us to access, correct, export, or delete on your behalf. The health
+						data described in section 03 is held by Apple Health on your own devices, under
+						your control, where you can view or delete it directly. If you have any
+						concerns about your privacy in connection with TapClick, please contact us
 						using the email below.
 					</p>
 				</div>
@@ -145,7 +199,7 @@ export default function TapClickPrivacyPage() {
 			<hr />
 
 			<section>
-				<div className="sec-num">/ 06</div>
+				<div className="sec-num">/ 07</div>
 				<h2 className="sec-title">Changes to this policy</h2>
 				<div className="prose">
 					<p>
@@ -159,7 +213,7 @@ export default function TapClickPrivacyPage() {
 			<hr />
 
 			<section id="contact">
-				<div className="sec-num">/ 07</div>
+				<div className="sec-num">/ 08</div>
 				<h2 className="sec-title">Contact</h2>
 				<p style={{ marginBottom: 20, maxWidth: '60ch', lineHeight: 1.65 }}>
 					Questions about this privacy policy or TapClick in general? Email us. We
