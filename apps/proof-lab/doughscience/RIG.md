@@ -96,7 +96,17 @@ container wall at the bottom and one in the middle of the dough near the top.
 
 A 316 stainless spear can carry all of it: temperature at the tip, four ring electrodes at fixed
 spacing along the shaft, and a self-heated element. Push one thing into the dough, get
-temperature, gas fraction by two independent methods, and a handle on acidification.
+temperature and gas fraction by two independent methods.
+
+**The impedance channel measures two things at once, and they're confounded.** Bubbles are
+insulators, so gas fraction drives conductivity down — but acidification releases ions, which
+drives it back up. In a sourdough both are happening simultaneously and the resistance curve is
+their sum. Two ways out: sweep frequency, since the two effects don't respond the same way
+across the spectrum, or measure pH separately and subtract. The thermal channel is useful partly
+because it responds only to gas, which makes it the clean reference for separating the two.
+
+Don't treat a single-frequency resistance reading as a gas measurement in a levain dough until
+you've checked it against one of those.
 
 ### What will bite you
 
