@@ -35,6 +35,23 @@ final class ConformanceTests: XCTestCase {
 			let value: Double
 		}
 
+		struct SensingPoint: Decodable {
+			let offsetMillis: Int64
+			let doughC: Double?
+			let heightMm: Double?
+		}
+
+		struct SensingCase: Decodable {
+			let id: String
+			let points: [SensingPoint]
+			let measuredEquivalentHours: Double
+			let effectiveConstantTemperatureC: Double?
+			let longestGapMinutes: Double
+			let elapsedHours: Double
+			let expansionPercent: Double?
+			let riseRatePercentPerHour: Double?
+		}
+
 		struct BlendPoint: Decodable {
 			let styleId: String
 			let proteinPercent: Double
@@ -100,6 +117,7 @@ final class ConformanceTests: XCTestCase {
 		let waterTemperatures: [WaterPoint]
 		let production: [ProductionPoint]
 		let blends: [BlendPoint]
+		let sensing: [SensingCase]
 	}
 
 	/// Transcendental functions can differ in the last bit or two between platforms.
@@ -299,6 +317,60 @@ final class ConformanceTests: XCTestCase {
 				"absorption guide for \(point.styleId)"
 			)
 			XCTAssertEqual(blend.summary, point.summary, "blend summary for \(point.styleId)")
+		}
+	}
+
+	func testSensingMatches() {
+		for point in fixtures.sensing {
+			let series = SensorSeries(
+				point.points.map { sample in
+					SensorReading(
+						date: Date(timeIntervalSince1970: Double(sample.offsetMillis) / 1000),
+						doughTempC: sample.doughC,
+						doughHeightMm: sample.heightMm
+					)
+				}
+			)
+
+			assertClose(series.elapsedHours, point.elapsedHours, "elapsed for \(point.id)")
+			assertClose(
+				series.measuredEquivalentHours(),
+				point.measuredEquivalentHours,
+				"measured equivalent hours for \(point.id)"
+			)
+			assertClose(
+				series.longestTemperatureGapMinutes(),
+				point.longestGapMinutes,
+				"gap for \(point.id)"
+			)
+
+			if let expected = point.effectiveConstantTemperatureC {
+				guard let actual = series.effectiveConstantTemperatureC() else {
+					return XCTFail("no effective temperature for \(point.id)")
+				}
+				// Both sides bisect to convergence, so this is tighter than the model's own error.
+				XCTAssertEqual(actual, expected, accuracy: 1e-6, "effective temperature for \(point.id)")
+			} else {
+				XCTAssertNil(series.effectiveConstantTemperatureC(), "\(point.id) should have none")
+			}
+
+			if let expected = point.expansionPercent {
+				guard let actual = series.expansionPercent() else {
+					return XCTFail("no expansion for \(point.id)")
+				}
+				assertClose(actual, expected, "expansion for \(point.id)")
+			} else {
+				XCTAssertNil(series.expansionPercent(), "\(point.id) should have no expansion")
+			}
+
+			if let expected = point.riseRatePercentPerHour {
+				guard let actual = series.riseRatePercentPerHour() else {
+					return XCTFail("no rise rate for \(point.id)")
+				}
+				assertClose(actual, expected, "rise rate for \(point.id)")
+			} else {
+				XCTAssertNil(series.riseRatePercentPerHour(), "\(point.id) should have no rise rate")
+			}
 		}
 	}
 

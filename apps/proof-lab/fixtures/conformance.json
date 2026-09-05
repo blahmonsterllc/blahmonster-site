@@ -1422,5 +1422,1623 @@
             "absorptionGuidePercent": 56.94,
             "summary": "100 % Bread flour"
         }
+    ],
+    "sensing": [
+        {
+            "id": "steady-24c-5h",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 1200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 1500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 1800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 2100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 2400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 2700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 4200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 4500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 4800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 6000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 6300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 6600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 6900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 8100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 8400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 8700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 10200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 10500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 10800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 11100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 11400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 11700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 13200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 13500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 13800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 14100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 14400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 14700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 15000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 15300000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 15600000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 15900000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 16200000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 16500000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 16800000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 17100000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 17400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 17700000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 18000000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                }
+            ],
+            "measuredEquivalentHours": 4.999999999999999,
+            "effectiveConstantTemperatureC": 24.0,
+            "longestGapMinutes": 5.0,
+            "elapsedHours": 5.0,
+            "expansionPercent": null,
+            "riseRatePercentPerHour": null
+        },
+        {
+            "id": "warm-walk-in-24h",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 1800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 2700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 4500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 6300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 8100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 10800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 11700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 13500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 14400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 15300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 16200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 17100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 18000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 18900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 19800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 20700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 21600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 22500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 23400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 24300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 25200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 26100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 27000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 27900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 28800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 29700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 30600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 31500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 32400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 33300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 34200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 35100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 36000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 36900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 37800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 38700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 39600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 40500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 41400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 42300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 43200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 44100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 45000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 45900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 46800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 47700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 48600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 49500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 50400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 51300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 52200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 53100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 54000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 54900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 55800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 56700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 57600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 58500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 59400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 60300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 61200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 62100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 63000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 63900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 64800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 65700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 66600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 67500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 68400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 69300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 70200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 71100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 72000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 72900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 73800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 74700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 75600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 76500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 77400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 78300000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 79200000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 80100000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 81000000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 81900000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 82800000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 83700000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 84600000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 85500000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 86400000,
+                    "doughC": 5.8,
+                    "heightMm": null
+                }
+            ],
+            "measuredEquivalentHours": 4.586361760577799,
+            "effectiveConstantTemperatureC": 5.800000000000011,
+            "longestGapMinutes": 15.0,
+            "elapsedHours": 24.0,
+            "expansionPercent": null,
+            "riseRatePercentPerHour": null
+        },
+        {
+            "id": "cold-4c-48h",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 1800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 9000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 10800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 12600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 14400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 16200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 18000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 19800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 21600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 23400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 25200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 27000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 28800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 30600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 32400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 34200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 36000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 37800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 39600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 41400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 43200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 45000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 46800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 48600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 50400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 52200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 54000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 55800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 57600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 59400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 61200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 63000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 64800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 66600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 68400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 70200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 72000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 73800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 75600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 77400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 79200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 81000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 82800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 84600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 86400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 88200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 90000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 91800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 93600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 95400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 97200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 99000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 100800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 102600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 104400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 106200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 108000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 109800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 111600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 113400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 115200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 117000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 118800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 120600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 122400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 124200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 126000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 127800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 129600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 131400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 133200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 135000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 136800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 138600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 140400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 142200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 144000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 145800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 147600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 149400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 151200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 153000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 154800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 156600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 158400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 160200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 162000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 163800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 165600000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 167400000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 169200000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 171000000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 172800000,
+                    "doughC": 4.0,
+                    "heightMm": null
+                }
+            ],
+            "measuredEquivalentHours": 7.526905744157913,
+            "effectiveConstantTemperatureC": 4.000000000000005,
+            "longestGapMinutes": 30.0,
+            "elapsedHours": 48.0,
+            "expansionPercent": null,
+            "riseRatePercentPerHour": null
+        },
+        {
+            "id": "swing-30-then-10",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 30.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3600000,
+                    "doughC": 30.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 3601000,
+                    "doughC": 10.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 7200000,
+                    "doughC": 10.0,
+                    "heightMm": null
+                }
+            ],
+            "measuredEquivalentHours": 1.8190282927643122,
+            "effectiveConstantTemperatureC": 22.631679825239395,
+            "longestGapMinutes": 60.0,
+            "elapsedHours": 2.0,
+            "expansionPercent": null,
+            "riseRatePercentPerHour": null
+        },
+        {
+            "id": "logging-gap",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 24.0,
+                    "heightMm": null
+                },
+                {
+                    "offsetMillis": 5400000,
+                    "doughC": 24.0,
+                    "heightMm": null
+                }
+            ],
+            "measuredEquivalentHours": 1.5,
+            "effectiveConstantTemperatureC": 24.0,
+            "longestGapMinutes": 90.0,
+            "elapsedHours": 1.5,
+            "expansionPercent": null,
+            "riseRatePercentPerHour": null
+        },
+        {
+            "id": "rising-20-percent-per-hour",
+            "points": [
+                {
+                    "offsetMillis": 0,
+                    "doughC": 24.0,
+                    "heightMm": 100.0
+                },
+                {
+                    "offsetMillis": 300000,
+                    "doughC": 24.0,
+                    "heightMm": 101.66666666666666
+                },
+                {
+                    "offsetMillis": 600000,
+                    "doughC": 24.0,
+                    "heightMm": 103.33333333333334
+                },
+                {
+                    "offsetMillis": 900000,
+                    "doughC": 24.0,
+                    "heightMm": 105.0
+                },
+                {
+                    "offsetMillis": 1200000,
+                    "doughC": 24.0,
+                    "heightMm": 106.66666666666667
+                },
+                {
+                    "offsetMillis": 1500000,
+                    "doughC": 24.0,
+                    "heightMm": 108.33333333333333
+                },
+                {
+                    "offsetMillis": 1800000,
+                    "doughC": 24.0,
+                    "heightMm": 110.00000000000001
+                },
+                {
+                    "offsetMillis": 2100000,
+                    "doughC": 24.0,
+                    "heightMm": 111.66666666666667
+                },
+                {
+                    "offsetMillis": 2400000,
+                    "doughC": 24.0,
+                    "heightMm": 113.33333333333333
+                },
+                {
+                    "offsetMillis": 2700000,
+                    "doughC": 24.0,
+                    "heightMm": 114.99999999999999
+                },
+                {
+                    "offsetMillis": 3000000,
+                    "doughC": 24.0,
+                    "heightMm": 116.66666666666667
+                },
+                {
+                    "offsetMillis": 3300000,
+                    "doughC": 24.0,
+                    "heightMm": 118.33333333333333
+                },
+                {
+                    "offsetMillis": 3600000,
+                    "doughC": 24.0,
+                    "heightMm": 120.0
+                },
+                {
+                    "offsetMillis": 3900000,
+                    "doughC": 24.0,
+                    "heightMm": 121.66666666666669
+                },
+                {
+                    "offsetMillis": 4200000,
+                    "doughC": 24.0,
+                    "heightMm": 123.33333333333334
+                },
+                {
+                    "offsetMillis": 4500000,
+                    "doughC": 24.0,
+                    "heightMm": 125.0
+                },
+                {
+                    "offsetMillis": 4800000,
+                    "doughC": 24.0,
+                    "heightMm": 126.66666666666666
+                },
+                {
+                    "offsetMillis": 5100000,
+                    "doughC": 24.0,
+                    "heightMm": 128.33333333333334
+                },
+                {
+                    "offsetMillis": 5400000,
+                    "doughC": 24.0,
+                    "heightMm": 130.0
+                },
+                {
+                    "offsetMillis": 5700000,
+                    "doughC": 24.0,
+                    "heightMm": 131.66666666666666
+                },
+                {
+                    "offsetMillis": 6000000,
+                    "doughC": 24.0,
+                    "heightMm": 133.33333333333334
+                },
+                {
+                    "offsetMillis": 6300000,
+                    "doughC": 24.0,
+                    "heightMm": 135.0
+                },
+                {
+                    "offsetMillis": 6600000,
+                    "doughC": 24.0,
+                    "heightMm": 136.66666666666666
+                },
+                {
+                    "offsetMillis": 6900000,
+                    "doughC": 24.0,
+                    "heightMm": 138.33333333333334
+                },
+                {
+                    "offsetMillis": 7200000,
+                    "doughC": 24.0,
+                    "heightMm": 140.0
+                },
+                {
+                    "offsetMillis": 7500000,
+                    "doughC": 24.0,
+                    "heightMm": 141.66666666666669
+                },
+                {
+                    "offsetMillis": 7800000,
+                    "doughC": 24.0,
+                    "heightMm": 143.33333333333334
+                },
+                {
+                    "offsetMillis": 8100000,
+                    "doughC": 24.0,
+                    "heightMm": 145.0
+                },
+                {
+                    "offsetMillis": 8400000,
+                    "doughC": 24.0,
+                    "heightMm": 146.66666666666669
+                },
+                {
+                    "offsetMillis": 8700000,
+                    "doughC": 24.0,
+                    "heightMm": 148.33333333333334
+                },
+                {
+                    "offsetMillis": 9000000,
+                    "doughC": 24.0,
+                    "heightMm": 150.0
+                },
+                {
+                    "offsetMillis": 9300000,
+                    "doughC": 24.0,
+                    "heightMm": 151.66666666666666
+                },
+                {
+                    "offsetMillis": 9600000,
+                    "doughC": 24.0,
+                    "heightMm": 153.33333333333331
+                },
+                {
+                    "offsetMillis": 9900000,
+                    "doughC": 24.0,
+                    "heightMm": 155.0
+                },
+                {
+                    "offsetMillis": 10200000,
+                    "doughC": 24.0,
+                    "heightMm": 156.66666666666669
+                },
+                {
+                    "offsetMillis": 10500000,
+                    "doughC": 24.0,
+                    "heightMm": 158.33333333333334
+                },
+                {
+                    "offsetMillis": 10800000,
+                    "doughC": 24.0,
+                    "heightMm": 160.0
+                },
+                {
+                    "offsetMillis": 11100000,
+                    "doughC": 24.0,
+                    "heightMm": 161.66666666666666
+                },
+                {
+                    "offsetMillis": 11400000,
+                    "doughC": 24.0,
+                    "heightMm": 163.33333333333334
+                },
+                {
+                    "offsetMillis": 11700000,
+                    "doughC": 24.0,
+                    "heightMm": 165.0
+                },
+                {
+                    "offsetMillis": 12000000,
+                    "doughC": 24.0,
+                    "heightMm": 166.66666666666669
+                },
+                {
+                    "offsetMillis": 12300000,
+                    "doughC": 24.0,
+                    "heightMm": 168.33333333333334
+                },
+                {
+                    "offsetMillis": 12600000,
+                    "doughC": 24.0,
+                    "heightMm": 170.00000000000003
+                },
+                {
+                    "offsetMillis": 12900000,
+                    "doughC": 24.0,
+                    "heightMm": 171.66666666666669
+                },
+                {
+                    "offsetMillis": 13200000,
+                    "doughC": 24.0,
+                    "heightMm": 173.33333333333334
+                },
+                {
+                    "offsetMillis": 13500000,
+                    "doughC": 24.0,
+                    "heightMm": 175.0
+                },
+                {
+                    "offsetMillis": 13800000,
+                    "doughC": 24.0,
+                    "heightMm": 176.66666666666666
+                },
+                {
+                    "offsetMillis": 14100000,
+                    "doughC": 24.0,
+                    "heightMm": 178.33333333333331
+                },
+                {
+                    "offsetMillis": 14400000,
+                    "doughC": 24.0,
+                    "heightMm": 180.0
+                }
+            ],
+            "measuredEquivalentHours": 4.000000000000003,
+            "effectiveConstantTemperatureC": 24.000000000000007,
+            "longestGapMinutes": 5.0,
+            "elapsedHours": 4.0,
+            "expansionPercent": 80.0,
+            "riseRatePercentPerHour": 20.0
+        }
     ]
 }

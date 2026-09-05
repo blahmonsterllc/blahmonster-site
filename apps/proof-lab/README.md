@@ -12,6 +12,7 @@ apps/proof-lab/
   fixtures/        golden values generated from doughcore
   ios/             DoughKit (Swift package) + ProofLab (SwiftUI app) + Xcode project
   android/         Compose app on top of doughcore
+  doughscience/    the bench rig — sensor spec, data contract, experiment protocol
 ```
 
 ## The idea
@@ -67,7 +68,7 @@ looking at it is not much of a proofing app.
 
 ```sh
 cd doughcore
-gradle test           # 93 tests
+gradle test           # 126 tests
 gradle writeFixtures  # regenerates ../fixtures/conformance.json
 ```
 
@@ -85,6 +86,20 @@ truth without publishing anything.
 synchronized folders, so new files under `ios/ProofLab/` are picked up without touching the
 project file. `DoughKit` is referenced as a local Swift package; its tests run from the same
 scheme.
+
+## Dough Science — measuring instead of assuming
+
+The model's weakest point is that it takes your stage temperatures on trust. `doughscience/` is
+the bench rig that fixes that: a dough probe, a rangefinder over an aliquot, and a CSV log.
+
+Both cores already read it. `measuredEquivalentHours()` integrates the temperature curve over
+what actually happened rather than what was planned — a walk-in you believe is 4 °C but which
+sits at 5.8 °C banks 4.59 equivalent hours in 24 against the 3.76 you scheduled, which is enough
+to explain a slack Friday.
+
+There is deliberately **no readiness threshold** anywhere in the code. What counts as "ready" —
+in expansion percent, or CO₂ slope, per style — is the output of the experiment, not an input to
+it. See `doughscience/RIG.md` for the parts list, the data contract and the protocol.
 
 ## Keeping the two platforms honest
 

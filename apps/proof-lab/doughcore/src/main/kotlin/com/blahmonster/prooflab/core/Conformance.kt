@@ -25,6 +25,30 @@ data class ConformanceFixtures(
 	val waterTemperatures: List<WaterPoint>,
 	val production: List<ProductionPoint>,
 	val blends: List<BlendPoint>,
+	val sensing: List<SensingCase>,
+)
+
+@Serializable
+data class SensingPoint(
+	val offsetMillis: Long,
+	val doughC: Double? = null,
+	val heightMm: Double? = null,
+)
+
+/**
+ * Inputs and outputs together, so the Swift side rebuilds the same series rather than keeping
+ * its own copy of it — a duplicated fixture input is a drift waiting to happen.
+ */
+@Serializable
+data class SensingCase(
+	val id: String,
+	val points: List<SensingPoint>,
+	val measuredEquivalentHours: Double,
+	val effectiveConstantTemperatureC: Double?,
+	val longestGapMinutes: Double,
+	val elapsedHours: Double,
+	val expansionPercent: Double? = null,
+	val riseRatePercentPerHour: Double? = null,
 )
 
 @Serializable
@@ -142,6 +166,64 @@ object Conformance {
 		val tap: Double,
 	)
 
+	private fun steadyPoints(tempC: Double, hours: Double, everyMinutes: Long): List<SensingPoint> {
+		val step = everyMinutes * 60_000
+		val count = ((hours * HOUR_MILLIS) / step).toInt()
+		return (0..count).map { SensingPoint(it * step, doughC = tempC) }
+	}
+
+	private fun sensingCase(id: String, points: List<SensingPoint>): SensingCase {
+		val series = SensorSeries(
+			points.map {
+				SensorReading(
+					epochMillis = it.offsetMillis,
+					doughTempC = it.doughC,
+					doughHeightMm = it.heightMm,
+				)
+			},
+		)
+		return SensingCase(
+			id = id,
+			points = points,
+			measuredEquivalentHours = series.measuredEquivalentHours(),
+			effectiveConstantTemperatureC = series.effectiveConstantTemperatureC(),
+			longestGapMinutes = series.longestTemperatureGapMinutes(),
+			elapsedHours = series.elapsedHours,
+			expansionPercent = series.expansionPercent(),
+			riseRatePercentPerHour = series.riseRatePercentPerHour(),
+		)
+	}
+
+	private fun sensingCases(): List<SensingCase> = listOf(
+		sensingCase("steady-24c-5h", steadyPoints(24.0, 5.0, 5)),
+		sensingCase("warm-walk-in-24h", steadyPoints(5.8, 24.0, 15)),
+		sensingCase("cold-4c-48h", steadyPoints(4.0, 48.0, 30)),
+		sensingCase(
+			"swing-30-then-10",
+			listOf(
+				SensingPoint(0, doughC = 30.0),
+				SensingPoint(HOUR_MILLIS, doughC = 30.0),
+				SensingPoint(HOUR_MILLIS + 1000, doughC = 10.0),
+				SensingPoint(2 * HOUR_MILLIS, doughC = 10.0),
+			),
+		),
+		sensingCase(
+			"logging-gap",
+			listOf(
+				SensingPoint(0, doughC = 24.0),
+				SensingPoint(90 * 60_000, doughC = 24.0),
+			),
+		),
+		sensingCase(
+			"rising-20-percent-per-hour",
+			(0..48).map { index ->
+				val offset = index * 5L * 60_000
+				val hours = offset.toDouble() / HOUR_MILLIS
+				SensingPoint(offset, doughC = 24.0, heightMm = 100.0 * (1 + 0.2 * hours))
+			},
+		),
+	)
+
 	fun build(): ConformanceFixtures = ConformanceFixtures(
 		rateMultipliers = temperatures.map { RatePoint(it, Fermentation.rateMultiplier(it)) },
 		equivalentHours = listOf(
@@ -241,6 +323,7 @@ object Conformance {
 				summary = blend.summary,
 			)
 		},
+		sensing = sensingCases(),
 	)
 }
 

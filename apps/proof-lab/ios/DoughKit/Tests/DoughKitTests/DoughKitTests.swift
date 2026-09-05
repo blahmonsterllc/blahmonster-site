@@ -512,3 +512,186 @@ final class FlourBlendTests: XCTestCase {
 		XCTAssertGreaterThanOrEqual(Set(pizza.map(\.planID)).count, 3)
 	}
 }
+
+private func steadySeries(
+	tempC: Double,
+	hours: Double,
+	everyMinutes: Double = 1,
+	height: ((Double) -> Double)? = nil
+) -> SensorSeries {
+	let step = everyMinutes * 60
+	let count = Int((hours * 3600) / step)
+	return SensorSeries((0...count).map { index in
+		let offset = Double(index) * step
+		return SensorReading(
+			date: start.addingTimeInterval(offset),
+			doughTempC: tempC,
+			doughHeightMm: height.map { $0(offset / 3600) }
+		)
+	})
+}
+
+final class SensingTests: XCTestCase {
+	func testSteadyRunAtReferenceBanksOneHourPerHour() {
+		XCTAssertEqual(steadySeries(tempC: 24, hours: 5).measuredEquivalentHours(), 5, accuracy: 1e-9)
+	}
+
+	func testSteadyRunMatchesTheModel() {
+		for temp in [4.0, 12, 20, 28] {
+			XCTAssertEqual(
+				steadySeries(tempC: temp, hours: 6).measuredEquivalentHours(),
+				Fermentation.equivalentHours(hours: 6, atC: temp),
+				accuracy: 1e-9,
+				"measured run at \(temp) °C drifted from the model"
+			)
+		}
+	}
+
+	func testAWarmWalkInBanksMoreThanPlanned() {
+		let planned = Fermentation.equivalentHours(hours: 24, atC: 4)
+		let measured = steadySeries(tempC: 5.8, hours: 24).measuredEquivalentHours()
+		XCTAssertGreaterThan(measured / planned, 1.15)
+	}
+
+	func testAmbientStandsInWithoutADoughProbe() {
+		let series = SensorSeries((0...60).map {
+			SensorReading(date: start.addingTimeInterval(Double($0) * 60), ambientTempC: 24)
+		})
+		XCTAssertEqual(series.measuredEquivalentHours(), 1, accuracy: 1e-9)
+	}
+
+	func testDoughProbeWinsOverAmbient() {
+		let series = SensorSeries((0...60).map {
+			SensorReading(
+				date: start.addingTimeInterval(Double($0) * 60),
+				doughTempC: 24,
+				ambientTempC: 4
+			)
+		})
+		XCTAssertEqual(series.measuredEquivalentHours(), 1, accuracy: 1e-9)
+	}
+
+	func testTooFewSamplesProduceZeroRatherThanAGuess() {
+		XCTAssertEqual(SensorSeries([]).measuredEquivalentHours(), 0, accuracy: 1e-12)
+		XCTAssertEqual(
+			SensorSeries([SensorReading(date: start, doughTempC: 24)]).measuredEquivalentHours(),
+			0,
+			accuracy: 1e-12
+		)
+	}
+
+	func testOutOfOrderSamplesAreSorted() {
+		let forward = steadySeries(tempC: 24, hours: 2, everyMinutes: 30)
+		let shuffled = SensorSeries(forward.readings.reversed())
+		XCTAssertEqual(
+			shuffled.measuredEquivalentHours(),
+			forward.measuredEquivalentHours(),
+			accuracy: 1e-9
+		)
+	}
+
+	func testGapsAreReportedButStillIntegrated() {
+		let series = SensorSeries([
+			SensorReading(date: start, doughTempC: 24),
+			SensorReading(date: start.addingTimeInterval(90 * 60), doughTempC: 24)
+		])
+		XCTAssertEqual(series.longestTemperatureGapMinutes(), 90, accuracy: 1e-9)
+		XCTAssertEqual(series.measuredEquivalentHours(), 1.5, accuracy: 1e-9)
+	}
+
+	func testEffectiveTemperatureBeatsTheArithmeticMeanOnASwingingRun() {
+		let series = SensorSeries([
+			SensorReading(date: start, doughTempC: 30),
+			SensorReading(date: start.addingTimeInterval(3600), doughTempC: 30),
+			SensorReading(date: start.addingTimeInterval(3601), doughTempC: 10),
+			SensorReading(date: start.addingTimeInterval(7200), doughTempC: 10)
+		])
+		guard let effective = series.effectiveConstantTemperatureC(),
+			  let mean = series.averageTemperatureC() else {
+			return XCTFail("expected both figures")
+		}
+		XCTAssertEqual(mean, 20, accuracy: 0.01)
+		XCTAssertGreaterThan(effective, mean)
+	}
+
+	func testRiseTracking() {
+		let rising = steadySeries(tempC: 24, hours: 4, everyMinutes: 5) { 100 * (1 + 0.2 * $0) }
+		XCTAssertEqual(rising.expansionRatio()!, 1.8, accuracy: 1e-9)
+		XCTAssertEqual(rising.expansionPercent()!, 80, accuracy: 1e-9)
+		XCTAssertEqual(rising.riseRatePercentPerHour()!, 20, accuracy: 1e-6)
+		XCTAssertEqual(rising.projectedHoursTo(ratio: 2.0)!, 1, accuracy: 1e-6)
+		XCTAssertEqual(rising.projectedHoursTo(ratio: 1.5)!, 0, accuracy: 1e-12)
+	}
+
+	func testAStalledOrCollapsingDoughGetsNoProjection() {
+		let flat = steadySeries(tempC: 24, hours: 3, everyMinutes: 5) { _ in 150 }
+		XCTAssertEqual(flat.riseRatePercentPerHour()!, 0, accuracy: 1e-9)
+		XCTAssertNil(flat.projectedHoursTo(ratio: 2.0))
+
+		let collapsing = steadySeries(tempC: 24, hours: 2, everyMinutes: 5) { 200 - 10 * $0 }
+		XCTAssertLessThan(collapsing.riseRatePercentPerHour()!, 0)
+		XCTAssertNil(collapsing.projectedHoursTo(ratio: 2.0))
+	}
+
+	func testHeightsAreOptionalEverywhere() {
+		let none = steadySeries(tempC: 24, hours: 2)
+		XCTAssertNil(none.expansionRatio())
+		XCTAssertNil(none.riseRatePercentPerHour())
+		XCTAssertNil(none.projectedHoursTo(ratio: 1.8))
+	}
+
+	func testCsvRoundTrip() {
+		let series = SensorSeries([
+			SensorReading(date: start, doughTempC: 23.5, ambientTempC: 21, relativeHumidity: 68),
+			SensorReading(
+				date: start.addingTimeInterval(60),
+				doughTempC: 23.6,
+				doughHeightMm: 101.2,
+				co2Ppm: 950
+			)
+		])
+		let decoded = SensorCsv.decode(SensorCsv.encode(series))
+		XCTAssertEqual(decoded.ordered.count, 2)
+		XCTAssertEqual(decoded.ordered[0].relativeHumidity!, 68, accuracy: 1e-9)
+		XCTAssertEqual(decoded.ordered[1].doughHeightMm!, 101.2, accuracy: 1e-9)
+		XCTAssertNil(decoded.ordered[0].co2Ppm)
+	}
+
+	func testCsvSkipsJunkAndCommentsAndKeepsPartialRows() {
+		let millis = Int64(start.timeIntervalSince1970 * 1000)
+		let text = """
+		# doughscience rig v0
+		\(SensorCsv.header)
+		\(millis),24.0,,,,,
+		not a reading at all
+		\(millis + 60_000),24.1
+		"""
+		let decoded = SensorCsv.decode(text)
+		XCTAssertEqual(decoded.readings.count, 2)
+		XCTAssertEqual(decoded.ordered.last!.doughTempC!, 24.1, accuracy: 1e-9)
+		XCTAssertNil(decoded.ordered.last!.co2Ppm)
+	}
+
+	func testAnEmptyLogDecodesToAnEmptySeries() {
+		XCTAssertTrue(SensorCsv.decode("").isEmpty)
+		XCTAssertTrue(SensorCsv.decode(SensorCsv.header).isEmpty)
+	}
+
+	func testRunComparisonFlagsAWarmWalkIn() {
+		let cold = FermentationPlan.coldBallRetard.stages.first { $0.kind.isCold }!
+		let onPlan = RunComparison(
+			stage: cold,
+			series: steadySeries(tempC: cold.temperatureC, hours: cold.hours, everyMinutes: 15)
+		)
+		XCTAssertFalse(onPlan.isSignificant)
+		XCTAssertNil(onPlan.caveat)
+
+		let warm = RunComparison(
+			stage: cold,
+			series: steadySeries(tempC: 6, hours: cold.hours, everyMinutes: 15)
+		)
+		XCTAssertTrue(warm.isSignificant)
+		XCTAssertGreaterThan(warm.ratio!, 1.2)
+		XCTAssertEqual(warm.measuredTemperatureC!, 6, accuracy: 0.01)
+	}
+}
